@@ -1,96 +1,137 @@
 <section id="current-analysis">
   <header class="rec">
-    <h1>Bun before and after the Rust rewrite</h1>
-    <p class="lede prose">Report patterns, release delivery and adoption signals through <strong>30 October 2026</strong>. The timeline below includes the whole observation window; the original August report is preserved in the historical appendix.</p>
+    <h1>Bun after the Rust rewrite</h1>
+    <p class="lede prose">Compare bug reports with download activity through <strong>30 October 2026</strong>. Select a version, report type or time window.</p>
     <p class="prose" id="p3-overview"></p>
-    <nav aria-label="Report sections"><a href="https://github.com/IlyaGulya/bun-rust-rewrite-analysis">Source &amp; methods</a> · <a href="#p3-safety">Crashes, leaks &amp; relative growth</a> · <a href="#p3-version-daily">Daily types by version</a> · <a href="#p3-volume">Full timeline</a> · <a href="#p3-classify">Bug categories</a> · <a href="#p3-adoption">Downloads &amp; interest</a> · <a href="#after-the-stable-release">Resolution follow-up</a> · <a href="#historical-analysis">August archive</a></nav>
+    <nav aria-label="Report sections"><a href="#p3-version-daily">Compare growth</a><a href="#p3-safety">Crashes and memory</a><a href="#p3-classify">Report types</a><a href="#after-the-stable-release">Releases and fixes</a><a href="#p3-adoption">Data sources</a></nav>
+    <details class="p3-terms"><summary>Terms used in this report</summary><dl>
+      <dt>Possible bug report</dt><dd>A GitHub issue that passes the label filter. It is not a confirmed defect.</dd>
+      <dt>npm request</dt><dd>A download request for package <code>bun</code>. One user or automated job can make many requests.</dd>
+      <dt>Title match</dt><dd>A word pattern in an issue title. It does not prove the cause of a defect.</dd>
+      <dt>Period rate</dt><dd>Total reports divided by total npm requests for the same complete days.</dd>
+      <dt>Growth index</dt><dd>Daily mean divided by its before-merge mean, then multiplied by 100.</dd>
+      <dt>Relative report rate</dt><dd>Report growth index divided by npm growth index. Its reference is 1.</dd>
+    </dl></details>
   </header>
   <section id="p3-version-daily">
-    <h2>Problem types, Bun versions and downloads · one daily chart</h2>
-    <p class="prose">Compare report growth with npm distribution activity on the same timeline. Colours show problem types; choose all versions, one version, or four versions grouped within each day. The default index uses a common scale: the pre-rewrite daily average is 100.</p>
+    <h2>Reports and downloads</h2>
+    <p class="prose">Colours show report types. The line shows npm requests. The default view gives each series a before-merge mean of 100.</p>
     <div class="p3-version-controls">
-      <label for="p3-v-version">Bun version</label><select id="p3-v-version" aria-label="Bun version"></select>
-      <label for="p3-v-axis">Problem types</label><select id="p3-v-axis"><option value="symptoms">Symptoms</option><option value="components">Components</option></select>
-      <label for="p3-v-measure">Compare</label><select id="p3-v-measure"><option value="index">Growth index · pre = 100</option><option value="counts">Report counts + npm downloads</option><option value="rate">Reports per million npm downloads</option><option value="percent">Composition of reports (%)</option></select>
-      <label for="p3-v-window">Smoothing</label><select id="p3-v-window"><option value="7">Trailing 7 days</option><option value="1">Daily · no smoothing</option></select>
+      <label for="p3-v-version">Bun version</label><select id="p3-v-version"></select>
+      <label for="p3-v-axis">Group reports by</label><select id="p3-v-axis"><option value="symptoms">Problem type</option><option value="components">Component named</option></select>
+      <label for="p3-v-measure">Show</label><select id="p3-v-measure"><option value="index">Growth: before = 100</option><option value="counts">Counts and npm requests</option><option value="rate">Reports per million requests</option><option value="percent">Share of report types (%)</option></select>
+      <label for="p3-v-window">Time window</label><select id="p3-v-window"><option value="7">Previous 7 days</option><option value="1">One day</option></select>
     </div>
     <div id="p3-v-charts"></div>
     <p class="prose" id="p3-v-summary" aria-live="polite"></p>
     <p class="prose" id="p3-v-scope"></p>
-    <details><summary>How to read the combined chart</summary><div class="p3-detail">
-      <p class="prose">Counts: type stacks use the left report axis, npm downloads the right axis. Growth index: both use the same left scale, with their own pre-rewrite daily mean set to 100. A taller stack than the download line means higher relative growth at that date, not a higher failure probability. Per-million mode divides the report count by npm requests over the same complete dates; a rising stack means that proxy is rising. The download line remains on the labelled right axis in that mode.</p>
-      <p class="prose">With 7-day smoothing, each daily point uses the trailing 7 calendar days. Per-million values divide the sum of reports by the sum of downloads, rather than averaging daily ratios. Missing/unpublished downloads and incomplete report days are gaps in indices and ratios. Daily raw counts can include October 30, which is partial. The pre/post summary uses all complete matched calendar days, excludes the merge day, and does not follow the zoom or legend toggles.</p>
-      <p class="prose">npm supplies a total across Bun versions and one installation channel. It includes CI and repeat requests; it is not an installation count or active-user count. A version filter narrows reports only: there is no historical per-version download denominator here. Never interpret the filtered ratio as that version's defect rate. Report and download populations differ even with all versions selected.</p>
-      <p class="prose">Types remain provisional title signals. One matching type keeps its name; several become “Multiple type signals”; none become “No title signal”. Version extraction checks the Bun field or explicit Bun version against saved official release bases. Unknown and multiple-version reports stay selectable. Canary/debug suffixes are retained; build hashes are grouped. A bare 1.4.0 does not establish stable versus canary.</p>
+    <details><summary>Read this chart</summary><div class="p3-detail">
+      <p class="prose">In the growth view, both series use the left axis. Each has its own before-merge mean of 100. A taller report stack means greater relative growth at that date.</p>
+      <p class="prose">In the count view, reports use the left axis. npm requests use the right axis. In the rate view, reports are divided by npm requests for the same dates.</p>
+      <p class="prose">A seven-day point uses the previous seven complete calendar days. Rates divide the sum of reports by the sum of requests. They do not average daily ratios.</p>
+      <p class="prose">Missing downloads and incomplete days appear as gaps in rates and indices. Raw daily counts can include the incomplete last day. The summary uses the full comparison period. Zoom and legend changes do not change that summary.</p>
+      <p class="prose">The version filter changes reports only. npm requests still include all versions. We cannot calculate a failure rate for each version from these inputs.</p>
+      <p class="prose">Each report appears once in a stack. One title match keeps its type. Several matches use the several-types group. No match uses the no-match group.</p>
     </div></details>
   </section>
   <section id="p3-safety">
-    <h2>Crashes and memory leaks per million npm downloads</h2>
-    <p class="prose">The report-signal rates are lower after the merge in this snapshot. Crashes use the existing title classifier; leaks require an explicit memory-leak or retained-allocation signal, rather than generic OOM or high memory usage. This is a comparison of reports across all builds, not confirmed failures attributable to Rust.</p>
+    <h2>Crashes and memory leaks</h2>
+    <p class="prose">Both report rates decreased after the merge. The leak group requires evidence of memory not released after use. High memory use alone is a separate group.</p>
     <div class="p3-controls">
-      <label>Evidence <select id="p3-safety-evidence"><option value="title">Title signals · primary</option><option value="expanded">Title + bounded body · sensitivity</option></select></label>
-      <label>Rate window <select id="p3-safety-window"><option value="28">Trailing 28 days</option><option value="7">Trailing 7 days</option><option value="1">Daily · no smoothing</option></select></label>
+      <label>Text to check <select id="p3-safety-evidence"><option value="title">Title only</option><option value="expanded">Title and body excerpt</option></select></label>
+      <label>Time window <select id="p3-safety-window"><option value="28">Previous 28 days</option><option value="7">Previous 7 days</option><option value="1">One day</option></select></label>
     </div>
-    <div class="tablebox"><table><thead><tr><th>Report signal</th><th>Before: reports</th><th>Before: / million</th><th>After: reports</th><th>After: / million</th><th>Rate change</th></tr></thead><tbody id="p3-safety-table"></tbody></table></div>
+    <div class="tablebox" tabindex="0" role="region" aria-label="Before and after report rates"><table><thead><tr><th>Report type</th><th>Before: count</th><th>Before: per million</th><th>After: count</th><th>After: per million</th><th>Rate change</th></tr></thead><tbody id="p3-safety-table"></tbody></table></div>
     <p class="prose" id="p3-safety-summary"></p>
-    <figure><h3>Crash or leak reports per million npm requests · daily timeline</h3>
-      <label>Rate signal <select id="p3-safety-signal"><option value="crash">Crash / fatal signal</option><option value="leak">Explicit memory leak / retention</option><option value="memory">Broad memory / OOM / corruption</option></select></label>
-      <div id="p3-safety-rate-chart" class="p3-chart" role="img" aria-label="Daily crash or memory-leak report rates per million npm downloads, before and after the rewrite"></div>
-      <figcaption>Each daily point is reports / downloads over the selected trailing window × 1,000,000. Dashed segments show pooled pre/post rates, not averages of daily ratios. Sparse leak counts need longer windows. Windows spanning the merge mix both periods; the comparison table uses separate periods. Missing downloads and incomplete report days are gaps.</figcaption>
+    <figure><h3>Reports per million npm requests</h3>
+      <label>Report type <select id="p3-safety-signal"><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">All memory problem reports</option></select></label>
+      <div id="p3-safety-rate-chart" class="p3-chart" role="img" aria-label="Crash or memory-leak reports per million npm requests"></div>
+      <figcaption>Each point divides reports by requests for the selected window, then multiplies by one million. Dashed lines show whole-period rates. A window across the merge contains both periods. Missing data remains a gap.</figcaption>
     </figure>
-    <figure id="p3-growth-ratio"><h3>Report growth divided by npm download growth</h3>
-      <label>Growth signal <select id="p3-growth-signal"><option value="all">All potential defect reports</option><option value="crash">Crash / fatal signal</option><option value="leak">Explicit memory leak / retention</option><option value="memory">Broad memory / OOM / corruption</option></select></label>
-      <div id="p3-growth-ratio-chart" class="p3-chart" role="img" aria-label="Ratio of report growth index to npm download growth index; one means equal relative growth"></div>
+    <figure id="p3-growth-ratio"><h3>Report growth divided by download growth</h3>
+      <label>Reports to compare <select id="p3-growth-signal"><option value="all">All possible bug reports</option><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">All memory problem reports</option></select></label>
+      <div id="p3-growth-ratio-chart" class="p3-chart" role="img" aria-label="Report growth index divided by npm growth index"></div>
       <p class="prose" id="p3-growth-summary"></p>
-      <figcaption>Q = (reports/day ÷ pre-merge mean reports/day) ÷ (npm requests/day ÷ pre-merge mean requests/day). Equivalently, Q is the report/download rate divided by its pooled pre-merge value. Q &gt; 1 means the rate exceeds that baseline; Q &lt; 1 means it is lower. A rising Q means reports are outpacing the npm proxy over that interval. This is a level ratio against a fixed baseline, not a division of month-to-month percentage changes. All dates are UTC; npm observations end October 28.</figcaption>
+      <figcaption>Q = report growth index / npm growth index. At 1, the report/request rate equals the before-merge reference. Below 1, that rate is lower. A rising Q means reports grow faster than npm requests over that interval. It can rise while it remains below 1.</figcaption>
     </figure>
-    <details><summary>Definitions, sensitivity and the memory-leak evidence</summary><div class="p3-detail">
-      <p class="prose">Matched comparison: 181 pre-merge full days (November 14–May 13), 167 post-merge full days (May 15–October 28). Denominators are 23,077,916 and 70,541,010 npm requests. The first/last partial issue days and merge day are excluded from the table. Dates with unpublished downloads are excluded rather than treated as zero. A report can match both crash and leak; each row counts its reports once and rows must not be added together.</p>
-      <p class="prose">Primary evidence is the title. The sensitivity variant adds at most 2,500 body characters on both sides, removing fenced code, and can pick up incidental mentions. The older plain-text and newer Markdown body snapshots differ in formatting, so this is not an accuracy check. Generic OOM, high RSS and memory corruption remain a separate broad-memory class. Explicit retained allocations and leaks detected at process shutdown are included; disk files, file descriptors and a test's memory-cap flake are excluded from the narrow leak signal.</p>
-      <p class="prose">There are few leak reports, some reports concern the same underlying defect, and titles differ in specificity across periods. The legacy crash classifier also has known contextual false positives (for example, “crash report” metadata). Baseline text/labels were observed in August; post-merge text/labels in October. Arrival dates do not establish Zig/Rust causation, and post-merge reports can concern old Zig builds. npm traffic includes CI and repeats, omits other channels, and does not measure active users. Lower report rates do not establish lower per-user defect risk or prove a Rust effect.</p>
-      <h3>Primary leak-signal reports in the matched comparison</h3>
-      <div class="tablebox"><table><thead><tr><th>Issue / title</th><th>Opened (UTC)</th><th>Arrival cohort</th></tr></thead><tbody id="p3-leak-evidence"></tbody></table></div>
+    <details><summary>Check the periods and memory-leak evidence</summary><div class="p3-detail">
+      <p class="prose">The comparison uses 181 days before the merge and 167 days after it. The periods are 14 November–13 May and 15 May–28 October. They contain 23,077,916 and 70,541,010 npm requests.</p>
+      <p class="prose">We exclude the merge day and incomplete issue-window days from the table. We also exclude unpublished download dates. One report can match both crash and leak rules. Do not add the rows.</p>
+      <p class="prose">The main check uses titles. The extra check adds up to 2,500 body characters on each side. It removes fenced code. Body text can mention problems that did not occur. The old and new excerpt formats also differ.</p>
+      <p class="prose">The leak group includes allocated memory that remains held, including leaks found at process exit. Generic OOM, high RSS and memory corruption are separate. Disk files, file descriptors and a test-cap failure are excluded.</p>
+      <p class="prose">The leak sample is small. Some reports can describe the same defect. The crash rule also has known false matches. Before-merge text and labels come from August. After-merge observations come from October.</p>
+      <p class="prose">After-merge reports can concern old Zig builds. npm includes repeat requests and automated jobs. It omits other channels. These rates do not prove a Rust effect or measure risk per user.</p>
+      <h3>Memory-leak reports in the title-only comparison</h3>
+      <div class="tablebox" tabindex="0" role="region" aria-label="Memory leak source reports"><table><thead><tr><th>Source issue and title</th><th>Opened in UTC</th><th>Report group</th></tr></thead><tbody id="p3-leak-evidence"></tbody></table></div>
     </div></details>
   </section>
   <figure id="p3-volume">
-    <h3>Potential defect reports per week · November 2025 → October 2026</h3>
-    <div id="p3-volume-chart" class="p3-chart" role="img" aria-label="Weekly potential defect reports before and after the May rewrite through October 30"></div>
-    <figcaption>Each bar is the cohort opened that week, split by its observed closure state. Baseline outcomes were observed on August 10; post-merge outcomes on October 30. Grey edge buckets are partial. Dashed rules mark the May 14 rewrite merge and August 20 stable 1.4.0. The final bucket starts October 29 and includes the partial October 30 observation. Closure shares are not shipped-fix rates.</figcaption>
+    <h3>Possible bug reports per week</h3>
+    <div id="p3-volume-chart" class="p3-chart" role="img" aria-label="Weekly possible bug reports from November 2025 through October 2026"></div>
+    <figcaption>Each bar groups reports by opening week. Before-merge states were recorded in August. After-merge states were recorded in October. Grey bars are incomplete weeks. Dashed lines mark the merge and stable 1.4.0. Marked-as-fixed counts do not prove fixes shipped.</figcaption>
   </figure>
   <section id="p3-classify">
-    <h2>What kinds of reports changed?</h2>
-    <p class="prose">Provisional classification from issue titles, with the same rules on both sides. Components and symptoms are separate, overlapping signals. A report can match several classes; a missing match means unknown. This describes what reporters wrote, not confirmed root causes or severity.</p>
+    <h2>Report types</h2>
+    <p class="prose">The same word rules check titles before and after the merge. A report can match several types. No match means unknown. These words do not prove a defect or its cause.</p>
     <div class="p3-controls">
-      <label>Compare with <select id="p3-period"><option value="post">All post-merge reports</option><option value="pre_stable">Merge → stable release</option><option value="stable">Since stable 1.4.0</option></select></label>
-      <label>Measure <select id="p3-measure"><option value="share">Share of potential bug reports (%)</option><option value="per_week">Reports per week</option></select></label>
-      <label>Title signals <select id="p3-axis"><option value="components">Components</option><option value="symptoms">Symptoms</option></select></label>
+      <label>After-merge period <select id="p3-period"><option value="post">All after-merge reports</option><option value="pre_stable">Merge to stable 1.4.0</option><option value="stable">After stable 1.4.0</option></select></label>
+      <label>Show <select id="p3-measure"><option value="share">Share of reports (%)</option><option value="per_week">Reports per week</option></select></label>
+      <label>Group by <select id="p3-axis"><option value="components">Component named</option><option value="symptoms">Problem type</option></select></label>
     </div>
-    <div id="p3-category-chart" class="p3-chart p3-tall" role="img" aria-label="Comparison of title-based issue categories before and after the rewrite"></div>
+    <div id="p3-category-chart" class="p3-chart p3-tall" role="img" aria-label="Before and after shares of title matches"></div>
     <p class="prose" id="p3-coverage"></p>
-    <div class="tablebox"><table><thead><tr><th>Title signal</th><th>Before: count</th><th>Compared period: count</th><th>Before: %</th><th>Compared period: %</th><th>Change (points)</th></tr></thead><tbody id="p3-category-table"></tbody></table></div>
-    <details><summary>Inspect the classification and its limits</summary><div class="p3-detail">
-      <p class="prose">Titles are the primary evidence because old bodies were truncated and triage-label coverage changed. A secondary pass uses the first 2,500 body characters on both sides, removing fenced code and template prompts; it is a sensitivity check, not a validated classifier. Body text still contains incidental mentions. Categories overlap. Manual review of 36 sampled reports found false positives and omissions; these are exploratory counts, not accuracy estimates. Sparse crash titles are more frequent in the baseline, which limits component comparisons.</p>
-      <h3>Sensitivity to including bounded body text</h3>
-      <div class="tablebox"><table><thead><tr><th>Signal</th><th>Before: title</th><th>Before: title + body</th><th>Compared: title</th><th>Compared: title + body</th></tr></thead><tbody id="p3-sensitivity"></tbody></table></div>
-      <label>Search issue titles <input id="p3-search" type="search" placeholder="e.g. segfault, SQL, bun install"></label>
-      <p id="p3-results-count"></p><div class="tablebox"><table><thead><tr><th>Issue / title</th><th>Period</th><th>Component signals</th><th>Symptom signals</th></tr></thead><tbody id="p3-issues"></tbody></table></div>
+    <div class="tablebox" tabindex="0" role="region" aria-label="Report type comparison"><table><thead><tr><th>Title match</th><th>Before: count</th><th>Selected period: count</th><th>Before: %</th><th>Selected period: %</th><th>Change in points</th></tr></thead><tbody id="p3-category-table"></tbody></table></div>
+    <details><summary>Check text rules and source reports</summary><div class="p3-detail">
+      <p class="prose">Titles are the main input. Old bodies were cut short, and label coverage changed. The extra check adds 2,500 body characters at most. It can find incidental mentions. A check of 36 reports found wrong and missing matches.</p>
+      <h3>Extra body-text check</h3>
+      <div class="tablebox" tabindex="0" role="region" aria-label="Title and body-text results"><table><thead><tr><th>Type</th><th>Before: title</th><th>Before: title and body</th><th>Selected: title</th><th>Selected: title and body</th></tr></thead><tbody id="p3-sensitivity"></tbody></table></div>
+      <label>Find a report by title <input id="p3-search" type="search" placeholder="Example: SQL, segfault or bun install"></label>
+      <p id="p3-results-count"></p><div class="tablebox" tabindex="0" role="region" aria-label="Source reports"><table><thead><tr><th>Issue and title</th><th>Report group</th><th>Component matches</th><th>Problem matches</th></tr></thead><tbody id="p3-issues"></tbody></table></div>
     </div></details>
   </section>
   <section id="p3-adoption">
-    <h2>Downloads and interest alongside reports</h2>
+    <h2>Data sources</h2>
     <p class="prose" id="p3-pop-summary"></p>
-
-
-    <figure><h3>Weekly GitHub stars · interest, not active users</h3><div id="p3-stars-chart" class="p3-chart" role="img" aria-label="GitHub weekly star events through October with final week marked partial"></div><figcaption>GitHub star history supplies weekly interest counts. Its calendar boundaries need not match the UTC issue/download buckets; stars are shown separately and never used as an exposure denominator. The last week is partial.</figcaption></figure>
-    <details><summary>Sources, download counters and interpretation</summary><div class="p3-detail">
-      <p class="prose">Sources: <a href="https://github.com/npm/registry/blob/main/docs/download-counts.md">npm downloads API documentation</a>, <a href="https://docs.github.com/en/rest/activity/starring">GitHub star history</a>, <a href="https://docs.github.com/en/rest/releases/assets">GitHub release assets</a>. The project saves raw series and collection timestamps. Current GitHub release-asset totals can be inspected below; they cannot reconstruct downloads on past days and must not be added to npm counts.</p>
-      <div class="tablebox"><table><thead><tr><th>Stable release</th><th>Published</th><th>Binary ZIP requests observed now</th></tr></thead><tbody id="p3-assets"></tbody></table></div>
-      <p class="prose">No public active-user time series is available in this dataset. A change in installation channel, CI traffic or reporting behaviour can change the proxy even when product quality is constant. Stable 1.4.0 and new APIs also change the population and types of reports. Pre-merge issue text/labels remain the frozen August snapshot; post-merge text/labels are current.</p>
+    <figure><h3>New GitHub stars per week</h3><div id="p3-stars-chart" class="p3-chart" role="img" aria-label="Weekly GitHub star counts"></div><figcaption>Stars show interest, not active use. GitHub weeks may not follow UTC boundaries. We do not divide reports by stars. The last week is incomplete.</figcaption></figure>
+    <details><summary>Read the download-source limits</summary><div class="p3-detail">
+      <p class="prose">Sources: <a href="https://github.com/npm/registry/blob/main/docs/download-counts.md">npm download API</a>, <a href="https://docs.github.com/en/rest/activity/starring">GitHub star history</a> and <a href="https://docs.github.com/en/rest/releases/assets">GitHub release assets</a>. The project saves responses and observation dates.</p>
+      <div class="tablebox" tabindex="0" role="region" aria-label="Release download counters"><table><thead><tr><th>Stable version</th><th>Release date</th><th>Total binary ZIP requests at the snapshot</th></tr></thead><tbody id="p3-assets"></tbody></table></div>
+      <p class="prose">These asset counters are current totals. They cannot show downloads on past days. Do not add them to npm counts. The sources can count the same installation more than once.</p>
+      <p class="prose">The saved data has no active-user series. Automated traffic and installation channels can change. New features can also change report types without a language effect.</p>
     </div></details>
   </section>
 </section>
 <style>
 #current-analysis{gap:38px}.p3-version-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 18px}.p3-version-controls label{grid-row:1;font:12px system-ui}.p3-version-controls select{grid-row:2;width:100%}@media(max-width:640px){.p3-version-controls{grid-template-columns:1fr}.p3-version-controls label,.p3-version-controls select{grid-row:auto}}.p3-combined{height:460px!important}.p3-chart{height:340px;width:100%;min-width:0}.p3-tall{height:430px}.p3-controls{display:flex;flex-wrap:wrap;gap:16px}.p3-controls label,.p3-detail label{display:flex;flex-direction:column;gap:6px;font:12px system-ui;color:var(--ink)}select,input{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);padding:9px;max-width:100%;border-radius:3px}select:focus-visible,input:focus-visible{outline:2px solid var(--s2);outline-offset:2px}.p3-detail{display:flex;flex-direction:column;gap:18px;padding:20px 0}#historical-analysis>summary{font-size:16px;padding:20px 0}#historical-analysis>.p3-history{display:flex;flex-direction:column;gap:54px}#current-analysis .prose{font-size:15px;line-height:1.65;max-width:74ch;color:var(--ink)}#current-analysis nav{line-height:1.9}#current-analysis section{scroll-margin-top:24px}#current-analysis table td{white-space:normal}#current-analysis table{min-width:620px}::selection{background:var(--s1);color:var(--surface)}@media(max-width:640px){.p3-chart{height:300px}.p3-tall{height:440px}.p3-controls{display:grid;grid-template-columns:1fr}#current-analysis figure{padding:14px 8px}#current-analysis h1{font-size:29px}}
+
+#current-analysis,#after-the-stable-release{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+#current-analysis h1{font-family:inherit;max-width:22ch;line-height:1.12;font-size:clamp(30px,4vw,44px)}
+#current-analysis h2,#after-the-stable-release h2{text-transform:none;letter-spacing:0;font-size:21px;font-weight:650;color:var(--ink)}
+#current-analysis h3,#after-the-stable-release h3{font-family:inherit;font-size:16px;line-height:1.4}
+#current-analysis .prose,#after-the-stable-release .prose{font-size:15px;line-height:1.65;max-width:72ch}
+#current-analysis nav{display:flex;flex-wrap:wrap;gap:6px 22px;max-width:75ch}
+#current-analysis nav a{display:inline-flex;align-items:center;min-height:40px;font-size:14px}
+.p3-terms{max-width:74ch}.p3-terms dl{display:grid;grid-template-columns:minmax(130px,1fr) 3fr;gap:10px 20px;margin:18px 0 0}
+.p3-terms dt{font-weight:650}.p3-terms dd{margin:0;line-height:1.6}
+#current-analysis select,#current-analysis input{min-height:44px;font-family:inherit}
+#current-analysis .tablebox:focus-visible{outline:2px solid var(--s2);outline-offset:3px}
+#current-analysis .tablebox table{font-family:inherit;font-size:13px}
+#current-analysis .tablebox td:not(:first-child){font-variant-numeric:tabular-nums}
+#current-analysis summary,#after-the-stable-release summary{font-family:inherit;text-transform:none;letter-spacing:0;font-size:14px;line-height:1.5;padding-block:10px}
+#after-the-stable-release .cards{display:grid;grid-template-columns:1fr;gap:0;background:transparent;border:0}
+#after-the-stable-release .card{background:transparent;border:0;border-radius:0;box-shadow:none;padding:18px 0;gap:7px}
+#after-the-stable-release .card+.card{border-top:1px solid var(--line)}
+#after-the-stable-release .tag{display:none}
+#after-the-stable-release .card p{font-family:inherit;max-width:72ch;font-size:14px;line-height:1.65}
+@media(max-width:640px){.p3-terms dl{grid-template-columns:1fr;gap:6px}.p3-terms dd{margin-bottom:12px}#current-analysis h2,#after-the-stable-release h2{font-size:20px}#current-analysis nav{gap:0 16px}}
+
+#current-analysis thead th,#after-the-stable-release thead th{font-size:12px;letter-spacing:0;text-transform:none;color:var(--muted)}
+#after-the-stable-release h2{display:block}
+#p2-asof{display:block;font-size:12px;line-height:1.5;margin-top:8px;letter-spacing:0!important;color:var(--muted)!important}
+#historical-analysis>summary{font-family:system-ui;font-size:15px;text-transform:none;letter-spacing:0}
+.p3-terms dl{padding:0 16px 16px}
+html{scrollbar-color:var(--line-strong) var(--paper);scrollbar-width:thin}
+input{caret-color:var(--s2)}
 </style>
 <script>
 const P3 = __P3_DATA__;
@@ -110,12 +151,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const marks={symbol:'none',label:{color:css('--ink'),fontSize:10,formatter:'{b}',rotate:90,position:'insideEndTop'},lineStyle:{type:'dashed',color:css('--s2')},data:[{name:'Rewrite',xAxis:'2026-05-14'},{name:'Stable 1.4.0',xAxis:'2026-08-20'}]};
   const zoom=[{type:'slider',height:18,bottom:8},{type:'inside',zoomOnMouseWheel:false}];
   const n=v=>v.toLocaleString('en-US');
-  document.getElementById('p3-overview').textContent=`${n(P3.periods.pre.n)} potential defect reports before the merge; ${n(P3.periods.post.n)} after, through ${P3.generated.slice(0,10)}. Current day is partial. The matching 26-week baseline starts ${P3.start.slice(0,10)}.`;
-  draw('p3-volume-chart',{color:[colors[2],colors[1]],legend:{...base.legend,data:['Closed as fixed','Other outcomes / open']},xAxis:{...base.xAxis,data:dates},dataZoom:zoom,series:[{name:'Closed as fixed',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.fixed,itemStyle:w.partial?{color:colors[3]}:{}})),markLine:marks},{name:'Other outcomes / open',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.bugs-w.fixed,itemStyle:w.partial?{color:colors[3],opacity:.55}:{}}))}]});
+  document.getElementById('p3-overview').textContent=`${n(P3.periods.pre.n)} possible bug reports opened before the merge. Another ${n(P3.periods.post.n)} opened after it. The last day, ${P3.generated.slice(0,10)}, is incomplete.`;
+  draw('p3-volume-chart',{color:[colors[2],colors[1]],legend:{...base.legend,data:['Marked as fixed','Other outcome or open']},xAxis:{...base.xAxis,data:dates},dataZoom:zoom,series:[{name:'Marked as fixed',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.fixed,itemStyle:w.partial?{color:colors[3]}:{}})),markLine:marks},{name:'Other outcome or open',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.bugs-w.fixed,itemStyle:w.partial?{color:colors[3],opacity:.55}:{}}))}]});
 
-  const versionNames=v=>v==='unknown'?'Version not stated':v==='multiple'?'Multiple reported versions':`Bun ${v}`;
+  const versionNames=v=>v==='unknown'?'No usable version':v==='multiple'?'Several versions reported':`Bun ${v}`;
   const versionSelect=document.getElementById('p3-v-version');
-  for(const [value,label] of [['all','All versions combined'],['compare','Compare four versions in one plot'],...Object.keys(VERSION_DAILY.counts).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true})).map(v=>[v,`${versionNames(v)} (${n(VERSION_DAILY.counts[v])} reports)`])]){
+  for(const [value,label] of [['all','All versions'],['compare','Four versions on one chart'],...Object.keys(VERSION_DAILY.counts).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true})).map(v=>[v,`${versionNames(v)} (${n(VERSION_DAILY.counts[v])} ${VERSION_DAILY.counts[v]===1?'report':'reports'})`])]){
     const o=document.createElement('option');o.value=value;o.textContent=label;versionSelect.append(o);
   }
   let combinedChart;
@@ -142,23 +183,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const prepared=Object.fromEntries(versions.map(v=>[v,CombinedSeries.build({...args,counts:pools[v],baselineReportMean:combined.baselineReports})]));
     const pre=combined.periods.pre,post=combined.periods.post;
     const fmt=(x,d=1)=>x==null?'unavailable':x.toLocaleString('en-US',{maximumFractionDigits:d});
-    const factor=(a,b)=>b>0?`${(a/b).toFixed(2)}×`:'no nonzero pre-merge baseline';
+    const factor=(a,b)=>b>0?`${(a/b).toFixed(2)}×`:'no reports before the merge';
     const change=pre.rate>0&&post.rate!=null?(post.rate/pre.rate-1)*100:null;
-    const direction=change==null?'Relative growth cannot be compared for this selection.':`The report/download proxy ${change>0?'rose':'fell'} ${fmt(Math.abs(change))}%; reports grew ${change>0?'faster':'slower'} than npm requests over these matched periods.`;
-    document.getElementById('p3-v-summary').textContent=`Matched complete days over the full observation window: ${pre.days} before, ${post.days} after. Reports/day ${fmt(pre.reportsPerDay)} → ${fmt(post.reportsPerDay)} (${factor(post.reportsPerDay,pre.reportsPerDay)}); npm requests/day ${fmt(pre.downloadsPerDay,0)} → ${fmt(post.downloadsPerDay,0)} (${factor(post.downloadsPerDay,pre.downloadsPerDay)}). Reports per million npm requests ${fmt(pre.rate,2)} → ${fmt(post.rate,2)}. ${direction}`;
-    document.getElementById('p3-v-scope').textContent=`npm observations end ${POP.npm.valid_through}; issue observations end ${P3.generated.slice(0,10)} (partial day). ${version==='compare'?`Within each day, version stacks run left to right: ${versions.map(versionNames).join(', ')}.`:version==='all'?'All reports are included, including unknown and multiple-version reports.':'Filtered reports are compared with ALL-VERSION npm downloads; these are contributions to the total report/download proxy.'} ${mode==='index'&&combined.baselineReports<=0?'No reports of this selection existed in the pre-merge baseline, so a report growth index cannot be drawn.':''} These proxies do not measure defect risk per user.`;
+    const direction=change==null?'This selection has no before-merge rate for comparison.':`The report/request rate ${change>0?'increased':'decreased'} ${fmt(Math.abs(change))}%. Reports grew ${change>0?'faster':'more slowly'} than npm requests in these periods.`;
+    document.getElementById('p3-v-summary').textContent=`The full comparison uses ${pre.days} complete days before the merge and ${post.days} after it. Reports per day: ${fmt(pre.reportsPerDay)} → ${fmt(post.reportsPerDay)} (${factor(post.reportsPerDay,pre.reportsPerDay)}). npm requests per day: ${fmt(pre.downloadsPerDay,0)} → ${fmt(post.downloadsPerDay,0)} (${factor(post.downloadsPerDay,pre.downloadsPerDay)}). Reports per million requests: ${fmt(pre.rate,2)} → ${fmt(post.rate,2)}. ${direction}`;
+    document.getElementById('p3-v-scope').textContent=`npm data ends on ${POP.npm.valid_through}. Issue data ends on ${P3.generated.slice(0,10)}, an incomplete day. ${version==='compare'?`Each day shows versions from left to right: ${versions.map(versionNames).join(', ')}.`:version==='all'?'All reports are included. This includes unknown and several-version groups.':'Only reports use the version filter. npm requests still cover all versions.'} ${mode==='index'&&combined.baselineReports<=0?'There were no reports in this selection before the merge. Select counts to see these reports.':''} These rates do not measure defect risk per user.`;
     const host=document.getElementById('p3-v-charts');host.replaceChildren();
     const fig=document.createElement('figure'),h=document.createElement('h3');
-    const title=version==='all'?'All versions':version==='compare'?'Four versions in one plot':versionNames(version);
-    const units={counts:'reports + npm requests',rate:'reports / million npm requests',index:'growth index · before rewrite = 100',percent:'report composition (%)'};
-    h.textContent=`${title} · ${units[mode]} · ${windowDays===1?'daily':`trailing ${windowDays} days`}`;fig.append(h);
+    const title=version==='all'?'All versions':version==='compare'?'Four versions':versionNames(version);
+    const units={counts:'reports and npm requests',rate:'reports per million npm requests',index:'growth: before = 100',percent:'share of report types (%)'};
+    h.textContent=`${title} · ${units[mode]} · ${windowDays===1?'one day':`previous ${windowDays} days`}`;fig.append(h);
     const el=document.createElement('div');el.className='p3-chart p3-combined';el.id='p3-combined-chart';el.setAttribute('role','img');el.setAttribute('aria-label',h.textContent);fig.append(el);host.append(fig);
     const palette=['#4f86c6','#de7344','#32a89a','#b184d6','#c9a53c','#d576a3','#6ea343','#7487d4','#c37d50','#4b9da7'];
     const typeColor=k=>k==='unknown'?css('--unk'):k==='multiple'?css('--muted'):palette[Object.keys(VERSION_DAILY.types[axis]).indexOf(k)];
-    const dlName=mode==='index'?'npm download growth':'npm downloads';
+    const dlName=mode==='index'?'npm request growth':'npm requests';
     const series=[];
     for(const [i,v] of versions.entries())for(const [j,key] of keys.entries()){
-      const markData=[...marks.data,...(mode==='index'?[{name:'Baseline 100',yAxis:100}]:[])];
+      const markData=[...marks.data,...(mode==='index'?[{name:'Before-merge mean: 100',yAxis:100}]:[])];
       series.push({name:VERSION_DAILY.types[axis][key],type:'bar',stack:v,barMaxWidth:22,
         itemStyle:{color:typeColor(key),opacity:1-i*.15},data:prepared[v].reportSeries[key],
         ...(i===0&&j===0?{markLine:{...marks,data:markData}}:{})});
@@ -170,7 +211,7 @@ window.addEventListener('DOMContentLoaded', () => {
       for(const v of versions){const values=prepared[v].reportSeries;parts.push(`<strong>${v==='all'?'All versions':versionNames(v)}</strong>`);
         let total=0,hasValue=false;
         for(const k of keys){const value=values[k][ix];if(value!=null){hasValue=true;total+=value;if(value>0)parts.push(`${VERSION_DAILY.types[axis][k]}: ${fmt(value,2)}${mode==='percent'?'%':''}`);}}
-        parts.push(hasValue?`Total: ${fmt(total,2)}`:'No complete matched data / no baseline');
+        parts.push(hasValue?`Total: ${fmt(total,2)}`:'No complete data or no before-merge reference');
       }
       parts.push(`${dlName}: ${fmt(combined.downloadSeries[ix],mode==='index'?2:0)}`);return parts.join('<br>');
     };
@@ -178,7 +219,7 @@ window.addEventListener('DOMContentLoaded', () => {
     combinedChart=draw(el.id,{grid:{left:58,right:mode==='index'?25:76,top:64,bottom:70},
       legend:{...base.legend,type:'scroll',data:[dlName,...keys.map(k=>VERSION_DAILY.types[axis][k])]},
       xAxis:{...base.xAxis,data:VERSION_DAILY.days},
-      yAxis:[{...base.yAxis,name:{counts:'reports/day',rate:'reports / 1m',index:'index (pre = 100)',percent:'% of reports'}[mode],min:0,...(mode==='percent'&&versions.length===1?{max:100}:{})},
+      yAxis:[{...base.yAxis,name:{counts:'reports/day',rate:'reports / 1m',index:'index (before = 100)',percent:'% of reports'}[mode],min:0,...(mode==='percent'&&versions.length===1?{max:100}:{})},
         {...base.yAxis,show:mode!=='index',name:'npm requests/day',splitLine:{show:false},axisLabel:{color:css('--muted'),formatter:x=>x>=1e6?`${(x/1e6).toFixed(1)}m`:`${(x/1000).toFixed(0)}k`}}],
       tooltip:{...base.tooltip,formatter:tooltip},
       dataZoom:[{type:'slider',height:18,bottom:8,...(versions.length===1&&version!=='all'&&first>=0?{startValue:VERSION_DAILY.days[Math.max(0,first-7)],endValue:VERSION_DAILY.days.at(-1)}:{})},{type:'inside',zoomOnMouseWheel:false}],series});
@@ -195,20 +236,20 @@ window.addEventListener('DOMContentLoaded', () => {
     const fmt=(x,d=2)=>x==null?'unavailable':x.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:d});
     const table=document.getElementById('p3-safety-table');table.replaceChildren();
     for(const key of ['crash','leak']){const row=stat[key],tr=document.createElement('tr');for(const text of [SAFETY.labels[key],n(row.pre.n),fmt(row.pre.rate),n(row.post.n),fmt(row.post.rate),`${fmt(row.change_pct,1)}%`]){const td=document.createElement('td');td.textContent=text;tr.append(td);}table.append(tr);}
-    document.getElementById('p3-safety-summary').textContent=`${variant==='title'?'Primary title-only counts':'Bounded-body sensitivity counts'}: crash reports ${n(stat.crash.pre.n)} → ${n(stat.crash.post.n)}, leak/retention reports ${n(stat.leak.pre.n)} → ${n(stat.leak.post.n)}. These are report signals, not verified root causes. The small leak sample limits the conclusion; denominator growth accounts for much of its per-million decline.`;
+    document.getElementById('p3-safety-summary').textContent=`${variant==='title'?'Title-only check':'Extra body-text check'}: crash reports ${n(stat.crash.pre.n)} → ${n(stat.crash.post.n)}, memory-leak reports ${n(stat.leak.pre.n)} → ${n(stat.leak.post.n)}. These matches do not confirm defect causes. There are few leak reports. Download growth explains much of their rate decrease.`;
     const args={days:VERSION_DAILY.days,counts:SAFETY.daily[variant],downloads:Object.fromEntries(POP.npm.daily.map(r=>[r.day,r.downloads])),firstPartial:SAFETY.first_partial,lastPartial:SAFETY.last_partial,merge:SAFETY.merge,stable:SAFETY.stable,windowDays,mode:'rate'};
     const rates=CombinedSeries.build({...args,types:[signal]}),growth=CombinedSeries.build({...args,types:[growthSignal]});
     const rate=stat[signal],daily=VERSION_DAILY.days;
     const label=SAFETY.labels[signal];
-    safetyRateChart=draw('p3-safety-rate-chart',{color:[colors[2],colors[0],colors[1]],legend:{...base.legend,type:'scroll',data:[label,'Pre-merge pooled rate','Post-merge pooled rate']},xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'reports / 1m requests',min:0},dataZoom:zoom,
+    safetyRateChart=draw('p3-safety-rate-chart',{color:[colors[2],colors[0],colors[1]],legend:{...base.legend,type:'scroll',data:[label,'Before-merge period rate','After-merge period rate']},xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'reports / 1m requests',min:0},dataZoom:zoom,
       tooltip:{...base.tooltip,valueFormatter:v=>fmt(v,3)},series:[
         {name:label,type:'line',data:rates.reportSeries[signal],connectNulls:false,showSymbol:false,lineStyle:{width:2.5},markLine:marks},
-        {name:'Pre-merge pooled rate',type:'line',data:daily.map(d=>d<SAFETY.merge&&d>SAFETY.first_partial?rate.pre.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}},
-        {name:'Post-merge pooled rate',type:'line',data:daily.map(d=>d>SAFETY.merge&&d<=SAFETY.download_through?rate.post.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}}]});
+        {name:'Before-merge period rate',type:'line',data:daily.map(d=>d<SAFETY.merge&&d>SAFETY.first_partial?rate.pre.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}},
+        {name:'After-merge period rate',type:'line',data:daily.map(d=>d>SAFETY.merge&&d<=SAFETY.download_through?rate.post.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}}]});
     const selected=stat[growthSignal],ratio=selected.pre.rate>0?selected.post.rate/selected.pre.rate:null;
-    document.getElementById('p3-growth-summary').textContent=`${SAFETY.labels[growthSignal]}: the pooled post/pre ratio is ${fmt(ratio,3)}× (pre-merge reference = 1). ${ratio==null?'There is no nonzero baseline.':ratio<1?'The report/download proxy is lower after the merge.':'The report/download proxy is higher after the merge.'} The selected trailing window affects the line; this pooled summary covers the entire matched comparison. “Audience” here is npm request volume, not active users.`;
-    growthRatioChart=draw('p3-growth-ratio-chart',{color:[colors[1]],xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'report index / download index',min:0},dataZoom:zoom,
-      tooltip:{...base.tooltip,valueFormatter:v=>fmt(v,3)+'×'},series:[{name:SAFETY.labels[growthSignal]+' / npm growth',type:'line',data:growth.growthRatio,connectNulls:false,showSymbol:false,lineStyle:{width:2.5},markLine:{...marks,data:[...marks.data,{name:'Equal relative growth = 1',yAxis:1}]}}]});
+    document.getElementById('p3-growth-summary').textContent=`${SAFETY.labels[growthSignal]}: the full-period after/before rate ratio is ${fmt(ratio,3)}×. The before-merge reference is 1. ${ratio==null?'There is no before-merge rate for comparison.':ratio<1?'The report/request rate is lower after the merge.':'The report/request rate is higher after the merge.'} The time window changes the curve. This summary uses the full comparison period. npm requests do not count active users.`;
+    growthRatioChart=draw('p3-growth-ratio-chart',{color:[colors[1]],xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'relative report rate',min:0},dataZoom:zoom,
+      tooltip:{...base.tooltip,valueFormatter:v=>fmt(v,3)+'×'},series:[{name:SAFETY.labels[growthSignal]+' / npm growth',type:'line',data:growth.growthRatio,connectNulls:false,showSymbol:false,lineStyle:{width:2.5},markLine:{...marks,data:[...marks.data,{name:'Before-merge rate = 1',yAxis:1}]}}]});
   }
   for(const id of ['p3-safety-evidence','p3-safety-window','p3-safety-signal','p3-growth-signal'])document.getElementById(id).addEventListener('change',safetyCharts);
   const leakTable=document.getElementById('p3-leak-evidence');
@@ -220,17 +261,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const period=document.getElementById('p3-period').value,measure=document.getElementById('p3-measure').value,axis=document.getElementById('p3-axis').value;
     const a=P3.periods.pre[axis],b=P3.periods[period][axis],keys=Object.keys(a).filter(k=>k!=='unclassified');
     if(category)category.dispose();
-    category=draw('p3-category-chart',{grid:{left:158,right:24,top:52,bottom:30},color:[colors[0],colors[1]],legend:{...base.legend,data:['Before merge','Compared period']},xAxis:{type:'value',name:measure==='share'?'% of reports':'reports/week',nameLocation:'middle',nameGap:24,splitLine:base.yAxis.splitLine,axisLabel:base.xAxis.axisLabel},yAxis:{type:'category',inverse:true,data:keys.map(k=>a[k].label),axisLabel:{color:css('--ink'),width:140,overflow:'break'}},series:[{name:'Before merge',type:'bar',data:keys.map(k=>a[k][measure])},{name:'Compared period',type:'bar',data:keys.map(k=>b[k][measure])}]});
+    category=draw('p3-category-chart',{grid:{left:158,right:24,top:52,bottom:30},color:[colors[0],colors[1]],legend:{...base.legend,data:['Before merge','Selected period']},xAxis:{type:'value',name:measure==='share'?'% of reports':'reports/week',nameLocation:'middle',nameGap:24,splitLine:base.yAxis.splitLine,axisLabel:base.xAxis.axisLabel},yAxis:{type:'category',inverse:true,data:keys.map(k=>a[k].label),axisLabel:{color:css('--ink'),width:140,overflow:'break'}},series:[{name:'Before merge',type:'bar',data:keys.map(k=>a[k][measure])},{name:'Selected period',type:'bar',data:keys.map(k=>b[k][measure])}]});
     const sensitivity=document.getElementById('p3-sensitivity');sensitivity.replaceChildren();
     for(const k of keys){const tr=document.createElement('tr');for(const val of [a[k].label,a[k].n,a[k].expanded_n,b[k].n,b[k].expanded_n]){const td=document.createElement('td');td.textContent=val;tr.append(td);}sensitivity.append(tr);}
     const tb=document.getElementById('p3-category-table');tb.replaceChildren();
     for(const k of [...keys,'unclassified']){const tr=document.createElement('tr');for(const val of [a[k].label,a[k].n,b[k].n,a[k].share+'%',b[k].share+'%',(b[k].share-a[k].share).toFixed(2)]){const td=document.createElement('td');td.textContent=val;tr.append(td);}tb.append(tr);}
-    document.getElementById('p3-coverage').textContent=`No ${axis==='components'?'component':'symptom'} title signal: ${a.unclassified.share}% before vs ${b.unclassified.share}% in the compared period. Counts overlap. The compared period has ${n(P3.periods[period].n)} potential reports over ${P3.periods[period].weeks.toFixed(1)} weeks; the baseline has ${n(P3.periods.pre.n)} over 26 weeks. Shares and weekly counts describe reports, not defect density.`;
+    document.getElementById('p3-coverage').textContent=`No ${axis==='components'?'component':'problem-type'} match: ${a.unclassified.share}% before the merge and ${b.unclassified.share}% in the selected period. Types can overlap. The selected period has ${n(P3.periods[period].n)} possible bug reports over ${P3.periods[period].weeks.toFixed(1)} weeks. The before-merge group has ${n(P3.periods.pre.n)} reports over 26 weeks.`;
   }
   for(const id of ['p3-period','p3-measure','p3-axis'])document.getElementById(id).addEventListener('change',categories);categories();
-  function evidence(){const q=document.getElementById('p3-search').value.toLowerCase();const found=AUDIT.filter(r=>r.title.toLowerCase().includes(q));const tb=document.getElementById('p3-issues');tb.replaceChildren();document.getElementById('p3-results-count').textContent=`${n(found.length)} matching potential defect reports; showing the first 30 chronologically. Each tag is a title rule match.`;for(const r of found.slice(0,30)){const tr=document.createElement('tr');const td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [r.period,Object.keys(r.components).map(k=>P3.rules.components[k].label).join(', ')||'Unknown',Object.keys(r.symptoms).map(k=>P3.rules.symptoms[k].label).join(', ')||'Unknown']){const c=document.createElement('td');c.textContent=value;tr.append(c);}tb.append(tr);}}
+  function evidence(){const q=document.getElementById('p3-search').value.toLowerCase();const found=AUDIT.filter(r=>r.title.toLowerCase().includes(q));const tb=document.getElementById('p3-issues');tb.replaceChildren();document.getElementById('p3-results-count').textContent=`${n(found.length)} possible bug reports match. The table shows the first 30 by date. Tags come from title rules.`;for(const r of found.slice(0,30)){const tr=document.createElement('tr');const td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [({pre:'Before merge',pre_stable:'Before stable 1.4.0',stable:'After stable 1.4.0'})[r.period],Object.keys(r.components).map(k=>P3.rules.components[k].label).join(', ')||'Unknown',Object.keys(r.symptoms).map(k=>P3.rules.symptoms[k].label).join(', ')||'Unknown']){const c=document.createElement('td');c.textContent=value;tr.append(c);}tb.append(tr);}}
   document.getElementById('p3-search').addEventListener('input',evidence);evidence();
-  document.getElementById('p3-pop-summary').textContent=`npm daily data is published through ${POP.npm.valid_through}. GitHub currently shows ${n(POP.github.snapshot.stars)} stars. Report types, versions and the download comparison are combined in the daily chart above; stars below show interest separately.`;
+  document.getElementById('p3-pop-summary').textContent=`npm data is available through ${POP.npm.valid_through}. The saved GitHub count is ${n(POP.github.snapshot.stars)} stars. Stars show interest. They do not count Bun users.`;
 
 
   draw('p3-stars-chart',{color:[colors[2]],xAxis:{...base.xAxis,data:POP.github.stars_weekly.map(w=>w.day)},dataZoom:zoom,series:[{name:'Weekly star events',type:'bar',data:POP.github.stars_weekly.map(w=>({value:w.total,itemStyle:{color:w.complete?colors[2]:colors[3]}}))}]});

@@ -11,105 +11,105 @@
       "weeks": 26.0,
       "components": {
         "packages": {
-          "label": "Package manager",
+          "label": "Package installation",
           "n": 152,
           "share": 8.44,
           "per_week": 5.85,
           "expanded_n": 369
         },
         "build": {
-          "label": "Bundler / transpiler",
+          "label": "Build and code conversion",
           "n": 112,
           "share": 6.22,
           "per_week": 4.31,
           "expanded_n": 374
         },
         "test": {
-          "label": "Test runner",
+          "label": "Tests",
           "n": 37,
           "share": 2.05,
           "per_week": 1.42,
           "expanded_n": 108
         },
         "network": {
-          "label": "HTTP / network",
+          "label": "HTTP and networks",
           "n": 162,
           "share": 8.99,
           "per_week": 6.23,
           "expanded_n": 942
         },
         "database": {
-          "label": "SQL / storage",
+          "label": "SQL and storage",
           "n": 67,
           "share": 3.72,
           "per_week": 2.58,
           "expanded_n": 98
         },
         "process": {
-          "label": "Processes / shell",
+          "label": "Processes and shell",
           "n": 62,
           "share": 3.44,
           "per_week": 2.38,
           "expanded_n": 741
         },
         "filesystem": {
-          "label": "Filesystem / watch",
+          "label": "Files and file watching",
           "n": 61,
           "share": 3.39,
           "per_week": 2.35,
           "expanded_n": 363
         },
         "modules": {
-          "label": "Modules / compatibility",
+          "label": "Modules and compatibility",
           "n": 48,
           "share": 2.66,
           "per_week": 1.85,
           "expanded_n": 682
         },
         "native": {
-          "label": "Native / FFI / JSC",
+          "label": "Native code and FFI",
           "n": 42,
           "share": 2.33,
           "per_week": 1.62,
           "expanded_n": 455
         },
         "types": {
-          "label": "Types / TypeScript",
+          "label": "TypeScript types",
           "n": 24,
           "share": 1.33,
           "per_week": 0.92,
           "expanded_n": 125
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 1110,
           "share": 61.6
         }
       },
       "symptoms": {
         "crash": {
-          "label": "Crash / fatal signal",
+          "label": "Crash or fatal signal",
           "n": 418,
           "share": 23.2,
           "per_week": 16.08,
           "expanded_n": 586
         },
         "panic": {
-          "label": "Panic / assertion",
+          "label": "Panic or failed check",
           "n": 87,
           "share": 4.83,
           "per_week": 3.35,
           "expanded_n": 342
         },
         "hang": {
-          "label": "Hang / deadlock",
+          "label": "Hang or deadlock",
           "n": 76,
           "share": 4.22,
           "per_week": 2.92,
           "expanded_n": 141
         },
         "memory": {
-          "label": "Memory use / leak",
+          "label": "Memory problems",
           "n": 27,
           "share": 1.5,
           "per_week": 1.04,
@@ -123,21 +123,21 @@
           "expanded_n": 59
         },
         "correctness": {
-          "label": "Wrong / missing result",
+          "label": "Wrong or missing result",
           "n": 167,
           "share": 9.27,
           "per_week": 6.42,
           "expanded_n": 442
         },
         "failure": {
-          "label": "Explicit failure",
+          "label": "Reported error",
           "n": 281,
           "share": 15.59,
           "per_week": 10.81,
           "expanded_n": 911
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 835,
           "share": 46.34
         }
@@ -148,105 +148,105 @@
       "weeks": 14.035494378306879,
       "components": {
         "packages": {
-          "label": "Package manager",
+          "label": "Package installation",
           "n": 55,
           "share": 5.48,
           "per_week": 3.92,
           "expanded_n": 125
         },
         "build": {
-          "label": "Bundler / transpiler",
+          "label": "Build and code conversion",
           "n": 63,
           "share": 6.27,
           "per_week": 4.49,
           "expanded_n": 150
         },
         "test": {
-          "label": "Test runner",
+          "label": "Tests",
           "n": 58,
           "share": 5.78,
           "per_week": 4.13,
           "expanded_n": 103
         },
         "network": {
-          "label": "HTTP / network",
+          "label": "HTTP and networks",
           "n": 126,
           "share": 12.55,
           "per_week": 8.98,
           "expanded_n": 426
         },
         "database": {
-          "label": "SQL / storage",
+          "label": "SQL and storage",
           "n": 43,
           "share": 4.28,
           "per_week": 3.06,
           "expanded_n": 67
         },
         "process": {
-          "label": "Processes / shell",
+          "label": "Processes and shell",
           "n": 50,
           "share": 4.98,
           "per_week": 3.56,
           "expanded_n": 154
         },
         "filesystem": {
-          "label": "Filesystem / watch",
+          "label": "Files and file watching",
           "n": 42,
           "share": 4.18,
           "per_week": 2.99,
           "expanded_n": 112
         },
         "modules": {
-          "label": "Modules / compatibility",
+          "label": "Modules and compatibility",
           "n": 33,
           "share": 3.29,
           "per_week": 2.35,
           "expanded_n": 117
         },
         "native": {
-          "label": "Native / FFI / JSC",
+          "label": "Native code and FFI",
           "n": 42,
           "share": 4.18,
           "per_week": 2.99,
           "expanded_n": 133
         },
         "types": {
-          "label": "Types / TypeScript",
+          "label": "TypeScript types",
           "n": 8,
           "share": 0.8,
           "per_week": 0.57,
           "expanded_n": 53
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 530,
           "share": 52.79
         }
       },
       "symptoms": {
         "crash": {
-          "label": "Crash / fatal signal",
+          "label": "Crash or fatal signal",
           "n": 123,
           "share": 12.25,
           "per_week": 8.76,
           "expanded_n": 188
         },
         "panic": {
-          "label": "Panic / assertion",
+          "label": "Panic or failed check",
           "n": 27,
           "share": 2.69,
           "per_week": 1.92,
           "expanded_n": 90
         },
         "hang": {
-          "label": "Hang / deadlock",
+          "label": "Hang or deadlock",
           "n": 49,
           "share": 4.88,
           "per_week": 3.49,
           "expanded_n": 91
         },
         "memory": {
-          "label": "Memory use / leak",
+          "label": "Memory problems",
           "n": 10,
           "share": 1.0,
           "per_week": 0.71,
@@ -260,21 +260,21 @@
           "expanded_n": 44
         },
         "correctness": {
-          "label": "Wrong / missing result",
+          "label": "Wrong or missing result",
           "n": 146,
           "share": 14.54,
           "per_week": 10.4,
           "expanded_n": 314
         },
         "failure": {
-          "label": "Explicit failure",
+          "label": "Reported error",
           "n": 132,
           "share": 13.15,
           "per_week": 9.4,
           "expanded_n": 447
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 550,
           "share": 54.78
         }
@@ -285,105 +285,105 @@
       "weeks": 10.114373346560846,
       "components": {
         "packages": {
-          "label": "Package manager",
+          "label": "Package installation",
           "n": 80,
           "share": 5.78,
           "per_week": 7.91,
           "expanded_n": 150
         },
         "build": {
-          "label": "Bundler / transpiler",
+          "label": "Build and code conversion",
           "n": 94,
           "share": 6.79,
           "per_week": 9.29,
           "expanded_n": 206
         },
         "test": {
-          "label": "Test runner",
+          "label": "Tests",
           "n": 118,
           "share": 8.52,
           "per_week": 11.67,
           "expanded_n": 169
         },
         "network": {
-          "label": "HTTP / network",
+          "label": "HTTP and networks",
           "n": 227,
           "share": 16.39,
           "per_week": 22.44,
           "expanded_n": 583
         },
         "database": {
-          "label": "SQL / storage",
+          "label": "SQL and storage",
           "n": 62,
           "share": 4.48,
           "per_week": 6.13,
           "expanded_n": 85
         },
         "process": {
-          "label": "Processes / shell",
+          "label": "Processes and shell",
           "n": 74,
           "share": 5.34,
           "per_week": 7.32,
           "expanded_n": 194
         },
         "filesystem": {
-          "label": "Filesystem / watch",
+          "label": "Files and file watching",
           "n": 86,
           "share": 6.21,
           "per_week": 8.5,
           "expanded_n": 165
         },
         "modules": {
-          "label": "Modules / compatibility",
+          "label": "Modules and compatibility",
           "n": 47,
           "share": 3.39,
           "per_week": 4.65,
           "expanded_n": 149
         },
         "native": {
-          "label": "Native / FFI / JSC",
+          "label": "Native code and FFI",
           "n": 36,
           "share": 2.6,
           "per_week": 3.56,
           "expanded_n": 161
         },
         "types": {
-          "label": "Types / TypeScript",
+          "label": "TypeScript types",
           "n": 22,
           "share": 1.59,
           "per_week": 2.18,
           "expanded_n": 111
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 624,
           "share": 45.05
         }
       },
       "symptoms": {
         "crash": {
-          "label": "Crash / fatal signal",
+          "label": "Crash or fatal signal",
           "n": 72,
           "share": 5.2,
           "per_week": 7.12,
           "expanded_n": 122
         },
         "panic": {
-          "label": "Panic / assertion",
+          "label": "Panic or failed check",
           "n": 18,
           "share": 1.3,
           "per_week": 1.78,
           "expanded_n": 54
         },
         "hang": {
-          "label": "Hang / deadlock",
+          "label": "Hang or deadlock",
           "n": 57,
           "share": 4.12,
           "per_week": 5.64,
           "expanded_n": 127
         },
         "memory": {
-          "label": "Memory use / leak",
+          "label": "Memory problems",
           "n": 15,
           "share": 1.08,
           "per_week": 1.48,
@@ -397,21 +397,21 @@
           "expanded_n": 97
         },
         "correctness": {
-          "label": "Wrong / missing result",
+          "label": "Wrong or missing result",
           "n": 171,
           "share": 12.35,
           "per_week": 16.91,
           "expanded_n": 434
         },
         "failure": {
-          "label": "Explicit failure",
+          "label": "Reported error",
           "n": 206,
           "share": 14.87,
           "per_week": 20.37,
           "expanded_n": 723
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 855,
           "share": 61.73
         }
@@ -422,105 +422,105 @@
       "weeks": 24.149867724867725,
       "components": {
         "packages": {
-          "label": "Package manager",
+          "label": "Package installation",
           "n": 135,
           "share": 5.65,
           "per_week": 5.59,
           "expanded_n": 275
         },
         "build": {
-          "label": "Bundler / transpiler",
+          "label": "Build and code conversion",
           "n": 157,
           "share": 6.57,
           "per_week": 6.5,
           "expanded_n": 356
         },
         "test": {
-          "label": "Test runner",
+          "label": "Tests",
           "n": 176,
           "share": 7.37,
           "per_week": 7.29,
           "expanded_n": 272
         },
         "network": {
-          "label": "HTTP / network",
+          "label": "HTTP and networks",
           "n": 353,
           "share": 14.78,
           "per_week": 14.62,
           "expanded_n": 1009
         },
         "database": {
-          "label": "SQL / storage",
+          "label": "SQL and storage",
           "n": 105,
           "share": 4.4,
           "per_week": 4.35,
           "expanded_n": 152
         },
         "process": {
-          "label": "Processes / shell",
+          "label": "Processes and shell",
           "n": 124,
           "share": 5.19,
           "per_week": 5.13,
           "expanded_n": 348
         },
         "filesystem": {
-          "label": "Filesystem / watch",
+          "label": "Files and file watching",
           "n": 128,
           "share": 5.36,
           "per_week": 5.3,
           "expanded_n": 277
         },
         "modules": {
-          "label": "Modules / compatibility",
+          "label": "Modules and compatibility",
           "n": 80,
           "share": 3.35,
           "per_week": 3.31,
           "expanded_n": 266
         },
         "native": {
-          "label": "Native / FFI / JSC",
+          "label": "Native code and FFI",
           "n": 78,
           "share": 3.26,
           "per_week": 3.23,
           "expanded_n": 294
         },
         "types": {
-          "label": "Types / TypeScript",
+          "label": "TypeScript types",
           "n": 30,
           "share": 1.26,
           "per_week": 1.24,
           "expanded_n": 164
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 1154,
           "share": 48.3
         }
       },
       "symptoms": {
         "crash": {
-          "label": "Crash / fatal signal",
+          "label": "Crash or fatal signal",
           "n": 195,
           "share": 8.16,
           "per_week": 8.07,
           "expanded_n": 310
         },
         "panic": {
-          "label": "Panic / assertion",
+          "label": "Panic or failed check",
           "n": 45,
           "share": 1.88,
           "per_week": 1.86,
           "expanded_n": 144
         },
         "hang": {
-          "label": "Hang / deadlock",
+          "label": "Hang or deadlock",
           "n": 106,
           "share": 4.44,
           "per_week": 4.39,
           "expanded_n": 218
         },
         "memory": {
-          "label": "Memory use / leak",
+          "label": "Memory problems",
           "n": 25,
           "share": 1.05,
           "per_week": 1.04,
@@ -534,21 +534,21 @@
           "expanded_n": 141
         },
         "correctness": {
-          "label": "Wrong / missing result",
+          "label": "Wrong or missing result",
           "n": 317,
           "share": 13.27,
           "per_week": 13.13,
           "expanded_n": 748
         },
         "failure": {
-          "label": "Explicit failure",
+          "label": "Reported error",
           "n": 338,
           "share": 14.15,
           "per_week": 14.0,
           "expanded_n": 1170
         },
         "unclassified": {
-          "label": "No title signal",
+          "label": "No title match",
           "n": 1405,
           "share": 58.81
         }
@@ -1325,61 +1325,61 @@
   "rules": {
     "components": {
       "packages": {
-        "label": "Package manager",
+        "label": "Package installation",
         "regex": "\\bbun\\s+(?:install|add|remove|update|pm|publish|link|unlink|outdated|patch)\\b|\\b(?:lockfile|bun\\.lockb?|package manager|workspaces?|peer dependenc\\w*|npm (?:install|registry)|registry auth)\\b"
       },
       "build": {
-        "label": "Bundler / transpiler",
+        "label": "Build and code conversion",
         "regex": "\\bbun\\s+build\\b|\\b(?:bundl\\w*|transpil\\w*|sourcemaps?|source maps?|minif\\w*|tree.shak\\w*|standalone executable|single.file executable|--compile)\\b"
       },
       "test": {
-        "label": "Test runner",
+        "label": "Tests",
         "regex": "\\bbun(?:\\s+|:)test\\b|\\b(?:test runner|mock\\w*|jest|toEqual|toMatchObject|toThrow|expect\\()"
       },
       "network": {
-        "label": "HTTP / network",
+        "label": "HTTP and networks",
         "regex": "\\b(?:fetch|https?|http2|websockets?|TLS|SSL|DNS|TCP|UDP|proxy|Bun\\.serve|Bun\\.connect|Bun\\.listen)\\b|node:(?:http2?|https|tls|net|dns)"
       },
       "database": {
-        "label": "SQL / storage",
+        "label": "SQL and storage",
         "regex": "\\b(?:SQL|SQLite|MySQL|PostgreSQL|postgres|mariadb|redis|Bun\\.SQL|Bun\\.sqlite)\\b|bun:sqlite"
       },
       "process": {
-        "label": "Processes / shell",
+        "label": "Processes and shell",
         "regex": "\\b(?:Bun\\.spawn|Bun\\.Shell|child_process|spawnSync|subprocess\\w*|shell|SIGCHLD|process\\.env|process\\.exit|stdin|stdout|stderr)\\b|\\bbun run\\b"
       },
       "filesystem": {
-        "label": "Filesystem / watch",
+        "label": "Files and file watching",
         "regex": "\\b(?:node:fs|fs\\.\\w+|Bun\\.file|Bun\\.write|readFile\\w*|writeFile\\w*|watch\\w*|file system|filesystem|symlink\\w*|readdir|fallocate)\\b"
       },
       "modules": {
-        "label": "Modules / compatibility",
+        "label": "Modules and compatibility",
         "regex": "\\b(?:node:module|CommonJS|CJS|ESM|require\\(|import\\s|module resol\\w*|node(?:\\.js)? compat\\w*)"
       },
       "native": {
-        "label": "Native / FFI / JSC",
+        "label": "Native code and FFI",
         "regex": "\\b(?:FFI|NAPI|N-API|node.api|native addon\\w*|JavaScriptCore|JSC|WebAssembly|WASM)\\b"
       },
       "types": {
-        "label": "Types / TypeScript",
+        "label": "TypeScript types",
         "regex": "\\b(?:TypeScript|bun-types|typecheck\\w*|type check\\w*|type definitions?|\\.d\\.ts)\\b"
       }
     },
     "symptoms": {
       "crash": {
-        "label": "Crash / fatal signal",
+        "label": "Crash or fatal signal",
         "regex": "\\b(?:crash\\w*|segfault\\w*|SIGSEGV|SIGABRT|SIGILL|segmentation fault|access violation|illegal instruction|bus error)\\b"
       },
       "panic": {
-        "label": "Panic / assertion",
+        "label": "Panic or failed check",
         "regex": "\\b(?:panic\\w*|assertion fail\\w*|assert\\w* failed|unreachable)\\b"
       },
       "hang": {
-        "label": "Hang / deadlock",
+        "label": "Hang or deadlock",
         "regex": "\\b(?:hang(?:s|ing)?|hung|deadlock\\w*|freez\\w*|frozen|infinite loop|stuck|never (?:exit\\w*|finish\\w*|resolv\\w*))\\b"
       },
       "memory": {
-        "label": "Memory use / leak",
+        "label": "Memory problems",
         "regex": "\\b(?:memory leak\\w*|memory usage|memory consumption|out.of.memory|OOM|heap corruption|use.after.free|double.free|buffer overflow)\\b"
       },
       "performance": {
@@ -1387,11 +1387,11 @@
         "regex": "\\b(?:slow\\w*|performance|CPU (?:usage|spike)|high CPU|100% CPU|latency|throughput)\\b"
       },
       "correctness": {
-        "label": "Wrong / missing result",
+        "label": "Wrong or missing result",
         "regex": "\\b(?:incorrect\\w*|wrong|corrupt\\w*|truncat\\w*|mismatch\\w*|missing|ignored|ignores|silently|unexpected\\w*|misread\\w*|drops?|deletes?|pads?)\\b"
       },
       "failure": {
-        "label": "Explicit failure",
+        "label": "Reported error",
         "regex": "\\b(?:fails?|failure|cannot|can't|unable|does(?:n.t| not) work|not working|error)\\b"
       }
     }

@@ -51,7 +51,7 @@ def main():
             stats[variant][key]=values
     payload={'generated':c['generated'],'merge':c['merge'][:10],'stable':c['stable'][:10],
         'first_partial':first,'last_partial':last,'download_through':pop['npm']['valid_through'],
-        'labels':{'all':'All potential defect reports','crash':'Crash / fatal-signal reports','leak':'Explicit memory-leak / retention reports','memory':'Broad memory / OOM / corruption reports'},
+        'labels':{'all':'All possible bug reports','crash':'Crash reports','leak':'Memory leak reports','memory':'All memory problem reports'},
         'daily':{v:{d:dict(x) for d,x in sorted(ds.items())} for v,ds in daily.items()},'stats':stats,
         'leak_examples':[r for r in rows if r['flags']['title']['leak'] and r['day'] in dates and r['day']!=c['merge'][:10]],
         'leak_rule':LEAK.pattern,'method':'Title signals are primary; title plus bounded body is sensitivity only. Categories overlap. All builds and channels; not confirmed defects or user risk.'}

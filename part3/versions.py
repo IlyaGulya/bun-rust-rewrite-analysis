@@ -58,7 +58,7 @@ def main():
     dates=[];day=dt.date.fromisoformat(classification['start'][:10]);end=dt.date.fromisoformat(classification['generated'][:10])
     while day<=end:dates.append(day.isoformat());day+=dt.timedelta(days=1)
     counts=collections.Counter(r['version'] for r in rows)
-    types={axis:{k:v['label'] for k,v in classification['rules'][axis].items()}|{'multiple':'Multiple type signals','unknown':'No title signal'} for axis in ['symptoms','components']}
+    types={axis:{k:v['label'] for k,v in classification['rules'][axis].items()}|{'multiple':'Several type matches','unknown':'No title match'} for axis in ['symptoms','components']}
     daily=collections.defaultdict(collections.Counter)
     for r in rows:
         for axis in types:daily[(r['version'],r['day'],axis)][r[axis]]+=1

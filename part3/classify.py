@@ -17,25 +17,25 @@ P = lambda s: dt.datetime.fromisoformat(s.replace('Z','+00:00'))
 # Applied to titles only for the primary comparison. Bodies and triage labels
 # have changed in length/coverage across periods; neither enters this taxonomy.
 COMPONENTS = {
- 'packages': ('Package manager', r'\bbun\s+(?:install|add|remove|update|pm|publish|link|unlink|outdated|patch)\b|\b(?:lockfile|bun\.lockb?|package manager|workspaces?|peer dependenc\w*|npm (?:install|registry)|registry auth)\b'),
- 'build': ('Bundler / transpiler', r'\bbun\s+build\b|\b(?:bundl\w*|transpil\w*|sourcemaps?|source maps?|minif\w*|tree.shak\w*|standalone executable|single.file executable|--compile)\b'),
- 'test': ('Test runner', r'\bbun(?:\s+|:)test\b|\b(?:test runner|mock\w*|jest|toEqual|toMatchObject|toThrow|expect\()'),
- 'network': ('HTTP / network', r'\b(?:fetch|https?|http2|websockets?|TLS|SSL|DNS|TCP|UDP|proxy|Bun\.serve|Bun\.connect|Bun\.listen)\b|node:(?:http2?|https|tls|net|dns)'),
- 'database': ('SQL / storage', r'\b(?:SQL|SQLite|MySQL|PostgreSQL|postgres|mariadb|redis|Bun\.SQL|Bun\.sqlite)\b|bun:sqlite'),
- 'process': ('Processes / shell', r'\b(?:Bun\.spawn|Bun\.Shell|child_process|spawnSync|subprocess\w*|shell|SIGCHLD|process\.env|process\.exit|stdin|stdout|stderr)\b|\bbun run\b'),
- 'filesystem': ('Filesystem / watch', r'\b(?:node:fs|fs\.\w+|Bun\.file|Bun\.write|readFile\w*|writeFile\w*|watch\w*|file system|filesystem|symlink\w*|readdir|fallocate)\b'),
- 'modules': ('Modules / compatibility', r'\b(?:node:module|CommonJS|CJS|ESM|require\(|import\s|module resol\w*|node(?:\.js)? compat\w*)'),
- 'native': ('Native / FFI / JSC', r'\b(?:FFI|NAPI|N-API|node.api|native addon\w*|JavaScriptCore|JSC|WebAssembly|WASM)\b'),
- 'types': ('Types / TypeScript', r'\b(?:TypeScript|bun-types|typecheck\w*|type check\w*|type definitions?|\.d\.ts)\b'),
+ 'packages': ('Package installation', r'\bbun\s+(?:install|add|remove|update|pm|publish|link|unlink|outdated|patch)\b|\b(?:lockfile|bun\.lockb?|package manager|workspaces?|peer dependenc\w*|npm (?:install|registry)|registry auth)\b'),
+ 'build': ('Build and code conversion', r'\bbun\s+build\b|\b(?:bundl\w*|transpil\w*|sourcemaps?|source maps?|minif\w*|tree.shak\w*|standalone executable|single.file executable|--compile)\b'),
+ 'test': ('Tests', r'\bbun(?:\s+|:)test\b|\b(?:test runner|mock\w*|jest|toEqual|toMatchObject|toThrow|expect\()'),
+ 'network': ('HTTP and networks', r'\b(?:fetch|https?|http2|websockets?|TLS|SSL|DNS|TCP|UDP|proxy|Bun\.serve|Bun\.connect|Bun\.listen)\b|node:(?:http2?|https|tls|net|dns)'),
+ 'database': ('SQL and storage', r'\b(?:SQL|SQLite|MySQL|PostgreSQL|postgres|mariadb|redis|Bun\.SQL|Bun\.sqlite)\b|bun:sqlite'),
+ 'process': ('Processes and shell', r'\b(?:Bun\.spawn|Bun\.Shell|child_process|spawnSync|subprocess\w*|shell|SIGCHLD|process\.env|process\.exit|stdin|stdout|stderr)\b|\bbun run\b'),
+ 'filesystem': ('Files and file watching', r'\b(?:node:fs|fs\.\w+|Bun\.file|Bun\.write|readFile\w*|writeFile\w*|watch\w*|file system|filesystem|symlink\w*|readdir|fallocate)\b'),
+ 'modules': ('Modules and compatibility', r'\b(?:node:module|CommonJS|CJS|ESM|require\(|import\s|module resol\w*|node(?:\.js)? compat\w*)'),
+ 'native': ('Native code and FFI', r'\b(?:FFI|NAPI|N-API|node.api|native addon\w*|JavaScriptCore|JSC|WebAssembly|WASM)\b'),
+ 'types': ('TypeScript types', r'\b(?:TypeScript|bun-types|typecheck\w*|type check\w*|type definitions?|\.d\.ts)\b'),
 }
 SYMPTOMS = {
- 'crash': ('Crash / fatal signal', r'\b(?:crash\w*|segfault\w*|SIGSEGV|SIGABRT|SIGILL|segmentation fault|access violation|illegal instruction|bus error)\b'),
- 'panic': ('Panic / assertion', r'\b(?:panic\w*|assertion fail\w*|assert\w* failed|unreachable)\b'),
- 'hang': ('Hang / deadlock', r'\b(?:hang(?:s|ing)?|hung|deadlock\w*|freez\w*|frozen|infinite loop|stuck|never (?:exit\w*|finish\w*|resolv\w*))\b'),
- 'memory': ('Memory use / leak', r'\b(?:memory leak\w*|memory usage|memory consumption|out.of.memory|OOM|heap corruption|use.after.free|double.free|buffer overflow)\b'),
+ 'crash': ('Crash or fatal signal', r'\b(?:crash\w*|segfault\w*|SIGSEGV|SIGABRT|SIGILL|segmentation fault|access violation|illegal instruction|bus error)\b'),
+ 'panic': ('Panic or failed check', r'\b(?:panic\w*|assertion fail\w*|assert\w* failed|unreachable)\b'),
+ 'hang': ('Hang or deadlock', r'\b(?:hang(?:s|ing)?|hung|deadlock\w*|freez\w*|frozen|infinite loop|stuck|never (?:exit\w*|finish\w*|resolv\w*))\b'),
+ 'memory': ('Memory problems', r'\b(?:memory leak\w*|memory usage|memory consumption|out.of.memory|OOM|heap corruption|use.after.free|double.free|buffer overflow)\b'),
  'performance': ('Performance', r'\b(?:slow\w*|performance|CPU (?:usage|spike)|high CPU|100% CPU|latency|throughput)\b'),
- 'correctness': ('Wrong / missing result', r'\b(?:incorrect\w*|wrong|corrupt\w*|truncat\w*|mismatch\w*|missing|ignored|ignores|silently|unexpected\w*|misread\w*|drops?|deletes?|pads?)\b'),
- 'failure': ('Explicit failure', r"\b(?:fails?|failure|cannot|can't|unable|does(?:n.t| not) work|not working|error)\b"),
+ 'correctness': ('Wrong or missing result', r'\b(?:incorrect\w*|wrong|corrupt\w*|truncat\w*|mismatch\w*|missing|ignored|ignores|silently|unexpected\w*|misread\w*|drops?|deletes?|pads?)\b'),
+ 'failure': ('Reported error', r"\b(?:fails?|failure|cannot|can't|unable|does(?:n.t| not) work|not working|error)\b"),
 }
 
 def classify(title, rules):
@@ -82,7 +82,7 @@ def main():
         for axis,rules in [('components',COMPONENTS),('symptoms',SYMPTOMS)]:
             counts=collections.Counter(k for r in group for k in r[axis]);expanded=collections.Counter(k for r in group for k in r['expanded_'+axis])
             stats[axis]={k:dict(label=label,n=counts[k],share=round(100*counts[k]/len(group),2),per_week=round(counts[k]/((b-a).total_seconds()/604800),2),expanded_n=expanded[k]) for k,(label,_) in rules.items()}
-            stats[axis]['unclassified']=dict(label='No title signal',n=sum(not r[axis] for r in group),share=round(100*sum(not r[axis] for r in group)/len(group),2))
+            stats[axis]['unclassified']=dict(label='No title match',n=sum(not r[axis] for r in group),share=round(100*sum(not r[axis] for r in group)/len(group),2))
         periods[period]=dict(n=len(group),weeks=(b-a).total_seconds()/604800,**stats)
     # Thursday calendar buckets align exactly with daily npm data; first/last
     # partial buckets remain visible and are excluded from download ratios.

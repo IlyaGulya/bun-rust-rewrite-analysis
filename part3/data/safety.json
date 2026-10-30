@@ -6,10 +6,10 @@
   "last_partial": "2026-10-30",
   "download_through": "2026-10-28",
   "labels": {
-    "all": "All potential defect reports",
-    "crash": "Crash / fatal-signal reports",
-    "leak": "Explicit memory-leak / retention reports",
-    "memory": "Broad memory / OOM / corruption reports"
+    "all": "All possible bug reports",
+    "crash": "Crash reports",
+    "leak": "Memory leak reports",
+    "memory": "All memory problem reports"
   },
   "daily": {
     "title": {

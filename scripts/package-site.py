@@ -13,4 +13,6 @@ site.mkdir(exist_ok=True)
 # Netlify receives a dedicated publish directory, never the source repository.
 shutil.copyfile(ROOT/'index.html',site/'index.html')
 shutil.copyfile(ROOT/'LICENSE',site/'LICENSE.txt')
+(site/'archive').mkdir(exist_ok=True)
+shutil.copyfile(ROOT/'archive/report-2026-08-10.html',site/'archive/report-2026-08-10.html')
 print(f'Packaged {len(html.encode()):,} bytes of self-contained HTML into dist/.')

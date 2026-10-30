@@ -1,66 +1,63 @@
-# Classification and adoption through 30 October 2026
+# Report types and Bun downloads through 30 October 2026
 
-The main report now opens with the full **November 2025 → October 30, 2026** timeline. The old August-only charts are in an explicitly labelled, collapsed historical appendix. Current classification and adoption charts appear first, followed by post-stable follow-up.
+The [current report](../index.html) covers November 2025 to 30 October 2026. The [original August report](../archive/report-2026-08-10.html) is stored separately.
 
-## What the provisional title classifier shows
+## Title matches
 
-| Title signal | Before: 1,802 potential reports | After: 2,389 potential reports |
+| Title match | Before: 1,802 possible bug reports | After: 2,389 possible bug reports |
 | --- | ---: | ---: |
-| HTTP / network | 162 (8.99%) | 353 (14.78%) |
-| Test runner | 37 (2.05%) | 176 (7.37%) |
-| Package manager | 152 (8.44%) | 135 (5.65%) |
-| Crash / fatal signal | 418 (23.20%) | 195 (8.16%) |
-| No component title signal | 1,110 (61.60%) | 1,154 (48.30%) |
+| HTTP and networks | 162 (8.99%) | 353 (14.78%) |
+| Tests | 37 (2.05%) | 176 (7.37%) |
+| Package installation | 152 (8.44%) | 135 (5.65%) |
+| Crash or fatal signal | 418 (23.20%) | 195 (8.16%) |
+| No component title match | 1,110 (61.60%) | 1,154 (48.30%) |
 
-These are **exploratory text signals**, not counts of confirmed subsystem defects. They are multi-label and overlap. A title such as “crash report peak” can produce a false positive; missing tags are not negative evidence. The large unclassified share and changing specificity of issue titles prevent a claim that actual crash incidence fell or network quality worsened. The [36-report spot check](CLASSIFICATION-AUDIT.md) covers only reports with some signal and does not estimate recall or overall accuracy.
+The same text rules apply to both periods. A report can match several types. These counts describe words in reports. They do not confirm a defect, its component, or its cause. For example, “crash report peak” can match the crash rule without describing a crash. No match does not mean no problem.
 
-The classifier applies the same regexes to titles in both periods. Labels are used only for the inherited potential-bug exclusion filter; unequal triage coverage remains a limitation. Separate title-plus-bounded-body counts are shown in the report's sensitivity table. Both periods use at most 2,500 body characters, with fenced code and template prompts removed; incidental mentions can remain. Classification stores rule-match evidence and bounded excerpts per issue in [data/classified.jsonl](data/classified.jsonl). Baseline text/labels were observed on August 10, post-merge on October 30. These are arrival-time periods, not verified Zig/Rust build assignments.
+Many titles name no component. Later titles can also contain more detail. Changes in these shares therefore cannot show that actual crash frequency fell or that network quality became worse. The [36-report review](CLASSIFICATION-AUDIT.md) checks only reports with at least one match. It does not measure how many problems the rules miss.
 
-## What adoption adds
+The separate body text check adds up to 2,500 characters per report. It removes fenced code and template prompts. Other unrelated mentions can remain. [Per-report records](data/classified.jsonl) keep the matches and excerpts. Before-merge text and labels were observed on 10 August. After-merge text and labels were observed on 30 October. These are report-date groups. They do not prove which language implementation was used.
 
-Daily npm downloads rose from **171,648/day in April** to **533,390/day over October 1–28**, approximately 3.11×. This supports interpreting report counts alongside changing distribution activity, but does not measure active-user growth. All values derive from the [saved npm response](data/popularity-npm-raw.json); [sources and limitations](POPULARITY-SOURCES.md) describe the endpoints.
+## Downloads and stars
 
-| Common complete UTC calendar weeks | Weeks | Potential reports | npm `bun` downloads | Reports per million npm requests |
+Mean daily npm requests rose from **171,648 in April** to **533,390 over 1–28 October**, about 3.11 times. These are requests for the `bun` package. They include repeated downloads and automated builds. They do not count active users. See the [saved npm data](data/popularity-npm-raw.json) and [source limits](POPULARITY-SOURCES.md).
+
+| Complete calendar weeks with both data sources | Weeks | Possible bug reports | npm requests | Reports per million requests |
 | --- | ---: | ---: | ---: | ---: |
 | Before merge | 25 | 1,678 | 22,569,677 | 74.35 |
 | After merge | 24 | 2,378 | 70,795,178 | 33.59 |
-| Since stable release (subset of after) | 10 | 1,373 | 35,842,116 | 38.31 |
+| After stable release, included above | 10 | 1,373 | 35,842,116 | 38.31 |
 
-The pooled ratio is total reports divided by total downloads, not the mean of weekly ratios. We exclude partial and non-overlapping weeks. The initial issue window starts November 13 at 08:09:34 UTC, so its first calendar week is partial. The final issue week starts October 29 and is partial; download data is published only through October 28. Calendar weeks start Thursday at midnight UTC, while the merge/stable events occur later in their boundary day; those daily buckets can mix a few hours across events.
+Each period rate is total reports divided by total npm requests. It is not the mean of the weekly rates. Partial weeks and dates without both sources are excluded. Weeks start on Thursday at 00:00 UTC. The merge and stable release occurred later on their boundary days, so these weeks can include hours on both sides of an event. The issue window starts on 13 November at 08:09:34 UTC. Its first week is partial. The final week starts on 29 October and is also partial. npm data ends on 28 October.
 
-**The denominator and numerator describe different populations.** Reports cover all installation channels and Bun versions, while npm requests cover one channel, all versions, repeat installations and automation. Changes in CI or channel share can lower this ratio with no improvement in defect risk. Do not call it bugs per user, quality improvement or a causal Rust effect. Downloading platform packages can accompany downloading `bun`, so we do not add their counts. GitHub cumulative asset counters are a separate dated table, not historical daily observations.
+Reports cover all installation methods and versions. npm covers one installation method. Changes in automated builds or installation methods can change the rate without changing defect risk. We do not add platform-package downloads to `bun` downloads because one installation can request both.
 
-Weekly GitHub star history is shown as interest alongside this analysis. GitHub currently reports 96,468 stars. The current week is partial; star-week boundaries are not guaranteed to be UTC. We do not use stars as a user-exposure denominator or infer a historical cumulative total from today's count.
+GitHub stars show interest. The saved current total is 96,468. The final star-history week is partial, and its day boundaries may differ from UTC. Stars are not used to calculate report rates. Current GitHub release-download counters are shown separately because they do not provide past daily counts.
 
-## Reproduction
+## Daily chart by reported version
 
-- `pnpm run rebuild`: rebuild the report from committed inputs, without network.
-- `pnpm run refresh`: refresh issues, npm and star history, then rebuild. Current repository/release-asset counter snapshots are dated separately; this command does not advance their observation timestamp.
-- `python3 part3/popularity.py`: reassemble popularity payload from saved responses.
-- `python3 part3/verify.py`: independently check classification counts and download alignment.
-- `python3 part2/verify.py`: validate refreshed follow-up data.
-- `cd scripts && python3 09-verify.py`: validate the frozen original report.
+The first chart stacks report types for each UTC report-opening day. Choose all versions, one version, or the four most-reported single versions. Choose problem types or named components. Each report enters one stack group: its single match, “Several type matches”, or “No title match”. The stack height equals the number of reports. The separate component comparison permits several matches per report.
 
-Files: `classify.py` defines the versioned taxonomy and exports classifications; `build.py` joins complete weeks and renders the current report before the archive; `block.html` contains the interactive controls and charts. Data sources, timestamps, counts and formulas are saved under `data/`. The current HTML includes its data and chart libraries and can be opened offline.
+`versions.py` first checks the Bun version field in the report template. It then checks explicit text next to the word Bun. Bare library versions are not accepted. Base versions must appear in the saved official release list. Unknown new canary bases can therefore be missed. Rejected candidates remain in the audit data. Reports with several versions form a separate group. Missing versions are unknown. Canary, debug, and dev suffixes remain; individual build IDs are grouped. A plain `1.4.0` does not identify stable or canary. A stated version does not confirm an affected runtime.
 
-## Daily type stacks by reported version
+[data/versions.jsonl](data/versions.jsonl) stores candidates, evidence, and stack groups. [data/version-daily.json](data/version-daily.json) stores daily totals. `verify_versions.py` checks version rules and confirms that each report enters each chart once.
 
-The first chart now combines version-aware type stacks and npm downloads on one canvas. It supports grouped bars for the four most-reported single versions, a single-version filter, and an all-version aggregate. Every bar is one UTC issue-opening day, through October 30. Controls switch symptoms/components and counts/percentages. Types are exclusive in this chart: one title signal keeps its class, several become `Multiple type signals`, none become `No title signal`. Thus stacked heights equal issue counts. The earlier multi-label comparison remains separate.
+## Growth and rates
 
-`versions.py` reads the bounded issue excerpts, preferring the issue template's Bun version field over explicit adjacent Bun version strings. It never treats a bare library semver as Bun. Base versions are checked against saved official releases because users sometimes put extension, editor or kernel versions in the Bun template field. Unrecognised or unreleased bases remain unknown, so novel canary bases can be missed. Rejected candidates are retained for audit. Several reported versions are grouped separately rather than duplicated across panels; absent versions are unknown. Canary/debug/dev suffixes are retained while build IDs are grouped. A plain `1.4.0` does not establish a release channel. The selected version is what the reporter states, not a confirmed affected version; old versions can receive reports after a new release.
+The default chart shows a growth index. Each series uses its own before-merge daily mean as 100. In the four-version view, report bars share the combined reference for the selected versions. Their contributions add to the selected report index. npm uses its own reference. A version with no before-merge reports has no report growth index. Use Counts to view it.
 
-`data/versions.jsonl` retains per-issue version candidates, source/evidence and exclusive chart classes. `data/version-daily.json` holds the daily counts. Run `python3 part3/verify_versions.py` to check extraction edge cases and verify that every report enters each chart exactly once.
+The seven-day option uses complete calendar windows. Counts show daily means. Rates divide the window's total reports by its total npm requests. The report summary uses all included dates. Zoom and hidden series do not change that summary. Version filters still use npm requests across all versions.
 
-## Combined growth comparison
+The complete-day comparison has **181 days before** the merge (14 November–13 May) and **167 days after** it (15 May–28 October). It excludes the merge day, partial report days, and missing npm dates. Reports per day rise **9.79 → 14.12 (1.44×)**. npm requests per day rise **127,502 → 422,401 (3.31×)**. The period rate falls **76.78 → 33.43 per million requests (−56.5%)**. Reports grew more slowly than npm requests. This does not measure defect risk or active users. The weekly table uses different date limits, so its rates differ slightly.
 
-The daily chart replaces the former separate download-overlay and ratio charts. Its default view stacks exclusive problem types and overlays npm download growth on one scale: each series is divided by its own pre-merge daily mean and multiplied by 100. Controls retain raw counts with a labelled download axis, per-million ratios and composition percentages. Version comparisons use grouped stacks within each day on one canvas; filtered numerators still use all-version npm downloads.
+The [crash and memory comparison](SAFETY-2026-10-30.md) checks explicit leaks separately from other memory problems. It also shows the body text check. A separate chart divides the report growth index by the npm growth index. Its reference is 1. All charts use the same complete-day rules.
 
-Trailing seven-day smoothing uses complete calendar windows. Rate mode uses the ratio of sums across that window. Counts use daily means; growth mode divides those means by the common selected-cohort baseline. In grouped-version mode the report baseline is pooled over the selected versions, so the grouped contributions add to the selected-cohort index. Download indices have their own pre-merge mean. With no report baseline, the report index is undefined rather than zero. The separate raw-count mode remains usable for recent versions.
+## Build and verify
 
-The current full-day comparison includes 181 paired pre-merge days (November 14–May 13) and 167 post-merge days (May 15–October 28). It excludes the partial first/last report days, the merge day from the summary, and unpublished downloads. Mean reports/day rise 9.79 → 14.12 (1.44×), mean npm requests/day 127,502 → 422,401 (3.31×), and the pooled ratio falls 76.78 → 33.43 reports per million requests (−56.5%). This is descriptive evidence that reports grew more slowly than this npm proxy, not a defect-risk or active-installation estimate. These complete-day figures differ slightly from the older complete-week table above because their inclusion windows differ. The summary covers the full paired window, independently of chart zoom or hidden legend series.
+- `pnpm run rebuild`: build from saved data, without network access.
+- `pnpm run refresh`: collect issues, npm counts, and star history, then build. This does not update the separately dated GitHub repository and asset snapshot.
+- `python3 part3/popularity.py`: build download and star data from saved responses.
+- `pnpm run verify`: check counts, dates, version rules, leak rules, and chart calculations.
+- From `scripts/`, run `python3 09-verify.py` to check the original report.
 
-`combined-series.js` is the shared, pure calculation module used directly by the browser and tested by `node part3/combined-series.test.cjs`. It checks paired dates, missing/zero denominators, partial days, smoothing and baseline indices.
-
-## Crash/leak rates and a separate relative-growth graph
-
-[The crash/leak comparison](SAFETY-2026-10-30.md) distinguishes explicit memory retention from broad memory/OOM keywords, exports per-issue evidence, and compares both primary title signals and a bounded-body sensitivity variant. The report now also has a separate line chart for report-index / npm-download-index, with a fixed baseline of 1 and selectable all/crash/leak/memory signals. Both plots use the same complete-day exposure rules as the combined plot. `safety.py` builds the analysis; `verify_safety.py` checks classification edge cases and denominators. The shared `CombinedSeries.growthRatio` calculation is tested directly.
+`classify.py` defines title rules. `safety.py` defines explicit leak rules. `build.py` builds the report. `block.html` contains the current page and charts. `combined-series.js` supplies the same calculations to the browser and README figures. Its tests check missing dates, zero request counts, partial days, time windows, and growth references. The built HTML includes its data and chart libraries for offline use.
