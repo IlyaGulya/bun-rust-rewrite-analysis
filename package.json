@@ -1,10 +1,14 @@
 {
   "name": "bun-rust-rewrite-analysis",
-  "version": "1.0.0",
+  "version": "2026.10.30",
   "private": true,
   "description": "Issue-tracker study of oven-sh/bun#30412, the Zig-to-Rust rewrite",
   "scripts": {
-    "build": "python3 part2/update.py"
+    "build": "python3 part2/update.py && python3 part3/classify.py && python3 part3/build.py",
+    "refresh": "python3 part2/update.py && python3 part3/popularity.py --fetch && python3 part3/classify.py && python3 part3/build.py",
+    "rebuild": "python3 part2/update.py --no-fetch && python3 part3/classify.py && python3 part3/build.py",
+    "verify": "python3 part2/verify.py && python3 part3/verify.py && python3 part3/verify_versions.py && python3 part3/verify_safety.py && node part3/combined-series.test.cjs",
+    "site": "python3 scripts/package-site.py"
   },
   "dependencies": {
     "echarts": "^6.1.0",

@@ -1,5 +1,9 @@
 # part2 — tracking the stable release
 
+Latest update: [30 October 2026 findings](UPDATE-2026-10-30.md), [primary sources](SOURCES-2026-10-30.md), and [snapshot metadata](data/snapshot.json).
+
+`pnpm run rebuild` rebuilds offline, including from committed slim records when the ignored raw cache is absent. Run `python3 part2/verify.py` to verify derived results independently. The explicit pull timestamp is retained across rebuilds; editing a cache file does not advance it.
+
 Part 1 froze its data on 2026-08-10, while the Rust build still shipped to canary
 only. Bun 1.4.0 reached stable users on **2026-08-20**, 98 days after the merge.
 This folder re-pulls the tracker on demand and renders a section into the report
@@ -74,9 +78,8 @@ coverage kept falling — unlabelled share of new issues went from 42.6% in May 
 over-counts issues that merely mention the word and under-counts crashes
 described without it; both charts caption the limitation.
 
-**Backlog is reconstructed, not sampled.** `created_at` and `closed_at` are in
-every record, so open-issue counts for any past date are derived from a single
-pull rather than needing a snapshot taken that day.
+**Backlog is reconstructed, not sampled, and lacks reopen history.** `created_at` and `closed_at` are in
+every record, so approximate open counts for the post-merge cohort are derived from a single pull. Intermediate reopen/reclose events cannot be reconstructed from latest closure timestamps. This is not the repository-wide backlog.
 
 ## Baseline
 

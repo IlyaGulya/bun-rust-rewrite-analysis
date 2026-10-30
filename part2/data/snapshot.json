@@ -1,0 +1,41 @@
+{
+  "generated": "2026-10-30T09:20:14+00:00",
+  "source": "GitHub REST API via connected GitHub plugin",
+  "timezone": "UTC",
+  "local_date": "2026-10-30",
+  "local_timezone": "Asia/Almaty",
+  "query_ranges": [
+    {
+      "start": "2026-05-14",
+      "end": "2026-05-31",
+      "total": 223
+    },
+    {
+      "start": "2026-06-01",
+      "end": "2026-06-30",
+      "total": 356
+    },
+    {
+      "start": "2026-07-01",
+      "end": "2026-07-31",
+      "total": 268
+    },
+    {
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "total": 538
+    },
+    {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "total": 586
+    },
+    {
+      "start": "2026-10-01",
+      "end": "2026-10-30",
+      "total": 607
+    }
+  ],
+  "fetched": 2578,
+  "note": "Search windows include merge calendar day; analysis excludes records before exact merge timestamp. Current day is partial; snapshot is a multi-request observation, not atomic."
+}

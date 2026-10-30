@@ -1,17 +1,21 @@
 cff-version: 1.2.0
 message: If you reference this analysis, please cite it as below.
-title: "One PR, a million lines of Rust: what Bun's AI-assisted rewrite did to its bug reports"
+title: "Bun's Rust rewrite: bug reports, release delivery and download growth"
 authors:
   - family-names: Smyshliaev
     given-names: Aleksandr
-date-released: 2026-08-10
-url: "https://github.com/asmyshlyaev177/bun-rust-rewrite-analysis"
+  - family-names: Gulya
+    given-names: Ilya
+version: "2026.10.30"
+date-released: 2026-10-30
+url: "https://github.com/IlyaGulya/bun-rust-rewrite-analysis"
 abstract: >-
-  An observational study of oven-sh/bun issue-tracker data across the May 2026
-  Zig-to-Rust rewrite (PR #30412): 2,981 issues over 39 merge-anchored weeks,
-  with bug reports classified by the build they name. Canary-channel bug
-  reports rose 2.2-3.5x while the fix rate held (43.5% to 41.9%); stable-only
-  reports fell 31%; no stable release shipped in the 89 days after the merge.
+  Updated fork of Aleksandr Smyshliaev's observational study of Bun's May 2026
+  Zig-to-Rust rewrite. Covers issue arrivals through October 30, 2026, with
+  daily version/type stacks, npm download proxies through October 28,
+  closure follow-up and separate crash/memory-retention report comparisons.
+  Report-per-download indicators decline across the merge, but exposure,
+  reporting behaviour and classification limits prevent attributing the change to Rust.
 keywords:
   - rust
   - zig

@@ -5,3 +5,8 @@ graydon.html
 kyren.html
 node_modules/
 part2/data/raw.json
+
+# Local publishing state and generated artifacts
+.netlify/
+dist/
+work/

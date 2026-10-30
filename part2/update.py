@@ -20,6 +20,7 @@ RAW = DATA / "raw.json"
 SLIM = DATA / "issues.jsonl"
 SERIES = DATA / "series.js"
 RELEASES_CACHE = DATA / "releases.json"
+SNAPSHOT = DATA / "snapshot.json"
 BLOCK = Path(__file__).parent / "block.html"
 ROOT = Path(__file__).parent.parent
 VENDOR = ROOT / "node_modules" / "uplot" / "dist"
@@ -77,6 +78,8 @@ def fetch(until):
             url = ("https://api.github.com/search/issues?q=repo:oven-sh/bun+type:issue"
                    f"+created:{start}..{end}&per_page=100&page={page}&sort=created&order=desc")
             payload = get(url)
+            if payload.get("incomplete_results") or payload.get("total_count", 0) > 1000:
+                raise SystemExit(f"incomplete search window {start}..{end}; split it before retrying")
             items = payload.get("items", [])
             for it in items:
                 out[it["number"]] = it
@@ -218,6 +221,7 @@ def series(rows, now):
         "bugs_since_merge": sum(r["bug"] for r in rows),
         "since_140": len(since),
         "bugs_since_140": sum(r["bug"] for r in since),
+        "crash_or_hang_since_140": sum(bool(set(r["kw"]) & {"crash", "hang"}) for r in since),
         "kw_since_140": {k: sum(k in r["kw"] for r in since) for k in KEYWORDS},
         "kw_since_merge": {k: sum(k in r["kw"] for r in rows) for k in KEYWORDS},
         "crash_labelled": sum("crash" in r["labels"] for r in since),
@@ -226,12 +230,13 @@ def series(rows, now):
     }
 
     pre = baseline()
+    summarize_at_pull = lambda group: summarize(group, now)
     cohorts = {
-        "pre": summarize([r for r in pre if r["bug"]]),
-        "pre_canary": summarize([r for r in pre if r["bug"] and r["canary"]]),
-        "post": summarize([r for r in rows if r["bug"]]),
-        "post_pre140": summarize([r for r in rows if r["bug"] and parse(r["created"]) < RELEASE_140]),
-        "post_140": summarize([r for r in since if r["bug"]]),
+        "pre": summarize_at_pull([r for r in pre if r["bug"]]),
+        "pre_canary": summarize_at_pull([r for r in pre if r["bug"] and r["canary"]]),
+        "post": summarize_at_pull([r for r in rows if r["bug"]]),
+        "post_pre140": summarize_at_pull([r for r in rows if r["bug"] and parse(r["created"]) < RELEASE_140]),
+        "post_140": summarize_at_pull([r for r in since if r["bug"]]),
     }
     return {
         "generated": now.isoformat(timespec="seconds"),
@@ -248,13 +253,19 @@ def series(rows, now):
     }
 
 
-def summarize(group):
+def summarize(group, now):
     if not group:
         return {"n": 0}
     fixed = sum(r["fixed"] for r in group)
     times = [(parse(r["closed"]) - parse(r["created"])).total_seconds() / 86400
              for r in group if r.get("closed") and r["fixed"]]
-    return {"n": len(group), "fixed": fixed, "rate": round(100 * fixed / len(group), 1),
+    mature = [r for r in group if parse(r["created"]) <= now - dt.timedelta(days=30)]
+    fixed30 = sum(r["fixed"] and r.get("closed") is not None and
+                  0 <= (parse(r["closed"]) - parse(r["created"])).total_seconds() <= 30 * 86400
+                  for r in mature)
+    return {"n": len(group), "fixed": fixed,
+            "mature30": len(mature), "fixed30": fixed30,
+            "rate30": round(100 * fixed30 / len(mature), 1) if mature else None, "rate": round(100 * fixed / len(group), 1),
             "median_days": round(st.median(times), 1) if times else None}
 
 
@@ -307,15 +318,24 @@ def main():
     now = dt.datetime.now(dt.timezone.utc)
 
     if args.no_fetch:
-        raw = json.loads(RAW.read_text())
+        raw = json.loads(RAW.read_text()) if RAW.exists() else None
         # The page says when the data was pulled, which is when raw.json was written.
-        now = dt.datetime.fromtimestamp(RAW.stat().st_mtime, dt.timezone.utc)
+        now = (parse(json.loads(SNAPSHOT.read_text())["generated"]) if SNAPSHOT.exists()
+               else dt.datetime.fromtimestamp(RAW.stat().st_mtime, dt.timezone.utc))
     else:
         print("fetching issues...", file=sys.stderr)
         raw = fetch(now.date())
         pull_releases()
+        now = dt.datetime.now(dt.timezone.utc)
+        SNAPSHOT.write_text(json.dumps({"generated": now.isoformat(timespec="seconds"),
+            "source": "GitHub REST API", "fetched": len(raw),
+            "note": "Current day is partial; multi-request observation, not atomic."}, indent=2) + "\n")
 
-    rows = slim(raw)
+    if raw is None:
+        rows = [json.loads(line) for line in SLIM.read_text().splitlines()]
+    else:
+        raw = [r for r in raw if MERGE <= parse(r["created_at"]) < now]
+        rows = slim(raw)
     payload = series(rows, now)
     SERIES.write_text("const S = " + json.dumps(payload, separators=(",", ":")) + ";\n")
     inject(payload)

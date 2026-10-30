@@ -1,0 +1,4954 @@
+{
+  "generated": "2026-10-30T09:20:14+00:00",
+  "merge": "2026-05-14",
+  "stable": "2026-08-20",
+  "first_partial": "2025-11-13",
+  "last_partial": "2026-10-30",
+  "download_through": "2026-10-28",
+  "labels": {
+    "all": "All potential defect reports",
+    "crash": "Crash / fatal-signal reports",
+    "leak": "Explicit memory-leak / retention reports",
+    "memory": "Broad memory / OOM / corruption reports"
+  },
+  "daily": {
+    "title": {
+      "2025-11-13": {
+        "all": 20,
+        "crash": 14,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-14": {
+        "all": 16,
+        "crash": 10,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-15": {
+        "all": 11,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-16": {
+        "all": 13,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-17": {
+        "all": 15,
+        "crash": 9,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-18": {
+        "all": 20,
+        "crash": 9,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-19": {
+        "all": 19,
+        "crash": 7,
+        "leak": 2,
+        "memory": 1
+      },
+      "2025-11-20": {
+        "all": 23,
+        "crash": 15,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-21": {
+        "all": 25,
+        "crash": 11,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-22": {
+        "all": 18,
+        "crash": 6,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-23": {
+        "all": 19,
+        "crash": 10,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-24": {
+        "all": 17,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-25": {
+        "all": 18,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-26": {
+        "all": 29,
+        "crash": 15,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-27": {
+        "all": 19,
+        "crash": 9,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-28": {
+        "all": 18,
+        "crash": 9,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-29": {
+        "all": 19,
+        "crash": 13,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-11-30": {
+        "all": 8,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-01": {
+        "all": 13,
+        "crash": 8,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-02": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-03": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-04": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-05": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-06": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-12-07": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-08": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-09": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-10": {
+        "all": 6,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-11": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-12": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-13": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-14": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-15": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-16": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-17": {
+        "all": 9,
+        "crash": 0,
+        "leak": 1,
+        "memory": 1
+      },
+      "2025-12-18": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-19": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-20": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-21": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-22": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-23": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-24": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-25": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-26": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-27": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-28": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-29": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-30": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-31": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-01": {
+        "all": 2,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-02": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-03": {
+        "all": 5,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-04": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-05": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-06": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-07": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-08": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-09": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-10": {
+        "all": 6,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-01-11": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-12": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-13": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-14": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-15": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-16": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-17": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-18": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-19": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-20": {
+        "all": 7,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-21": {
+        "all": 16,
+        "crash": 4,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-01-22": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-23": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-24": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-25": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-26": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-27": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-28": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-29": {
+        "all": 14,
+        "crash": 6,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-30": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-31": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-01": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-02": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-03": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-04": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-05": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-06": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-07": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-08": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-09": {
+        "all": 17,
+        "crash": 11,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-10": {
+        "all": 15,
+        "crash": 10,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-11": {
+        "all": 24,
+        "crash": 19,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-12": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-13": {
+        "all": 10,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-14": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-15": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-16": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-17": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-18": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-19": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-20": {
+        "all": 11,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-21": {
+        "all": 9,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-22": {
+        "all": 9,
+        "crash": 7,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-02-23": {
+        "all": 15,
+        "crash": 5,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-24": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-25": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-26": {
+        "all": 24,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-27": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-28": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-01": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-02": {
+        "all": 3,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-03": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-04": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-05": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-06": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-07": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-08": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-09": {
+        "all": 12,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-10": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-11": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-12": {
+        "all": 14,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-13": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-14": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-15": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-16": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-17": {
+        "all": 14,
+        "crash": 5,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-18": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-19": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-20": {
+        "all": 11,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-03-21": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-22": {
+        "all": 9,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-03-23": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-24": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-25": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-26": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-27": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-28": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-29": {
+        "all": 10,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-03-30": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-31": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-01": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-02": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-03": {
+        "all": 9,
+        "crash": 0,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-04-04": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-05": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-06": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-07": {
+        "all": 14,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-08": {
+        "all": 18,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-09": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-10": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-11": {
+        "all": 20,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-12": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-13": {
+        "all": 17,
+        "crash": 4,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-04-14": {
+        "all": 12,
+        "crash": 1,
+        "leak": 2,
+        "memory": 2
+      },
+      "2026-04-15": {
+        "all": 10,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-16": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-17": {
+        "all": 11,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-04-18": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-19": {
+        "all": 8,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-20": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-21": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-22": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-23": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-24": {
+        "all": 13,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-25": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-26": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-27": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-28": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-29": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-30": {
+        "all": 9,
+        "crash": 0,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-05-01": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-02": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-03": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-04": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-05": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-06": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-07": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-08": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-09": {
+        "all": 14,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-10": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-11": {
+        "all": 19,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-12": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-13": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-14": {
+        "all": 20,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-15": {
+        "all": 43,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-16": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-17": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-18": {
+        "all": 16,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-19": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-20": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-21": {
+        "all": 11,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-22": {
+        "all": 5,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-23": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-24": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-25": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-26": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-27": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-28": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-29": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-30": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-31": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-01": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-02": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-03": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-04": {
+        "all": 10,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-06-05": {
+        "all": 25,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-06": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-07": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-08": {
+        "all": 13,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-09": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-10": {
+        "all": 17,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-11": {
+        "all": 26,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-12": {
+        "all": 32,
+        "crash": 4,
+        "leak": 3,
+        "memory": 0
+      },
+      "2026-06-13": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-14": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-15": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-16": {
+        "all": 17,
+        "crash": 2,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-06-17": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-18": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-19": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-20": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-21": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-22": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-23": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-24": {
+        "all": 4,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-06-25": {
+        "all": 11,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-26": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-27": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-28": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-29": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-30": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-01": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-02": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-03": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-04": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-05": {
+        "all": 2,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-06": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-07": {
+        "all": 9,
+        "crash": 0,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-07-08": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-09": {
+        "all": 8,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-10": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-11": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-12": {
+        "all": 2,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-07-13": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-14": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-15": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-16": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-17": {
+        "all": 8,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-18": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-19": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-20": {
+        "all": 15,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-21": {
+        "all": 7,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-22": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-23": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-24": {
+        "all": 12,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-25": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-26": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-27": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-28": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-29": {
+        "all": 15,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-30": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-31": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-01": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-02": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-03": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-04": {
+        "all": 11,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-05": {
+        "all": 18,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-06": {
+        "all": 6,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-07": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-08": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-09": {
+        "all": 10,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-10": {
+        "all": 17,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-11": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-12": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-13": {
+        "all": 19,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-14": {
+        "all": 15,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-15": {
+        "all": 20,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-16": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-17": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-18": {
+        "all": 16,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-19": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-20": {
+        "all": 35,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-21": {
+        "all": 36,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-22": {
+        "all": 23,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-23": {
+        "all": 23,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-24": {
+        "all": 38,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-25": {
+        "all": 22,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-26": {
+        "all": 18,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-27": {
+        "all": 16,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-28": {
+        "all": 23,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-29": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-30": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-31": {
+        "all": 22,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-01": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-02": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-03": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-04": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-05": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-06": {
+        "all": 8,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-09-07": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-08": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-09": {
+        "all": 6,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-09-10": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-11": {
+        "all": 21,
+        "crash": 0,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-09-12": {
+        "all": 18,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-13": {
+        "all": 19,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-14": {
+        "all": 14,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-15": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-16": {
+        "all": 26,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-17": {
+        "all": 44,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-18": {
+        "all": 47,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-19": {
+        "all": 49,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-20": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-21": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-22": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-23": {
+        "all": 16,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-24": {
+        "all": 20,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-25": {
+        "all": 20,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-26": {
+        "all": 19,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-27": {
+        "all": 30,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-28": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-29": {
+        "all": 21,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-30": {
+        "all": 27,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-01": {
+        "all": 13,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-02": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-03": {
+        "all": 15,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-04": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-05": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-06": {
+        "all": 20,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-07": {
+        "all": 32,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-08": {
+        "all": 39,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-09": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-10": {
+        "all": 16,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-11": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-12": {
+        "all": 25,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-13": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-14": {
+        "all": 22,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-15": {
+        "all": 27,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-16": {
+        "all": 24,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-17": {
+        "all": 34,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-18": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-19": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-20": {
+        "all": 18,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-21": {
+        "all": 19,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-22": {
+        "all": 28,
+        "crash": 0,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-10-23": {
+        "all": 22,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-24": {
+        "all": 16,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-25": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-26": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-27": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-28": {
+        "all": 35,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-29": {
+        "all": 17,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-30": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      }
+    },
+    "expanded": {
+      "2025-11-13": {
+        "all": 20,
+        "crash": 15,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-14": {
+        "all": 16,
+        "crash": 11,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-15": {
+        "all": 11,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-16": {
+        "all": 13,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-17": {
+        "all": 15,
+        "crash": 12,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-18": {
+        "all": 20,
+        "crash": 12,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-19": {
+        "all": 19,
+        "crash": 12,
+        "leak": 2,
+        "memory": 1
+      },
+      "2025-11-20": {
+        "all": 23,
+        "crash": 19,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-21": {
+        "all": 25,
+        "crash": 20,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-11-22": {
+        "all": 18,
+        "crash": 14,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-23": {
+        "all": 19,
+        "crash": 17,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-24": {
+        "all": 17,
+        "crash": 10,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-25": {
+        "all": 18,
+        "crash": 12,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-26": {
+        "all": 29,
+        "crash": 21,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-11-27": {
+        "all": 19,
+        "crash": 14,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-28": {
+        "all": 18,
+        "crash": 12,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-11-29": {
+        "all": 19,
+        "crash": 14,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-11-30": {
+        "all": 8,
+        "crash": 8,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-01": {
+        "all": 13,
+        "crash": 11,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-02": {
+        "all": 12,
+        "crash": 5,
+        "leak": 1,
+        "memory": 1
+      },
+      "2025-12-03": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-04": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-05": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-06": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-12-07": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-08": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-09": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-10": {
+        "all": 6,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-11": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-12": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-12-13": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-14": {
+        "all": 4,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-15": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-16": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-17": {
+        "all": 9,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2025-12-18": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2025-12-19": {
+        "all": 9,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-20": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-21": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-22": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-23": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-24": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-25": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-26": {
+        "all": 4,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-27": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-28": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-29": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-30": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2025-12-31": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-01": {
+        "all": 2,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-02": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-03": {
+        "all": 5,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-04": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-05": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-06": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-07": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-08": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-09": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-10": {
+        "all": 6,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-01-11": {
+        "all": 7,
+        "crash": 0,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-01-12": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-13": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-14": {
+        "all": 13,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-15": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-16": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-17": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-18": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-19": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-20": {
+        "all": 7,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-21": {
+        "all": 16,
+        "crash": 5,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-01-22": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-23": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-24": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-25": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-26": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-27": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-28": {
+        "all": 11,
+        "crash": 6,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-29": {
+        "all": 14,
+        "crash": 6,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-30": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-01-31": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-01": {
+        "all": 14,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-02": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-03": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-04": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-05": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-06": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-07": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-08": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-09": {
+        "all": 17,
+        "crash": 13,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-10": {
+        "all": 15,
+        "crash": 11,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-11": {
+        "all": 24,
+        "crash": 20,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-12": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-13": {
+        "all": 10,
+        "crash": 4,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-02-14": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-15": {
+        "all": 3,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-16": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-17": {
+        "all": 8,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-02-18": {
+        "all": 7,
+        "crash": 3,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-02-19": {
+        "all": 13,
+        "crash": 5,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-02-20": {
+        "all": 11,
+        "crash": 7,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-02-21": {
+        "all": 9,
+        "crash": 5,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-22": {
+        "all": 9,
+        "crash": 7,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-02-23": {
+        "all": 15,
+        "crash": 6,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-24": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-02-25": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-02-26": {
+        "all": 24,
+        "crash": 5,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-02-27": {
+        "all": 13,
+        "crash": 5,
+        "leak": 2,
+        "memory": 3
+      },
+      "2026-02-28": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-01": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-02": {
+        "all": 3,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-03": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-04": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-05": {
+        "all": 3,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-06": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 3
+      },
+      "2026-03-07": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-08": {
+        "all": 6,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-09": {
+        "all": 12,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-10": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-11": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-12": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-13": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-14": {
+        "all": 13,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-15": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-03-16": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-17": {
+        "all": 14,
+        "crash": 6,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-18": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-19": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-20": {
+        "all": 11,
+        "crash": 3,
+        "leak": 1,
+        "memory": 3
+      },
+      "2026-03-21": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-03-22": {
+        "all": 9,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-03-23": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-24": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-25": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-26": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-27": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-28": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-29": {
+        "all": 10,
+        "crash": 2,
+        "leak": 2,
+        "memory": 2
+      },
+      "2026-03-30": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-03-31": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-01": {
+        "all": 13,
+        "crash": 2,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-04-02": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-03": {
+        "all": 9,
+        "crash": 0,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-04-04": {
+        "all": 4,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-05": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-06": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-07": {
+        "all": 14,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-08": {
+        "all": 18,
+        "crash": 4,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-04-09": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-10": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-11": {
+        "all": 20,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-12": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-13": {
+        "all": 17,
+        "crash": 5,
+        "leak": 2,
+        "memory": 2
+      },
+      "2026-04-14": {
+        "all": 12,
+        "crash": 2,
+        "leak": 2,
+        "memory": 2
+      },
+      "2026-04-15": {
+        "all": 10,
+        "crash": 6,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-16": {
+        "all": 9,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-17": {
+        "all": 11,
+        "crash": 2,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-04-18": {
+        "all": 9,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-19": {
+        "all": 8,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-20": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-21": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-22": {
+        "all": 10,
+        "crash": 2,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-04-23": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-24": {
+        "all": 13,
+        "crash": 4,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-04-25": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-26": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-27": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-28": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-04-29": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-04-30": {
+        "all": 9,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-05-01": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-02": {
+        "all": 4,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-05-03": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-04": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-05": {
+        "all": 14,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-06": {
+        "all": 12,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-05-07": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-08": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-09": {
+        "all": 14,
+        "crash": 7,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-05-10": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-11": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-12": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-05-13": {
+        "all": 8,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-14": {
+        "all": 20,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-15": {
+        "all": 43,
+        "crash": 2,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-05-16": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-17": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-18": {
+        "all": 16,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-19": {
+        "all": 8,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-20": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-21": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-05-22": {
+        "all": 5,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-23": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-24": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-25": {
+        "all": 10,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-26": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-27": {
+        "all": 15,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-28": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-29": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-30": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-05-31": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-01": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-02": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-03": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-04": {
+        "all": 10,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-06-05": {
+        "all": 25,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-06": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-07": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-08": {
+        "all": 13,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-09": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-10": {
+        "all": 17,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-11": {
+        "all": 26,
+        "crash": 5,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-06-12": {
+        "all": 32,
+        "crash": 8,
+        "leak": 3,
+        "memory": 0
+      },
+      "2026-06-13": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-14": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-15": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-16": {
+        "all": 17,
+        "crash": 6,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-06-17": {
+        "all": 5,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-06-18": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-06-19": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-20": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-21": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-22": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-23": {
+        "all": 8,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-24": {
+        "all": 4,
+        "crash": 2,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-06-25": {
+        "all": 11,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-26": {
+        "all": 7,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-06-27": {
+        "all": 6,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-28": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-29": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-06-30": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-01": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-02": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-03": {
+        "all": 4,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-04": {
+        "all": 5,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-05": {
+        "all": 2,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-06": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-07": {
+        "all": 9,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-07-08": {
+        "all": 3,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-09": {
+        "all": 8,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-10": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-11": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-12": {
+        "all": 2,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-07-13": {
+        "all": 11,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-14": {
+        "all": 12,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-15": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-16": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-17": {
+        "all": 8,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-18": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-19": {
+        "all": 6,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-20": {
+        "all": 15,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-21": {
+        "all": 7,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-22": {
+        "all": 5,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-23": {
+        "all": 13,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-24": {
+        "all": 12,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-25": {
+        "all": 8,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-26": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-27": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-28": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-29": {
+        "all": 15,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-07-30": {
+        "all": 4,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-07-31": {
+        "all": 5,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-01": {
+        "all": 2,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-02": {
+        "all": 4,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-03": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-04": {
+        "all": 11,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-05": {
+        "all": 18,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-06": {
+        "all": 6,
+        "crash": 4,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-07": {
+        "all": 8,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-08": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-09": {
+        "all": 10,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-10": {
+        "all": 17,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-11": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-12": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-13": {
+        "all": 19,
+        "crash": 5,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-08-14": {
+        "all": 15,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-15": {
+        "all": 20,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-16": {
+        "all": 8,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-17": {
+        "all": 10,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-18": {
+        "all": 16,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-19": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-20": {
+        "all": 35,
+        "crash": 1,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-21": {
+        "all": 36,
+        "crash": 4,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-08-22": {
+        "all": 23,
+        "crash": 2,
+        "leak": 1,
+        "memory": 3
+      },
+      "2026-08-23": {
+        "all": 23,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-24": {
+        "all": 38,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-25": {
+        "all": 22,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-26": {
+        "all": 18,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-27": {
+        "all": 16,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-28": {
+        "all": 23,
+        "crash": 7,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-29": {
+        "all": 10,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-08-30": {
+        "all": 15,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-08-31": {
+        "all": 22,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-01": {
+        "all": 7,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-02": {
+        "all": 7,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-03": {
+        "all": 11,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-04": {
+        "all": 14,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-05": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-06": {
+        "all": 8,
+        "crash": 1,
+        "leak": 1,
+        "memory": 0
+      },
+      "2026-09-07": {
+        "all": 13,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-08": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-09": {
+        "all": 6,
+        "crash": 1,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-09-10": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-11": {
+        "all": 21,
+        "crash": 2,
+        "leak": 1,
+        "memory": 1
+      },
+      "2026-09-12": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-13": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-14": {
+        "all": 14,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-15": {
+        "all": 9,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-16": {
+        "all": 26,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-17": {
+        "all": 44,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-18": {
+        "all": 47,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-19": {
+        "all": 49,
+        "crash": 0,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-20": {
+        "all": 6,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-21": {
+        "all": 19,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-22": {
+        "all": 11,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-23": {
+        "all": 16,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-24": {
+        "all": 20,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-25": {
+        "all": 20,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-26": {
+        "all": 19,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-27": {
+        "all": 30,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-28": {
+        "all": 9,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-09-29": {
+        "all": 21,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-09-30": {
+        "all": 27,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-01": {
+        "all": 13,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-02": {
+        "all": 14,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-03": {
+        "all": 15,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-04": {
+        "all": 12,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-05": {
+        "all": 19,
+        "crash": 3,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-06": {
+        "all": 20,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-07": {
+        "all": 32,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-08": {
+        "all": 39,
+        "crash": 2,
+        "leak": 1,
+        "memory": 2
+      },
+      "2026-10-09": {
+        "all": 7,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-10": {
+        "all": 16,
+        "crash": 4,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-11": {
+        "all": 10,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-12": {
+        "all": 25,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-13": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-14": {
+        "all": 22,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-15": {
+        "all": 27,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-16": {
+        "all": 24,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-17": {
+        "all": 34,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-18": {
+        "all": 14,
+        "crash": 3,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-19": {
+        "all": 12,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-20": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-21": {
+        "all": 19,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-22": {
+        "all": 28,
+        "crash": 0,
+        "leak": 0,
+        "memory": 2
+      },
+      "2026-10-23": {
+        "all": 22,
+        "crash": 2,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-24": {
+        "all": 16,
+        "crash": 2,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-25": {
+        "all": 18,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-26": {
+        "all": 15,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-27": {
+        "all": 12,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-28": {
+        "all": 35,
+        "crash": 1,
+        "leak": 0,
+        "memory": 1
+      },
+      "2026-10-29": {
+        "all": 17,
+        "crash": 1,
+        "leak": 0,
+        "memory": 0
+      },
+      "2026-10-30": {
+        "all": 4,
+        "crash": 0,
+        "leak": 0,
+        "memory": 0
+      }
+    }
+  },
+  "stats": {
+    "title": {
+      "all": {
+        "pre": {
+          "n": 1772,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 76.78336293450413
+        },
+        "post": {
+          "n": 2358,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 33.42736374202751
+        },
+        "stable": {
+          "n": 1338,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 37.89646843433771
+        },
+        "change_pct": -56.46535595146971
+      },
+      "crash": {
+        "pre": {
+          "n": 404,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 17.505913445564147
+        },
+        "post": {
+          "n": 190,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 2.6934686645399606
+        },
+        "stable": {
+          "n": 71,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 2.0109486239446768
+        },
+        "change_pct": -84.61394960671154
+      },
+      "leak": {
+        "pre": {
+          "n": 15,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 0.649972033869956
+        },
+        "post": {
+          "n": 13,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 0.1842899612579973
+        },
+        "stable": {
+          "n": 5,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 0.14161610027779414
+        },
+        "change_pct": -71.64647836296456
+      },
+      "memory": {
+        "pre": {
+          "n": 27,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 1.1699496609659208
+        },
+        "post": {
+          "n": 25,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 0.35440377164999476
+        },
+        "stable": {
+          "n": 14,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 0.3965250807778236
+        },
+        "change_pct": -69.70777602880828
+      }
+    },
+    "expanded": {
+      "all": {
+        "pre": {
+          "n": 1772,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 76.78336293450413
+        },
+        "post": {
+          "n": 2358,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 33.42736374202751
+        },
+        "stable": {
+          "n": 1338,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 37.89646843433771
+        },
+        "change_pct": -56.46535595146971
+      },
+      "crash": {
+        "pre": {
+          "n": 571,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 24.74226875598299
+        },
+        "post": {
+          "n": 306,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 4.337902164995937
+        },
+        "stable": {
+          "n": 121,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 3.4271096267226184
+        },
+        "change_pct": -82.46764592294319
+      },
+      "leak": {
+        "pre": {
+          "n": 29,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 1.2566125988152483
+        },
+        "post": {
+          "n": 17,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 0.24099456472199646
+        },
+        "stable": {
+          "n": 7,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 0.1982625403889118
+        },
+        "change_pct": -80.8218885478938
+      },
+      "memory": {
+        "pre": {
+          "n": 70,
+          "downloads": 23077916,
+          "days": 181,
+          "rate": 3.0332028247264615
+        },
+        "post": {
+          "n": 63,
+          "downloads": 70541010,
+          "days": 167,
+          "rate": 0.8930975045579869
+        },
+        "stable": {
+          "n": 32,
+          "downloads": 35306720,
+          "days": 69,
+          "rate": 0.9063430417778825
+        },
+        "change_pct": -70.55595830000165
+      }
+    }
+  },
+  "leak_examples": [
+    {
+      "n": 24854,
+      "day": "2025-11-19",
+      "title": "Memory leak",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 24858,
+      "day": "2025-11-19",
+      "title": "CPU profiler leaks memory very rapidly",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 25550,
+      "day": "2025-12-17",
+      "title": "Memory Leak in Next.js",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 25948,
+      "day": "2026-01-10",
+      "title": "Memory leak with Mongoose and Bun (Production build / No Hot Reload)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 26321,
+      "day": "2026-01-21",
+      "title": "Memory leak when streaming large files on Windows with Bun.file().stream() (Bun v1.3.6)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 27358,
+      "day": "2026-02-22",
+      "title": "Memory leak in fetch() with TLS client certificates (mTLS)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 28343,
+      "day": "2026-03-20",
+      "title": "Tracking: JavaScriptCore GC Memory Leaks - Upstream WebKit Issue",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 28427,
+      "day": "2026-03-22",
+      "title": "Bun memory leak with simple fetch polling script",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 28632,
+      "day": "2026-03-29",
+      "title": "`bun:sql` MySQL adapter causes RSS memory leak on Linux (RSS grows unbounded until OOM crash)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 28799,
+      "day": "2026-04-03",
+      "title": "bun:sql MySQL adapter memory leak persists with dynamic interpolation after #28633 fix",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 29267,
+      "day": "2026-04-13",
+      "title": "Memory leak in Next.js SSR under `bun --bun next start` — JSC GC fails to reclaim heap after concurrent requests",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 29301,
+      "day": "2026-04-14",
+      "title": "Memory leak on AbortSignals",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 29302,
+      "day": "2026-04-14",
+      "title": "Memory leak in Next.js SSR under `bun --bun next start` — JSC GC fails to reclaim heap after concurrent requests",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 29400,
+      "day": "2026-04-17",
+      "title": "Memory leaks everywhere",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 30010,
+      "day": "2026-04-30",
+      "title": "Bun.SQL: PostgresSQLConnection JS-side wrapper leak — ~9k objects/h linear, RSS +340MB/h",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 31804,
+      "day": "2026-06-04",
+      "title": "HTMLRewriter: thrown handler exceptions leak protected Exception roots",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 32144,
+      "day": "2026-06-12",
+      "title": "napi: NapiFinalizerTask boxes leak at exit when the final GC sweeps deferred finalizers (LSAN failure in 30205 isolate test on asan CI)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 32176,
+      "day": "2026-06-12",
+      "title": "bun test --isolate leaks the last file's Expect/RefData at exit, aborting ASAN CI lanes (flaky 30205.test.ts failures)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 32191,
+      "day": "2026-06-12",
+      "title": "Async node:fs ops with Buffer path arguments leak a GC root per call",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": true,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 32659,
+      "day": "2026-06-24",
+      "title": "fetch(): aborting an in-flight streaming response via AbortController retains the response body off-heap — RSS grows unbounded until OOM (HTTP/1.1; reader.cancel() does not)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 33699,
+      "day": "2026-07-07",
+      "title": "`node:http` permanently leaks request-body bytes when the client disconnects mid-upload (handler never runs, GC can't reclaim)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 34053,
+      "day": "2026-07-12",
+      "title": "Bun.build() leaks native memory per call (RSS unbounded, heapUsed flat) — kills long-lived watch/dev processes",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 39800,
+      "day": "2026-08-20",
+      "title": "bun build --compile with sourcemaps leaks native (non-JS-heap) memory on every thrown error, proportional to error-path traffic",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 40102,
+      "day": "2026-08-22",
+      "title": "1.4.0 regression: bun:sql leaks native memory on every query binding a jsonb parameter",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 40226,
+      "day": "2026-08-23",
+      "title": "Every React commit leaks ~21 KB of native memory (mimalloc), with a no-op reconciler and no renderer",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 41459,
+      "day": "2026-09-06",
+      "title": "Every `new WebAssembly.Memory` leaks ~4 KB of RSS that GC never returns (1.4.0 through 1.4.3-canary; 1.3.14 is flat)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    },
+    {
+      "n": 42143,
+      "day": "2026-09-09",
+      "title": "`vitest` worker RSS is not released between test files when run under Bun on Linux; unbounded growth OOM-kills CI (Node runtime with the same suite stays flat)",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": true
+        }
+      }
+    },
+    {
+      "n": 42377,
+      "day": "2026-09-11",
+      "title": "`--cpu-prof` pins every sampled callee (closures / bound functions) as GC roots until exit — React/Ink apps leak GBs",
+      "flags": {
+        "title": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        },
+        "expanded": {
+          "all": true,
+          "crash": false,
+          "leak": true,
+          "memory": false
+        }
+      }
+    }
+  ],
+  "leak_rule": "\\bmemory\\s+leak\\w*\\b|\\bleak(?:s|ing|ed)?\\b.{0,140}(?:\\bmemory\\b|\\bRSS\\b|\\bheap\\b|\\bbytes\\b|\\b[KMGT]Bs?\\b|GC root|Exception root|RefData|LSAN)|(?:\\bmemory\\b|\\bRSS\\b|\\bheap\\b).{0,100}\\bleak(?:s|ing|ed)?\\b|\\bretain\\w*\\b.{0,100}(?:off.heap|heap|RSS).{0,80}unbounded|\\b(?:RSS|memory|heap)\\b.{0,80}\\bnot (?:released|freed|reclaimed)\\b.{0,100}(?:unbounded|grows)",
+  "method": "Title signals are primary; title plus bounded body is sensitivity only. Categories overlap. All builds and channels; not confirmed defects or user risk."
+}

@@ -2,9 +2,10 @@
   <h2>7 &mdash; After the stable release <span id="p2-asof" style="font-weight:400; letter-spacing:.06em; text-transform:none; color:var(--faint)"></span></h2>
   <p class="prose lede" style="font-size:14px">
     Sections 1&ndash;6 are frozen at the 2026-08-10 pull, when the Rust build shipped to canary only.
-    This one re-reads the tracker and updates itself. The argument these numbers were gathered for is in
+    This section is rebuilt from a dated tracker snapshot; the current day is partial. The argument these numbers were gathered for is in
     <a href="https://asmyshlyaev177.dev/blog/bun-rust-rewrite-bug-count">I counted every Bun bug before and after the Rust rewrite</a>.
   </p>
+  <p class="prose" id="p2-followup"></p>
   <div class="cards">
     <div class="card">
       <span class="tag">Stable shipped</span>
@@ -38,11 +39,12 @@
   <div class="tablebox">
     <table>
       <thead><tr>
-        <th>Cohort</th><th>Bug reports</th><th>Closed as fixed</th><th>Fix rate</th><th>Median time to fix</th>
+        <th>Cohort</th><th>Bug reports</th><th>Closed as fixed</th><th>Closed as fixed (%)</th><th>Median among fixed</th><th>Within 30 days (mature reports)</th>
       </tr></thead>
       <tbody id="p2-cohorts"></tbody>
     </table>
   </div>
+  <p class="prose">Closed-as-fixed shares use current GitHub state, not verified fixes shipped to users. The 30-day column includes only reports at least 30 days old; reopened reports count as unresolved. Baseline states remain frozen at the August pull. Medians include only completed reports. Backlog covers this post-merge cohort and is reconstructed from latest closure timestamps; reopen history is unavailable.</p>
 </section>
 
 <style>__UPLOT_CSS__</style>
@@ -80,6 +82,9 @@ const P2 = __DATA__;
 
   document.getElementById('p2-asof').textContent = `data pulled ${P2.generated.slice(0, 10)}`;
 
+  document.getElementById('p2-followup').textContent =
+    `Stable releases have resumed. Among reports with at least 30 days of follow-up, ${C.post_140.rate30}% of post-stable bug reports were closed as fixed within 30 days, versus ${C.pre.rate30}% in the frozen pre-rewrite baseline. This is an observational comparison, sensitive to issue mix and reopened reports; it does not establish a language effect. October remains a partial month.`;
+
   /* ---------- cards ---------- */
   const gap = Math.round((secs(relDate) - secs(P2.merge.slice(0, 10))) / 86400);
   const patches = rel14.filter(([, t]) => t !== '1.4.0');
@@ -100,7 +105,7 @@ const P2 = __DATA__;
   const kw = T.kw_since_140;
   document.getElementById('p2-crashhead').textContent = `${kw.crash} crashes, ${kw.hang} hangs`;
   document.getElementById('p2-crashbody').innerHTML =
-    `Of ${num(T.since_140)} issues filed since the stable release, <strong>${kw.crash}</strong> mention a crash, <strong>${kw.hang}</strong> a hang, freeze or deadlock, <strong>${kw.panic}</strong> a panic and <strong>${kw.segfault}</strong> a segfault or access violation — ${Math.round(100 * (kw.crash + kw.hang) / T.since_140)}% of the intake between them. Only <strong>${T.crash_labelled}</strong> carry the <code>crash</code> label, which measures triage rather than defects.`;
+    `Of ${num(T.since_140)} issues filed since the stable release, <strong>${kw.crash}</strong> mention a crash, <strong>${kw.hang}</strong> a hang, freeze or deadlock, <strong>${kw.panic}</strong> a panic and <strong>${kw.segfault}</strong> a segfault or access violation — ${Math.round(100 * T.crash_or_hang_since_140 / T.since_140)}% of the intake mention either (counted once). Only <strong>${T.crash_labelled}</strong> carry the <code>crash</code> label, which measures triage rather than defects.`;
 
   /* ---------- shared uPlot wiring ---------- */
 
@@ -448,7 +453,7 @@ const P2 = __DATA__;
   })();
 
   document.getElementById('p2-crashcap').innerHTML =
-    `Issues whose title or body matches each keyword class, counted cumulatively from the day 1.4.0 shipped. Hover a line to isolate it. ${ZOOM_HINT} Keyword matching is a proxy, not a triage verdict: it over-counts issues that merely mention the word and under-counts crashes described without it. It is used here because the <code>crash</code> label is applied to only ${T.crash_labelled} of the ${kw.crash} issues that mention one, so label counts measure triage capacity rather than defects. Segfaults and panics are the pair that speak to the memory-safety thesis directly — a rewrite into safe Rust should not produce them, though Bun still links JavaScriptCore, which is C++.`;
+    `Issues whose title or body matches each keyword class, counted cumulatively from the day 1.4.0 shipped. Hover a line to isolate it. ${ZOOM_HINT} Keyword matching is a proxy, not a triage verdict: it over-counts issues that merely mention the word and under-counts crashes described without it. It is used here because the <code>crash</code> label appears on ${T.crash_labelled} issues in this period, compared with ${kw.crash} keyword matches, so label counts measure triage capacity rather than defects. Keyword counts cannot establish a memory-safety regression: panics can be safe, deliberate error handling, while segfaults require root-cause analysis across Rust unsafe code, FFI and JavaScriptCore (C++). Classes overlap.`;
 
   // The charts add height after the browser has already jumped to the fragment,
   // so a deep link into this section lands short of it without a second scroll.
@@ -461,7 +466,7 @@ const P2 = __DATA__;
 
   const rows = [
     ['Pre-rewrite baseline (26 wks of Zig)', C.pre],
-    ['Post-merge, canary only', C.post_pre140],
+    ['Before stable release (all builds)', C.post_pre140],
     ['Post-merge, since 1.4.0 stable', C.post_140],
     ['Post-merge, all', C.post],
   ];
@@ -469,7 +474,7 @@ const P2 = __DATA__;
     const bold = t => i === 3 ? `<strong>${t}</strong>` : t;
     return `<tr><td>${bold(label)}</td><td class="num">${num(s.n)}</td>` +
       `<td class="num">${num(s.fixed)}</td><td class="num">${bold(s.rate.toFixed(1) + '%')}</td>` +
-      `<td class="num">${s.median_days}d</td></tr>`;
+      `<td class="num">${s.median_days}d</td><td class="num">${s.rate30 == null ? "—" : s.rate30.toFixed(1) + "%"} (${s.fixed30}/${s.mature30})</td></tr>`;
   }).join('');
 })();
 </script>
