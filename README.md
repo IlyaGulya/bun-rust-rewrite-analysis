@@ -1,104 +1,216 @@
-# Bun's Rust rewrite: bug reports, release delivery and download growth
+# One PR, a million lines of Rust — what happened next?
 
-An updated fork of [Aleksandr Smyshliaev's original study](https://github.com/asmyshlyaev177/bun-rust-rewrite-analysis) of [oven-sh/bun#30412](https://github.com/oven-sh/bun/pull/30412). The report now follows issue arrivals through **30 October 2026**, with daily version/type stacks, npm downloads, GitHub interest, and separate crash and memory-leak comparisons.
+On 14 May 2026, Bun merged [PR #30412](https://github.com/oven-sh/bun/pull/30412): a million-line Zig-to-Rust rewrite. This follow-up extends [Aleksandr Smyshliaev's original study](https://github.com/asmyshlyaev177/bun-rust-rewrite-analysis) through **30 October 2026**, comparing report patterns, release delivery and npm distribution activity.
 
-**[Open the interactive report](https://bun-rust-analysis-ilyagulya.netlify.app/)**
+![Daily problem-type stacks and npm downloads indexed to their own pre-merge means of 100. The npm line rises faster than the report stack after the rewrite. Trailing seven-day series extend through October; missing download dates remain gaps.](assets/readme/01-growth-and-reports.png)
 
-[Combined chart](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-version-daily) · [Crashes and leaks](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety) · [Reports / audience-proxy growth](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-growth-ratio) · [Original August analysis](archive/README-2026-08-10.md)
+**[Explore the interactive report →](https://bun-rust-analysis-ilyagulya.netlify.app/)** · [Crashes and leaks](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety) · [Reports versus audience growth](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-growth-ratio)
 
-The HTML is self-contained: [download `index.html`](https://raw.githubusercontent.com/IlyaGulya/bun-rust-rewrite-analysis/master/index.html) and open it locally. The published Netlify site serves this same file. The original August charts remain in the report's collapsed historical appendix.
+All figures below render directly on GitHub. The HTML adds zoom, version filters, title/body sensitivity and inspectable issue evidence; it also [works offline](https://raw.githubusercontent.com/IlyaGulya/bun-rust-rewrite-analysis/master/index.html).
 
-## Current snapshot
-
-| Item | Observation |
+| Study context | Observation |
 | --- | --- |
-| Rewrite merged | **14 May 2026, 08:09:34 UTC** |
-| First Rust stable | **1.4.0, 20 August 2026** — 98 calendar days after the merge |
-| Latest observed stable | **1.4.4, 22 October 2026** |
-| Issue pull | **30 October 2026, 09:20:14 UTC**; current day is partial |
-| npm downloads | Daily observations through **28 October 2026**; unpublished days are gaps |
-| Comparison corpus | **1,802 pre-merge + 2,389 post-merge potential defect reports** |
-| Post-merge issue cohort | 2,568 issues; 1,022 still open at the pull |
-| Pre-merge source | Frozen August snapshot; post-merge labels and outcomes are refreshed |
+| **Rewrite** | [PR #30412](https://github.com/oven-sh/bun/pull/30412), merged **14 May 2026, 08:09:34 UTC** |
+| **Scale** | +1,009,257 / −4,024 lines; 2,188 files; 6,755 commits |
+| **Report window** | 13 November 2025 → **30 October 2026** |
+| **Potential defect reports** | **1,802 before + 2,389 after = 4,191** |
+| **Issue observation** | 30 October, 09:20 UTC; that calendar day is partial |
+| **npm observation** | Daily `bun` package requests through **28 October** |
+| **First Rust stable** | **1.4.0, 20 August** — 98 calendar days after the merge |
+| **Latest observed stable** | **1.4.4, 22 October** |
+| **Historical reference** | [Original August analysis](archive/README-2026-08-10.md), preserved separately |
 
-“Potential defect reports” retains the original label-exclusion definition; it can include untriaged non-bugs. These are reports, not independently confirmed or deduplicated defects.
+## What the new data says
 
-## Findings on comparable full days
+**Reports increased, but npm requests increased faster.** On complete, matched calendar days, report arrivals rose **1.44×**, while npm requests rose **3.31×**. The all-report ratio fell from **76.78 to 33.43 reports per million npm requests**.
 
-The normalization uses **181 pre-merge days** (14 November–13 May) and **167 post-merge days** (15 May–28 October). It excludes the merge day, partial issue-window endpoints and unpublished download dates. npm denominators are **23,077,916** and **70,541,010** requests.
+**Crash and memory-retention report indicators also fell.** The title-based crash rate declined **84.6%**; the explicit memory-leak/retention rate declined **71.6%**. The leak numerator itself barely changed: **15 reports before, 13 after**.
 
-| Primary title signal | Before: reports | Before: per million npm requests | After: reports | After: per million npm requests | Rate change |
+**The shipping interruption ended.** The original August conclusion that no Rust build had reached stable is now historical. Stable 1.4.0 arrived on 20 August; four patches followed through 22 October.
+
+These are observations about **report indicators and distribution activity**. npm requests include CI and repeats, omit other installation channels and do not count active users. The data cannot establish that Rust caused a change in defect risk.
+
+## More reports, much more download activity
+
+The hero chart places both series on a common scale: each is divided by its own pre-merge daily mean and multiplied by 100. The stacked bars preserve the problem-type mix; the white line shows npm-request growth. A trailing seven-day mean reduces daily noise.
+
+| Matched full-day comparison | Before merge | After merge | Change |
+| --- | ---: | ---: | ---: |
+| Days observed | 181 | 167 | Different window lengths |
+| Potential reports | 1,772 | 2,358 | Counts need an exposure comparison |
+| Reports / day | 9.79 | 14.12 | **1.44×** |
+| npm requests | 23,077,916 | 70,541,010 | One distribution channel |
+| npm requests / day | 127,502 | 422,401 | **3.31×** |
+| Reports / million npm requests | 76.78 | 33.43 | **−56.5%** |
+
+The matched periods are **14 November–13 May** and **15 May–28 October**. We exclude the merge day, the partial first/last issue-window days, and unpublished downloads. These smaller numerators therefore differ from the full 1,802/2,389 cohorts above.
+
+This is an exposure *proxy*, not a measured installed base. Existing users can report without downloading Bun again; one CI job can download it repeatedly; direct installers, embedded Bun, Docker and other channels need not contribute to the npm denominator. A shift in that channel mix can change the ratio without changing quality.
+
+## Crashes and memory retention per million requests
+
+![Two before/after comparisons with separate scales: crash report rates fall from 17.51 to 2.69 per million npm requests; explicit memory-leak or retention report rates fall from 0.65 to 0.18. Labels retain the raw sample sizes.](assets/readme/02-crashes-and-leaks.png)
+
+| Primary title signal | Before: reports | Before: / million | After: reports | After: / million | Rate change |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| All potential defect reports | 1,772 | 76.78 | 2,358 | 33.43 | **−56.5%** |
 | Crash / fatal signal | 404 | 17.51 | 190 | 2.69 | **−84.6%** |
 | Explicit memory leak / retained allocations | 15 | 0.65 | 13 | 0.18 | **−71.6%** |
+| Broad memory / OOM / corruption, separate check | 27 | 1.17 | 25 | 0.35 | **−69.7%** |
 
-Average report arrivals rose **1.44×**, while average npm requests rose **3.31×**. Report growth was slower than this distribution-activity proxy over the matched periods. The separate relative-growth chart divides the report-growth index by the npm-download index; its pooled post/pre comparison is **0.435×**, with **1** as the pre-merge report/download reference.
+The narrow leak signal requires explicit allocation-retention evidence: leaked native memory, GC roots, request-body bytes or similar retained allocations. Generic OOM/high memory use remains a separate class. Disk/temp-file growth, file-descriptor leaks and a memory-cap test flake are excluded. Leaks detected at process shutdown are included.
 
-The crash/leak direction survives a sensitivity pass that adds the first 2,500 body characters: crash-signal rates change **24.74 → 4.34**, explicit leak/retention rates **1.26 → 0.24** per million npm requests. That sensitivity pass can pick up incidental mentions and formatting differences; it is not classifier validation.
+**For leaks, the denominator does most of the work.** Fifteen reports over 181 days and thirteen over 167 days are similar daily arrival rates. The strong per-million decline chiefly reflects growing npm traffic. The [28 matched primary leak-signal reports](part3/data/safety-audit.jsonl) remain auditable; the [interactive evidence table](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety) links each one.
 
-**The narrow conclusion is about report indicators, not a causal Rust benefit.** There are only **15 → 13** primary leak reports, so much of the normalized decline comes from growth in the download denominator. npm counts package requests, including CI/repeats, rather than active users; it misses other installation channels and cannot provide a historical per-version denominator here. Arrival-time cohorts include multiple builds, and a post-merge report can concern an older Zig build. Title specificity, triage, issue mix and exposure also changed.
+A sensitivity pass adds at most 2,500 body characters on both sides:
 
-Stable delivery resumed: the August statement that nothing had shipped is now historical. Likewise, canary-only version heuristics from part 1 cannot be applied after 1.4.0 became stable. [Post-stable analysis](part2/UPDATE-2026-10-30.md) and [primary release sources](part2/SOURCES-2026-10-30.md) document the timeline.
+| Bounded-body sensitivity | Before: reports | Before: / million | After: reports | After: / million | Rate change |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Crash / fatal signal | 571 | 24.74 | 306 | 4.34 | −82.5% |
+| Explicit memory leak / retention | 29 | 1.26 | 17 | 0.24 | −80.8% |
 
-## What the interactive report contains
+The direction survives that variant. It is not classifier validation: body mentions can be incidental or negated, and the old plain-text and newer Markdown excerpts differ in formatting. The legacy crash rule also has known false positives such as crash-report metadata. Counts concern reports, not independently confirmed or deduplicated failures. [Definitions, evidence and calculations](part3/SAFETY-2026-10-30.md).
 
-- **One combined daily chart:** exclusive type stacks, a version filter or grouped version stacks, and an npm-download line. Switch between counts, a common growth index (`pre = 100`), reports per million downloads, and composition. Choose daily or trailing seven-day values.
-- **Separate crash/leak rates:** before/after counts and rates, title-only/body sensitivity, 1/7/28-day windows, and inspectable links to the memory-retention reports. Generic OOM/high memory use remains a separate category.
-- **Report growth / npm growth:** a separate ratio chart. Below 1 means fewer reports per npm request than the pre-period reference; a rising curve means reports are outpacing requests over that interval, even if still below 1.
-- **Provisional classification:** components and symptoms, coverage/unclassified shares, body sensitivity, and searchable issue-title evidence. The daily stacks count every report once; multiple signals and unknowns are explicit buckets.
-- **Follow-up and context:** age-restricted 30-day closure shares, releases, weekly star arrivals and dated cumulative binary-asset counters. Stars measure interest; current asset totals cannot reconstruct historical daily downloads.
+## Are bugs outgrowing the audience proxy?
 
-The primary taxonomy is rule-based title matching. It is exploratory, multi-label in the comparison table, and exclusive only in the daily stacks. The [36-report spot check](part3/CLASSIFICATION-AUDIT.md) found false positives and omissions; no overall accuracy or recall estimate is claimed. Version parsing prefers the Bun version field or explicit Bun version strings, checks saved release bases, and preserves ambiguous/unknown reports. It does not confirm which runtime caused a bug.
+![The ratio of report growth to npm-request growth over time. The horizontal reference is 1. Seven-day and twenty-eight-day windows are shown, and the pooled post/pre comparison is 0.435.](assets/readme/03-relative-growth.png)
 
-## Reproduce and verify
+The separate graph answers the growth question directly:
 
-Requirements: **Python 3**, **Node.js** and **pnpm**. No network is needed after installing the pinned chart dependencies.
+```text
+Q = report-growth index / npm-download-growth index
+  = current reports-per-request rate / pooled pre-merge reports-per-request rate
+```
+
+- **Q = 1:** the report/request ratio equals the pre-period reference.
+- **Q < 1:** fewer reports per npm request than that reference.
+- **Q > 1:** more reports per npm request than that reference.
+- **A rising Q:** reports are outpacing the npm proxy over that interval, even if Q remains below 1.
+
+The all-report pooled post/pre result is **0.435×**. This divides rate levels against a fixed baseline; it does not divide potentially zero or negative percentage-growth numbers. Rolling values use **ratios of sums** within complete windows. The pooled result is not the unweighted average of the rolling curve.
+
+[Open this chart](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-growth-ratio) to switch between all reports, crashes, explicit memory retention and broad memory signals, or between 1/7/28-day windows.
+
+## What kinds of reports changed?
+
+![Before/after shares of component mentions in issue titles. HTTP/network and test-runner mentions rise; package-manager mentions fall. The chart excludes the large no-component-signal group from the bars and reports its coverage in the footnote.](assets/readme/04-component-mix.png)
+
+| Component title signal | Before: 1,802 reports | After: 2,389 reports |
+| --- | ---: | ---: |
+| HTTP / network | 162 (8.99%) | 353 (14.78%) |
+| Test runner | 37 (2.05%) | 176 (7.37%) |
+| Package manager | 152 (8.44%) | 135 (5.65%) |
+| Bundler / transpiler | 112 (6.22%) | 157 (6.57%) |
+| SQL / storage | 67 (3.72%) | 105 (4.40%) |
+| **No component title signal** | **1,110 (61.60%)** | **1,154 (48.30%)** |
+
+These are **provisional title mentions**, not validated affected subsystems or root causes. Categories overlap. Titles became more specific across the two snapshots, and many reports name no component. Thus the component-share changes cannot by themselves establish that networking worsened or package installation improved.
+
+Components and symptoms are separate axes. The comparison table uses multi-label counts; the daily stacks use exclusive buckets: one matching signal keeps its class, several become **multiple signals**, none become **no title signal**. Every report enters a stack exactly once. A [36-report conditional spot check](part3/CLASSIFICATION-AUDIT.md) found false positives and omissions; it does not estimate overall accuracy or recall.
+
+## Reported Bun versions, day by day
+
+![Daily problem-type stacks for three selected reported versions: Bun 1.3.14, 1.4.0 and 1.4.4. All three panels share date and count scales. Unknown and multiple signals remain in the stack.](assets/readme/05-daily-versions.png)
+
+The panels show three selected versions on the same calendar-day and count scales. **They are not all-version totals.** The [interactive version](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-version-daily) includes every extracted version, an all-version aggregate, grouped version comparisons and npm overlays.
+
+| Version extraction over all 4,191 potential reports | Reports |
+| --- | ---: |
+| A single usable reported version | 2,918 |
+| Unknown / unusable version | 857 |
+| Multiple reported versions | 416 |
+
+The extractor prefers the issue template's Bun version field, then explicit adjacent Bun-version strings. Base versions are checked against saved official release history because reporters sometimes put editor, extension or kernel versions in the Bun field. Canary/debug suffixes are retained while build hashes are grouped. Unrecognised or unreleased bases remain unknown.
+
+A **plain `1.4.0` does not identify stable versus canary**. A reported version does not prove which runtime caused a bug, and later edits can change version text. Counts have no historical per-version npm denominator, so a more frequently reported version is not necessarily less reliable. [Version evidence](part3/data/versions.jsonl).
+
+## Stable shipping resumed; follow-up is a different question
+
+![Whole-window weekly potential reports split into closed-as-fixed and other outcomes, with stable-release dates below. The release strip highlights 98 days from the rewrite merge to the first Rust stable, followed by four patch releases. Edge weeks are partial.](assets/readme/06-release-and-followup.png)
+
+Bun **1.4.0 shipped on 20 August**, 98 calendar days after the merge. It was followed by **1.4.1 (4 September)**, **1.4.2 (5 September)**, **1.4.3 (10 October)** and **1.4.4 (22 October)**. The release-drought statements in the [August analysis](archive/README-2026-08-10.md) describe that historical window, not the current state. [Primary release-source verification](part2/SOURCES-2026-10-30.md).
+
+Closure shares need equal follow-up. The age-restricted comparison includes only potential bug reports at least 30 days old:
+
+| Arrival cohort | Eligible reports | Closed as fixed within 30 days | Share |
+| --- | ---: | ---: | ---: |
+| Before merge, frozen baseline | 1,802 | 478 | **26.5%** |
+| Merge → first Rust stable, all builds | 1,004 | 297 | **29.6%** |
+| Since stable 1.4.0, all builds | 796 | 192 | **24.1%** |
+| All post-merge | 1,800 | 489 | **27.2%** |
+
+The overall post-merge share is close to the frozen baseline; the post-stable subset is lower. GitHub's current `closed`/`completed` state is a maintainer disposition, not proof that a verified fix shipped. Reopened reports count as unresolved. Medians among fixed reports omit unresolved cases, and reconstructed backlog lacks intermediate reopen/reclose events. The baseline's states remain frozen in August while post-merge states were refreshed in October. [Full follow-up analysis](part2/UPDATE-2026-10-30.md).
+
+## What this study can and cannot establish
+
+The data supports three descriptive conclusions: **stable delivery resumed**, **npm distribution activity grew faster than report arrivals**, and **crash/leak report-per-request indicators fell**. It does not isolate a programming-language effect.
+
+The limits that matter to those conclusions are:
+
+- **Exposure is unmeasured.** npm traffic is one installation-channel proxy, including CI and repeats. GitHub stars measure interest, not runtime use; current cumulative binary-asset counters cannot reconstruct historical daily downloads.
+- **Arrival time is not implementation.** Post-merge reports include old Zig builds; canary availability, stable adoption and reporting incentives changed.
+- **Reports are not unique confirmed defects.** One defect can produce several issues. The inherited label-exclusion definition can admit untriaged feature requests; triage coverage changed.
+- **Classification is exploratory.** Title specificity and excerpt formats differ. Root causes, severity and memory-safety guarantees require case-level investigation.
+- **Snapshots have different observation dates.** Baseline text/labels/outcomes were observed in August; post-merge ones in October. A frozen historical comparison is not a randomized control.
+- **Calendar boundaries matter.** The main normalization excludes partial days and the merge day. Older complete-week tables use different inclusion windows and therefore slightly different rates. Windows crossing the merge contain both periods.
+
+The original report also discusses Rust's complexity, AI-assisted porting and verification. Those contextual arguments and their quotations remain available in the [preserved original analysis](archive/README-2026-08-10.md); the October evidence does not settle those broader debates.
+
+## Data and reproduction
+
+The snapshot is committed, and the figures above are generated from it. No API requests are needed for an offline rebuild after installing the pinned chart dependencies.
 
 ```bash
 pnpm install --frozen-lockfile
-pnpm run rebuild       # rebuild from committed snapshots; no API requests
-pnpm run verify        # cohort, classification, exposure, version and safety checks
-pnpm run site          # package the already-built HTML into dist/ for static hosting
+pnpm run rebuild       # regenerate the self-contained HTML from saved inputs
+pnpm run verify        # classifications, cohorts, exposure joins, versions and safety
+pnpm run site          # package the verified HTML for static hosting
 ```
 
-`pnpm run refresh` collects a **new observation** of issues, npm downloads and star history, then rebuilds. It requires network access and can change past counts as reports are relabelled or closed. Repository/release-asset counter snapshots have their own observation timestamps; that command does not refresh those counters. The ignored full-body cache is optional for an offline rebuild: committed slim records and bounded excerpts provide the inputs.
-
-The original August-only verification remains separate:
+The rendered README figures use the same rolling/index calculations as the HTML. To regenerate them with Python 3.12+, Node.js and a local plotting environment:
 
 ```bash
-(cd scripts && python3 09-verify.py)  # 31 checks for the frozen original analysis
+python3 -m venv .venv-readme
+.venv-readme/bin/pip install -r requirements-readme.txt
+.venv-readme/bin/python scripts/render-readme-charts.py
 ```
 
-## Sources and files
+<details>
+<summary>Source files, snapshot refresh and publication</summary>
 
 | Path | Purpose |
 | --- | --- |
 | [`index.html`](index.html) | Complete offline-capable interactive report |
-| [`archive/README-2026-08-10.md`](archive/README-2026-08-10.md) | Preserved original analysis and its historical conclusions |
+| [`assets/readme/`](assets/readme/) | The six rendered GitHub figures and their snapshot manifest |
+| [`scripts/render-readme-charts.py`](scripts/render-readme-charts.py) | Reproducible static-figure renderer |
+| [`archive/README-2026-08-10.md`](archive/README-2026-08-10.md) | Original analysis and historical conclusions |
 | [`data/`](data/) and [`scripts/`](scripts/) | Frozen part 1 evidence and verification |
-| [`part2/`](part2/README.md) | Refreshed post-merge issues, stable releases and closure follow-up |
-| [`part3/README.md`](part3/README.md) | Taxonomy, version stacks and adoption comparison |
+| [`part2/`](part2/README.md) | Post-merge issues, releases and follow-up |
+| [`part3/README.md`](part3/README.md) | Classification, version stacks and adoption methods |
 | [`part3/SAFETY-2026-10-30.md`](part3/SAFETY-2026-10-30.md) | Crash/leak definitions, rates, sensitivity and relative-growth formula |
-| [`part3/POPULARITY-SOURCES.md`](part3/POPULARITY-SOURCES.md) | Primary npm/GitHub sources and exposure limitations |
-| [`part3/data/`](part3/data/) | Saved source responses, classified records, version/type counts and safety audit |
-| [`scripts/package-site.py`](scripts/package-site.py) | Packages the prebuilt report without fetching or recomputing data |
+| [`part3/POPULARITY-SOURCES.md`](part3/POPULARITY-SOURCES.md) | Primary npm/GitHub sources and denominator limits |
+| [`part3/data/`](part3/data/) | Saved source responses, classified evidence and audit records |
 
-The older complete-week comparison and newer complete-day comparison use different inclusion boundaries; their slightly different rates should not be mixed. Every derived table records its denominators and observation window.
+`pnpm run refresh` collects a **new observation** of issues, npm downloads and star history, then rebuilds the HTML. It can change historical counts as reports are edited, relabelled or closed. Refresh the static figures and README claims too when changing the snapshot. Repository/release-asset counters have separate timestamps and are not refreshed by that command. The full-body cache is optional for an offline rebuild; committed slim records and bounded excerpts supply the inputs.
 
-## Publication and attribution
+The original verification remains separate:
 
-This fork's current report is published at **[bun-rust-analysis-ilyagulya.netlify.app](https://bun-rust-analysis-ilyagulya.netlify.app/)**. Netlify serves a manually deployed, versioned static artifact; GitHub is the source of record. A future GitHub push does not automatically publish a new Netlify deploy.
+```bash
+(cd scripts && python3 09-verify.py)  # 31 checks on frozen part 1
+```
 
-To update the linked Netlify project after rebuilding and verifying:
+Netlify serves a manually published static artifact. A GitHub push does not automatically redeploy it. To update the site after rebuilding and verifying:
 
 ```bash
 pnpm run site
 pnpm --package=netlify-cli@24.0.1 dlx netlify deploy --site bun-rust-analysis-ilyagulya --prod --no-build --dir=dist
 ```
 
-The pinned, isolated CLI avoids conflicts with globally installed packages and uses your existing Netlify login.
+`.netlify/`, `dist/`, local plotting environments, scratch work and the full raw issue cache are ignored. Only rendered HTML and the license are packaged for web publication.
 
-`.netlify/`, `dist/`, scratch work and the full raw issue cache are ignored. Only the rendered report and license are packaged for web publication.
+</details>
 
-The original study and its historical discussion are by **Aleksandr Smyshliaev**. This fork extends that work with the October snapshot, classifications, adoption proxies and additional charts. Code/report licensing remains [MIT](LICENSE); copyright in quoted issue text belongs to its authors. See [CITATION.cff](CITATION.cff) for the updated fork citation.
+## Attribution and license
+
+The original study is by **Aleksandr Smyshliaev**. This fork extends it with the October snapshot, version/type classification, adoption proxies and additional charts. The original text and its historical context are preserved in the archive.
+
+Code/report licensing remains [MIT](LICENSE); copyright in quoted issue text belongs to its authors. [CITATION.cff](CITATION.cff) records the updated fork citation. The current web report is published at **[bun-rust-analysis-ilyagulya.netlify.app](https://bun-rust-analysis-ilyagulya.netlify.app/)**.

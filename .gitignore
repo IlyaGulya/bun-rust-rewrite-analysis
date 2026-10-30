@@ -10,3 +10,6 @@ part2/data/raw.json
 .netlify/
 dist/
 work/
+
+# Optional README plotting environment
+.venv-readme/

@@ -1,0 +1,99 @@
+{
+  "snapshot": "2026-10-30T09:20:14+00:00",
+  "npm_through": "2026-10-28",
+  "files": [
+    "01-growth-and-reports.png",
+    "02-crashes-and-leaks.png",
+    "03-relative-growth.png",
+    "04-component-mix.png",
+    "05-daily-versions.png",
+    "06-release-and-followup.png"
+  ],
+  "calculation_source": "part3/combined-series.js",
+  "stats": {
+    "all": {
+      "pre": {
+        "n": 1772,
+        "downloads": 23077916,
+        "days": 181,
+        "rate": 76.78336293450413
+      },
+      "post": {
+        "n": 2358,
+        "downloads": 70541010,
+        "days": 167,
+        "rate": 33.42736374202751
+      },
+      "stable": {
+        "n": 1338,
+        "downloads": 35306720,
+        "days": 69,
+        "rate": 37.89646843433771
+      },
+      "change_pct": -56.46535595146971
+    },
+    "crash": {
+      "pre": {
+        "n": 404,
+        "downloads": 23077916,
+        "days": 181,
+        "rate": 17.505913445564147
+      },
+      "post": {
+        "n": 190,
+        "downloads": 70541010,
+        "days": 167,
+        "rate": 2.6934686645399606
+      },
+      "stable": {
+        "n": 71,
+        "downloads": 35306720,
+        "days": 69,
+        "rate": 2.0109486239446768
+      },
+      "change_pct": -84.61394960671154
+    },
+    "leak": {
+      "pre": {
+        "n": 15,
+        "downloads": 23077916,
+        "days": 181,
+        "rate": 0.649972033869956
+      },
+      "post": {
+        "n": 13,
+        "downloads": 70541010,
+        "days": 167,
+        "rate": 0.1842899612579973
+      },
+      "stable": {
+        "n": 5,
+        "downloads": 35306720,
+        "days": 69,
+        "rate": 0.14161610027779414
+      },
+      "change_pct": -71.64647836296456
+    },
+    "memory": {
+      "pre": {
+        "n": 27,
+        "downloads": 23077916,
+        "days": 181,
+        "rate": 1.1699496609659208
+      },
+      "post": {
+        "n": 25,
+        "downloads": 70541010,
+        "days": 167,
+        "rate": 0.35440377164999476
+      },
+      "stable": {
+        "n": 14,
+        "downloads": 35306720,
+        "days": 69,
+        "rate": 0.3965250807778236
+      },
+      "change_pct": -69.70777602880828
+    }
+  }
+}
