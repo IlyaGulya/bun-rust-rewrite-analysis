@@ -1,6 +1,6 @@
 <section id="after-the-stable-release" style="scroll-margin-top:24px">
   <h2>Releases and fixes after stable 1.4.0 <span id="p2-asof" style="font-weight:400; letter-spacing:.06em; text-transform:none; color:var(--faint)"></span></h2>
-  <p class="prose">This section uses the October issue snapshot. It includes all builds reported after the merge. The <a href="archive/report-2026-08-10.html">original August report</a> remains available.</p>
+  <p class="prose">This section uses the October issue snapshot. It separates the canary period from the after-stable period. Both groups include all reported builds. The <a href="archive/report-2026-08-10.html">original August report</a> remains available.</p>
   <p class="prose" id="p2-followup"></p>
   <div class="cards">
     <div class="card">
@@ -78,7 +78,7 @@ const P2 = __DATA__;
 
   document.getElementById('p2-asof').textContent = `data collected ${P2.generated.slice(0, 10)}`;
 
-  document.getElementById('p2-followup').textContent = `Stable releases resumed. Among reports old enough for comparison, ${C.post_140.rate30}% after stable 1.4.0 were marked as fixed within 30 days. The before-merge share was ${C.pre.rate30}%. Report types and reopen events can affect this comparison. It does not prove a language effect.`;
+  document.getElementById('p2-followup').textContent = `For reports at least 30 days old, the shares marked as fixed within 30 days are ${C.pre.rate30}% before merge, ${C.post_pre140.rate30}% in the canary period, and ${C.post_140.rate30}% after Rust stable. These are report-date groups across all builds. They do not isolate a language effect.`;
 
   /* ---------- cards ---------- */
   const gap = Math.round((secs(relDate) - secs(P2.merge.slice(0, 10))) / 86400);
@@ -86,8 +86,9 @@ const P2 = __DATA__;
   document.getElementById('p2-relhead').textContent = `1.4.0 after ${gap} days`;
   document.getElementById('p2-relbody').innerHTML = `Bun released stable 1.4.0 on <strong>${relDate}</strong>. This was ${gap} calendar days after the merge. It was 99 calendar days after the last Zig stable, 1.3.14.` + (patches.length ? ` There have been ${patches.length} later patches. The latest is ${patches.at(-1)[1]}, released on ${patches.at(-1)[0]}.` : ` No patch has followed it.`);
 
-  document.getElementById('p2-volhead').textContent = `${num(T.bugs_since_merge)} possible bug reports`;
-  document.getElementById('p2-volbody').innerHTML = `Since the merge, users opened <strong>${num(T.since_merge)}</strong> issues. The possible-bug filter includes ${num(T.bugs_since_merge)}. Of all ${num(T.since_merge)} issues, ${num(T.open_now)} remain open. After stable 1.4.0, the counts are ${num(T.since_140)} issues, ${num(T.bugs_since_140)} possible bug reports and ${num(T.open_since_140)} open issues.`;
+  document.getElementById('p2-volhead').textContent = 'Reports in three date periods';
+  document.getElementById('p2-volbody').innerHTML = `The possible-bug filter includes <strong>${num(C.pre.n)}</strong> reports before merge, <strong>${num(C.post_pre140.n)}</strong> in the canary period, and <strong>${num(C.post_140.n)}</strong> after Rust stable. During the canary period, stable remained on Zig. Across all ${num(T.since_merge)} issues opened after merge, ${num(T.open_now)} remain open.`;
+
 
   const kw = T.kw_since_140;
   document.getElementById('p2-crashhead').textContent = `${kw.crash} crash mentions; ${kw.hang} hang mentions`;
@@ -450,9 +451,8 @@ const P2 = __DATA__;
 
   const rows = [
     ['Before merge (26 weeks)', C.pre],
-    ['Merge to stable 1.4.0', C.post_pre140],
-    ['After stable 1.4.0', C.post_140],
-    ['All after-merge reports', C.post],
+    ['Canary period: all builds', C.post_pre140],
+    ['After Rust stable: all builds', C.post_140],
   ];
   document.getElementById('p2-cohorts').innerHTML = rows.map(([label, s], i) => {
     const bold = t => i === 3 ? `<strong>${t}</strong>` : t;

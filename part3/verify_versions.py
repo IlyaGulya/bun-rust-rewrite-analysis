@@ -3,7 +3,7 @@
 import collections
 import json
 from pathlib import Path
-from versions import bucket, reported_version
+from versions import bucket, reported_version, reported_family
 D=Path(__file__).resolve().parent/'data'
 
 def check(title,body,want):
@@ -33,11 +33,34 @@ for row in rows:
     assert row['version']==reported_version(r['title'],r['excerpt'])['version']
     for axis in ['symptoms','components']:
         assert row[axis]==bucket(r[axis])
-        expected[(row['version'],row['day'],axis)][row[axis]]+=1
+        assert (row['family'],row['family_reason'])==reported_family(row['version'],r['created'],'2026-05-14T08:09:34+00:00')
+        expected[(row['version'],row['day'],axis,row['family'])][row[axis]]+=1
 assert dict(collections.Counter(r['version'] for r in rows))==payload['counts']
-actual={(r['version'],r['day'],r['axis']):collections.Counter(r['counts']) for r in payload['daily']}
+actual={(r['version'],r['day'],r['axis'],r['family']):collections.Counter(r['counts']) for r in payload['daily']}
 assert actual==expected
 for axis in ['symptoms','components']:
     assert sum(sum(r['counts'].values()) for r in payload['daily'] if r['axis']==axis)==len(rows)
 assert payload['days'][-1]=='2026-10-30'
 print(f'Verified version-field precedence, dependency exclusions, ambiguous versions, canary grouping, and exact daily stacks for {len(rows)} reports.')
+
+assert reported_family('1.4.0-canary','2026-05-20','2026-05-14')[0]=='rust'
+assert reported_family('1.3.14','2026-09-01','2026-05-14')[0]=='zig'
+assert reported_family('1.4.3','2026-04-10','2026-05-14')[0]=='unclear'
+assert reported_family('1.3.14-canary','2026-06-01','2026-05-14')[0]=='unclear'
+assert reported_family('1.3.11-canary','2026-03-01','2026-05-14')[0]=='zig'
+for v in ['unknown','multiple']:assert reported_family(v,'2026-09-01','2026-05-14')[0]=='unclear'
+m=json.loads((D/'family-matrix.json').read_text())
+assert m['family_counts']==dict(collections.Counter(r['family'] for r in rows))
+assert sum(m['family_counts'].values())==4191
+assert sum(r['total'] for r in m['rows'])==4191
+assert all(sum(x.get('all',0) for x in r['weekly'])==r['total'] for r in m['rows'])
+for kind in ['all','crash','panic','hang','memory','performance','correctness','failure']:
+    want=sum(r['bug'] and (kind=='all' or kind in r['symptoms']) for r in source)
+    assert sum(w.get(kind,0) for r in m['rows'] for w in r['weekly'])==want
+for phase,original in [('pre','pre'),('canary','pre_stable'),('stable','stable')]:
+    for family in ['zig','rust','unclear']:
+        assert m['period_family_counts'][phase].get(family,0)==sum(r['family']==family and by_id[r['n']]['period']==original for r in rows)
+print('Verified family uncertainty cases, weekly matrix totals, direct type matches, and language/date separation.')
+
+safety_rows=[json.loads(l) for l in (D/'safety-audit.jsonl').read_text().splitlines()]
+assert sum(w.get('leak',0) for r in m['rows'] for w in r['weekly'])==sum(r['flags']['title']['leak'] for r in safety_rows)

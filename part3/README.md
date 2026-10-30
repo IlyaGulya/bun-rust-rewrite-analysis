@@ -1,63 +1,61 @@
-# Report types and Bun downloads through 30 October 2026
+# Report dates, stated versions, and inferred families
 
-The [current report](../index.html) covers November 2025 to 30 October 2026. The [original August report](../archive/report-2026-08-10.html) is stored separately.
+The [current HTML](../index.html) and [main README](../README.md) separate three questions:
 
-## Title matches
+1. When was the report opened: before merge, during the Rust canary period, or after Rust stable?
+2. Which Bun version does the saved text state?
+3. Which version family can be inferred from that text?
 
-| Title match | Before: 1,802 possible bug reports | After: 2,389 possible bug reports |
-| --- | ---: | ---: |
-| HTTP and networks | 162 (8.99%) | 353 (14.78%) |
-| Tests | 37 (2.05%) | 176 (7.37%) |
-| Package installation | 152 (8.44%) | 135 (5.65%) |
-| Crash or fatal signal | 418 (23.20%) | 195 (8.16%) |
-| No component title match | 1,110 (61.60%) | 1,154 (48.30%) |
+These measures do not establish the cause of a defect or actual runtime exposure.
 
-The same text rules apply to both periods. A report can match several types. These counts describe words in reports. They do not confirm a defect, its component, or its cause. For example, “crash report peak” can match the crash rule without describing a crash. No match does not mean no problem.
+## Date periods
 
-Many titles name no component. Later titles can also contain more detail. Changes in these shares therefore cannot show that actual crash frequency fell or that network quality became worse. The [36-report review](CLASSIFICATION-AUDIT.md) checks only reports with at least one match. It does not measure how many problems the rules miss.
+Full report groups use exact timestamps: merge **14 May 2026, 08:09:34 UTC** and stable **20 August 2026, 14:07:21 UTC**. Their possible-bug totals are **1,802 / 1,004 / 1,385**. Stable remained Zig during the canary period. Reports after stable can concern old versions.
 
-The separate body text check adds up to 2,500 characters per report. It removes fenced code and template prompts. Other unrelated mentions can remain. [Per-report records](data/classified.jsonl) keep the matches and excerpts. Before-merge text and labels were observed on 10 August. After-merge text and labels were observed on 30 October. These are report-date groups. They do not prove which language implementation was used.
+Rate tables require complete paired UTC days. They exclude both event days, the first/last partial issue days, and missing npm dates. The three periods have **181 / 97 / 69 days** and **1,772 / 985 / 1,338 possible bug reports**. The corresponding npm totals are **23,077,916 / 34,698,894 / 35,306,720**. [Safety calculations](SAFETY-2026-10-30.md) define these groups.
 
-## Downloads and stars
+## Text rules
 
-Mean daily npm requests rose from **171,648 in April** to **533,390 over 1–28 October**, about 3.11 times. These are requests for the `bun` package. They include repeated downloads and automated builds. They do not count active users. See the [saved npm data](data/popularity-npm-raw.json) and [source limits](POPULARITY-SOURCES.md).
+`classify.py` applies the same title rules in every period. Component and problem matches can overlap. A missing match does not prove absence of a problem. Labels only supply the inherited possible-bug exclusion rule. Unlabelled feature requests can pass it.
 
-| Complete calendar weeks with both data sources | Weeks | Possible bug reports | npm requests | Reports per million requests |
-| --- | ---: | ---: | ---: | ---: |
-| Before merge | 25 | 1,678 | 22,569,677 | 74.35 |
-| After merge | 24 | 2,378 | 70,795,178 | 33.59 |
-| After stable release, included above | 10 | 1,373 | 35,842,116 | 38.31 |
+The body text check adds up to 2,500 characters after removing fenced code and template prompts. It can include unrelated mentions. [Saved matches](data/classified.jsonl) retain evidence. Before-merge text and labels were observed in August; later data in October. The [36-report review](CLASSIFICATION-AUDIT.md) found wrong and missed matches. It does not estimate overall accuracy.
 
-Each period rate is total reports divided by total npm requests. It is not the mean of the weekly rates. Partial weeks and dates without both sources are excluded. Weeks start on Thursday at 00:00 UTC. The merge and stable release occurred later on their boundary days, so these weeks can include hours on both sides of an event. The issue window starts on 13 November at 08:09:34 UTC. Its first week is partial. The final week starts on 29 October and is also partial. npm data ends on 28 October.
+## Version extraction and family inference
 
-Reports cover all installation methods and versions. npm covers one installation method. Changes in automated builds or installation methods can change the rate without changing defect risk. We do not add platform-package downloads to `bun` downloads because one installation can request both.
+`versions.py` prefers the report template's Bun version field. It then checks explicitly adjacent Bun-version strings. Bare dependency versions are not accepted. Base versions must appear in saved official release history. New unrecognised canary bases can be missed. Rejected candidates remain in the audit. Suffixes are preserved; individual build IDs are grouped.
 
-GitHub stars show interest. The saved current total is 96,468. The final star-history week is partial, and its day boundaries may differ from UTC. Stars are not used to calculate report rates. Current GitHub release-download counters are shown separately because they do not provide past daily counts.
+One usable version appears in **2,918** reports. **857** have no usable version and **416** have several versions. The family rule assigns **1,910 Zig-line**, **980 Rust-line**, and **1,301 unclear** reports:
 
-## Daily chart by reported version
+- Base versions below 1.4 are Zig-line. Old canary/dev/debug strings after merge remain unclear.
+- Base versions from 1.4 are Rust-line only after the exact merge timestamp. Earlier mentions have conflicting dates and stay unclear.
+- Missing or multiple versions stay unclear. They are never assigned by report date.
 
-The first chart stacks report types for each UTC report-opening day. Choose all versions, one version, or the four most-reported single versions. Choose problem types or named components. Each report enters one stack group: its single match, “Several type matches”, or “No title match”. The stack height equals the number of reports. The separate component comparison permits several matches per report.
+A plain `1.4.0` cannot identify stable or canary. These are version-line inferences, not binary checks. Edits after filing can create impossible-looking version dates. Per-report records keep the inference reason in [versions.jsonl](data/versions.jsonl).
 
-`versions.py` first checks the Bun version field in the report template. It then checks explicit text next to the word Bun. Bare library versions are not accepted. Base versions must appear in the saved official release list. Unknown new canary bases can therefore be missed. Rejected candidates remain in the audit data. Reports with several versions form a separate group. Missing versions are unknown. Canary, debug, and dev suffixes remain; individual build IDs are grouped. A plain `1.4.0` does not identify stable or canary. A stated version does not confirm an affected runtime.
+## Version-family map
 
-[data/versions.jsonl](data/versions.jsonl) stores candidates, evidence, and stack groups. [data/version-daily.json](data/version-daily.json) stores daily totals. `verify_versions.py` checks version rules and confirms that each report enters each chart once.
+[family-matrix.json](data/family-matrix.json) stores weekly direct title-match counts for every family/version row. Weeks start Thursday at 00:00 UTC. Weeks can cross event timestamps. The first and last issue weeks are partial. All **4,191** reports remain represented.
 
-## Growth and rates
+The interactive map filters family and problem type. Its default shows the 12 most-reported clear versions, remaining-version groups, and unclear groups. The every-version view exposes all rows. Colour uses fixed count ranges shared across rows. No row has its own intensity scale. Zero is distinct from a missing download observation.
 
-The default chart shows a growth index. Each series uses its own before-merge daily mean as 100. In the four-version view, report bars share the combined reference for the selected versions. Their contributions add to the selected report index. npm uses its own reference. A version with no before-merge reports has no report growth index. Use Counts to view it.
+Selecting a cell chooses the stated version, one-day counts, and that week in the daily chart. The native version selector provides keyboard access to the same detail. The npm context line shows daily means for complete weeks across all versions. It does not normalize individual version rows. [Design and reading guide](INFOGRAPHIC.md).
 
-The seven-day option uses complete calendar windows. Counts show daily means. Rates divide the window's total reports by its total npm requests. The report summary uses all included dates. Zoom and hidden series do not change that summary. Version filters still use npm requests across all versions.
+The daily stack counts each report once: its single problem match, several matches, or no match. The map uses direct matches, so a crash can count even if its title also matches another type. Its leak option uses the separate explicit-memory rule.
 
-The complete-day comparison has **181 days before** the merge (14 November–13 May) and **167 days after** it (15 May–28 October). It excludes the merge day, partial report days, and missing npm dates. Reports per day rise **9.79 → 14.12 (1.44×)**. npm requests per day rise **127,502 → 422,401 (3.31×)**. The period rate falls **76.78 → 33.43 per million requests (−56.5%)**. Reports grew more slowly than npm requests. This does not measure defect risk or active users. The weekly table uses different date limits, so its rates differ slightly.
+## Counts, growth, and rates
 
-The [crash and memory comparison](SAFETY-2026-10-30.md) checks explicit leaks separately from other memory problems. It also shows the body text check. A separate chart divides the report growth index by the npm growth index. Its reference is 1. All charts use the same complete-day rules.
+The daily chart defaults to counts. Growth divides each series by its own before-merge daily mean and multiplies by 100. Family and version filters change only report counts. npm requests remain across all versions. A version with no before-merge reference has no report growth index; counts remain available.
 
-## Build and verify
+Seven-day windows use complete calendar windows. Counts show daily means. Rates divide the window's total reports by total requests. The three summary periods are disjoint and exclude both event days. Zoom does not change summaries. The separate Q chart divides the current report/request rate by its before-merge reference.
 
-- `pnpm run rebuild`: build from saved data, without network access.
-- `pnpm run refresh`: collect issues, npm counts, and star history, then build. This does not update the separately dated GitHub repository and asset snapshot.
-- `python3 part3/popularity.py`: build download and star data from saved responses.
-- `pnpm run verify`: check counts, dates, version rules, leak rules, and chart calculations.
-- From `scripts/`, run `python3 09-verify.py` to check the original report.
+June-to-October npm daily means rose **348,054 → 533,390**, about **1.53×**. This differs from a comparison of long periods before/after merge. None of these request ratios counts active users. The [source file](POPULARITY-SOURCES.md) records dates and limits.
 
-`classify.py` defines title rules. `safety.py` defines explicit leak rules. `build.py` builds the report. `block.html` contains the current page and charts. `combined-series.js` supplies the same calculations to the browser and README figures. Its tests check missing dates, zero request counts, partial days, time windows, and growth references. The built HTML includes its data and chart libraries for offline use.
+## Reproduction
+
+- `pnpm run rebuild`: build from committed inputs, without network.
+- `pnpm run refresh`: collect issues, npm counts, and stars, then build. Separately dated repository/asset counters are not refreshed by this command.
+- `pnpm run verify`: check counts, boundaries, daily stacks, matrix conservation, family ambiguity, and rates.
+- `python3 part3/popularity.py`: build popularity data from saved responses.
+- From `scripts/`, run `python3 09-verify.py` for the original August report.
+
+`combined-series.js` supplies shared calculations to the browser and README figures. Python safety exports are checked independently against it. The built current HTML includes the data and chart libraries for offline use. [Original August report](../archive/report-2026-08-10.html).

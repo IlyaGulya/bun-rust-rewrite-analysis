@@ -40,3 +40,9 @@ Release assets have a cumulative `download_count`. The API does not give histori
 The saved data covers 17 stable releases published since the study began. On 30 October, totals for all listed assets were **24,756,510 for 1.3.14**, **5,075,252 for 1.4.0**, and **2,049,312 for 1.4.4**. The saved file also keeps individual counters and a ZIP-only total. Releases have different ages. The totals include several platforms and build variants. They cannot serve as comparable period rates. [Releases API](https://api.github.com/repos/oven-sh/bun/releases?per_page=100&page=1), [saved assets](data/popularity-github-snapshot.json).
 
 We do not add npm and GitHub counts. Users, upgrades, and installer fallback requests can overlap. Other installation methods are absent. The report uses daily npm counts and shows stars separately. Actual defect risk would require active-use counts by build and information about how often users report problems. These snapshots do not provide either.
+
+## Growth depends on the chosen dates
+
+June has **10,441,614 requests over 30 days**, or **348,054/day**. October 1–28 has **14,934,927 over 28 days**, or **533,390/day**. The daily-mean ratio is **1.53×**. A ratio using all dates before and after merge answers a different question. Neither is a user-growth estimate.
+
+The report now uses separate before-merge, canary-period, and after-stable summaries. npm still covers all versions in every period. We do not divide Zig-line or Rust-line reports by an assumed share of npm requests.

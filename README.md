@@ -1,197 +1,151 @@
-# Bun after the Rust rewrite
+# Bun's rewrite: reports, versions, and release periods
 
-Bun merged [PR #30412](https://github.com/oven-sh/bun/pull/30412) on 14 May 2026. The change replaced its Zig runtime with Rust. This report extends [Aleksandr Smyshliaev's original study](https://github.com/asmyshlyaev177/bun-rust-rewrite-analysis) through **30 October 2026**.
+Bun merged [PR #30412](https://github.com/oven-sh/bun/pull/30412) on **14 May 2026**. Rust reached stable in [Bun 1.4.0 on 20 August](https://bun.com/blog/bun-v1.4). Between these dates, **stable stayed on Zig; Rust was canary**. Merge was not a migration date for all users.
 
-![Report types and npm requests on one growth scale. Each series uses its own before-merge daily mean as 100. npm requests grow faster after the merge.](assets/readme/01-growth-and-reports.png)
+This fork extends [Aleksandr Smyshliaev's original study](https://github.com/asmyshlyaev177/bun-rust-rewrite-analysis) through **30 October 2026**. It separates **report date**, **stated version**, and **inferred version family**. It does not estimate a causal effect of Rust.
 
-**[Open the interactive report](https://bun-rust-analysis-ilyagulya.netlify.app/)** · [Crashes and memory leaks](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety) · [Reports compared with downloads](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-growth-ratio)
+![Weekly reports by stated version and inferred Zig or Rust family, with an aligned all-version npm request line. Merge and Rust stable are separate events.](assets/readme/07-version-family-map.png)
 
-The six charts below work directly on GitHub. Use the HTML report to zoom and select versions. You can also [download the HTML](https://raw.githubusercontent.com/IlyaGulya/bun-rust-rewrite-analysis/master/index.html) and open it offline.
+**[Open the interactive report](https://bun-rust-analysis-ilyagulya.netlify.app/)** · [Versions and families](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-family-map) · [Three-period rates](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety)
 
-## Main results
+The website and seven figures use the same saved report snapshot. [Download the HTML](https://raw.githubusercontent.com/IlyaGulya/bun-rust-rewrite-analysis/master/index.html) for offline use.
 
-**Report counts grew more slowly than npm requests.** Reports per day increased **1.44 times**. npm requests per day increased **3.31 times**. Reports per million npm requests decreased **56.5%**.
+## What the evidence supports
 
-**Crash and memory-leak report rates also decreased.** The crash rate decreased **84.6%**. The memory-leak rate decreased **71.6%**. There were only **15 memory-leak reports before and 13 after**.
+- **Three date periods have different report patterns.** The canary period includes reports about Zig stable. The after-stable period also includes old Zig versions.
+- **The measures do not move together.** After stable, reports per npm request are higher than during the canary period. Crash and explicit leak rates are lower. Broad memory-report rates are higher.
+- **Counts do not establish language quality.** A title match does not confirm a defect. npm requests do not count active users. Versions and report dates do not prove the cause of a problem.
 
-**Stable releases resumed.** Bun released 1.4.0 on 20 August. Four patches followed. The latest stable version in this data is 1.4.4, released on 22 October.
+The earlier two-period headlines combined the canary and after-stable periods. They could suggest a Rust improvement before Rust reached stable. Those headlines have been removed.
 
-These results describe reports and download activity. **They do not show that Rust caused fewer defects.** npm requests include repeat downloads and automated jobs. They do not count active users.
+## Three calendar periods
 
-## Read the numbers correctly
+The rate comparison uses complete UTC days with both report and npm data. It excludes **14 May and 20 August**, because each event occurred partway through its day. It also excludes partial report days and unpublished npm dates.
 
-| Term | Meaning |
-| --- | --- |
-| **Possible bug report** | A GitHub issue that passes the label filter. Some reports may describe features or duplicate defects. |
-| **npm request** | A download request for package `bun`. One person or job can make many requests. |
-| **Title match** | A word pattern in an issue title. It does not prove the cause of a defect. |
-| **Period rate** | Total reports divided by total npm requests for the same complete days. |
-| **Growth index** | Daily mean divided by its before-merge mean, then multiplied by 100. |
-| **Relative report rate** | Report growth index divided by npm growth index. The reference is 1. |
+| Period | Complete dates | Days | Possible bug reports | npm requests | Reports per million requests |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Before merge | 2025-11-14–2026-05-13 | 181 | 1,772 | 23,077,916 | 76.78 |
+| Canary period | 2026-05-15–2026-08-19 | 97 | 985 | 34,698,894 | 28.39 |
+| After Rust stable | 2026-08-21–2026-10-28 | 69 | 1,338 | 35,306,720 | 37.90 |
 
-The report uses fixed data snapshots. The matching rules, source files and limits are linked below.
+These are **all-version date groups**, not Zig and Rust user groups. The full report-date groups contain **1,802 / 1,004 / 1,385** possible bug reports. They use exact event timestamps and include boundary-day reports. The complete-day rate table uses fewer reports.
 
-| Data or event | Value |
-| --- | --- |
-| Rewrite merged | **14 May 2026, 08:09:34 UTC** |
-| Change size | +1,009,257 / −4,024 lines; 2,188 files; 6,755 commits |
-| Report window | 13 November 2025 → **30 October 2026** |
-| Possible bug reports | **1,802 before + 2,389 after = 4,191** |
-| Issue data collected | 30 October, 09:20 UTC. That day is incomplete. |
-| npm data available | Through **28 October** |
-| First Rust stable release | **1.4.0, 20 August**. This was 98 calendar days after the merge. |
-| Latest stable in the snapshot | **1.4.4, 22 October** |
-| Original report | [August source text](archive/README-2026-08-10.md) |
+Issue data was collected at **30 October, 09:20:14 UTC**. npm data ends on **28 October**. The first issue day, final issue day, and final npm gap are not complete paired observations.
 
-## Reports and download activity
+## Versions and language families
 
-The first chart uses a common growth scale. Each series has its own before-merge mean of 100. The colours show report types. The white line shows npm requests. Each daily point uses the previous seven days.
+The map places versions on rows and report-opening weeks on columns. All rows use the same colour scale. The npm line below uses the same dates, across all versions. It provides context; it is not a version-specific denominator.
 
-| Complete-day comparison | Before merge | After merge | Change |
+[Use the map](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-family-map) to filter the family or problem type. Show the 12 most-reported versions plus remaining groups, or every stated version. Select a cell to open the daily chart for that version and week.
+
+**Family is inferred from the stated version line.** It is not a verified binary classification:
+
+- **Zig:** versions before 1.4. Old canary, dev, and debug strings after merge remain unclear.
+- **Rust:** versions from 1.4 stated after merge. Plain `1.4.0` does not distinguish stable from canary.
+- **Unclear:** no usable version, several versions, conflicting dates, or uncertain development versions. We do not assign these reports by date.
+
+| Inferred stated-version family | Before merge | Canary period | After Rust stable |
 | --- | ---: | ---: | ---: |
-| Days | 181 | 167 | The periods have different lengths. |
-| Possible bug reports | 1,772 | 2,358 | Compare rates, not counts alone. |
-| Reports per day | 9.79 | 14.12 | **1.44×** |
-| npm requests | 23,077,916 | 70,541,010 | This covers one download channel. |
-| npm requests per day | 127,502 | 422,401 | **3.31×** |
-| Reports per million requests | 76.78 | 33.43 | **−56.5%** |
+| Zig version line | 1,468 | 400 | 42 |
+| Rust version line | 0 | 199 | 781 |
+| Unclear family | 334 | 405 | 562 |
 
-The periods are **14 November–13 May** and **15 May–28 October**. We exclude the merge day and incomplete days. We also exclude days without published npm data. This explains why these report counts are smaller than the full 1,802/2,389 groups.
+These full snapshot counts total **4,191 reports**: **1,910 Zig-line**, **980 Rust-line**, and **1,301 unclear**. The unclear group includes **857 with no usable version**, **416 with several versions**, and **28 with uncertain date/channel evidence**. Before-merge reports include a Rust-line version with a conflicting date; it stays unclear.
 
-Existing users can file reports without a new download. Automated jobs can download Bun many times. Direct installers, embedded Bun and Docker may not appear in the npm count. These differences can change the ratio without a change in product quality.
+The parser first reads the Bun version field. It then checks explicit Bun-version text. Base versions must match saved official releases. Later text edits and rejected new canary bases can affect this inference. [Per-report version evidence](part3/data/versions.jsonl) · [Map data](part3/data/family-matrix.json).
 
 ## Crashes and memory leaks
 
-![Separate before-and-after rate charts for crashes and memory leaks. Each chart shows reports per million npm requests and the raw report count.](assets/readme/02-crashes-and-leaks.png)
+![Crash and explicit memory leak reports per million npm requests in three separate date periods. Raw report counts appear beside each bar.](assets/readme/02-crashes-and-leaks.png)
 
-| Title match | Before: count | Before: per million | After: count | After: per million | Rate change |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Crash or fatal signal | 404 | 17.51 | 190 | 2.69 | **−84.6%** |
-| Memory leak or memory not released | 15 | 0.65 | 13 | 0.18 | **−71.6%** |
-| All memory problems, as a separate check | 27 | 1.17 | 25 | 0.35 | **−69.7%** |
+Rates below are reports per million **all-version** npm requests. Each cell shows **report count / rate**.
 
-The leak rule requires evidence that allocated memory was not released. It includes native memory, garbage-collector roots and request-body bytes. It also includes leaks found when a process exits.
+| Report type | Before merge: count / rate | Canary period: count / rate | After stable: count / rate | Stable vs canary rate |
+| --- | ---: | ---: | ---: | ---: |
+| All possible bug reports | 1,772 / 76.783 | 985 / 28.387 | 1,338 / 37.896 | +33.5% |
+| Crash reports | 404 / 17.506 | 118 / 3.401 | 71 / 2.011 | -40.9% |
+| Memory leak reports | 15 / 0.650 | 7 / 0.202 | 5 / 0.142 | -29.8% |
+| Memory keyword reports | 27 / 1.170 | 10 / 0.288 | 14 / 0.397 | +37.6% |
 
-High memory use or an out-of-memory error alone does not meet this rule. Leaked disk files and file descriptors do not meet it either. These reports remain in the full input and can match other rules.
+The lower crash rate does not establish a Rust effect. A substantial decline happened before Rust stable. The all-report and broad memory rates are higher after stable than in the canary period. The leak counts are only **15 / 7 / 5**. Those samples are too small to carry a strong quality claim.
 
-**Most of the leak-rate decrease comes from download growth.** The report counts, 15 before and 13 after, are close. The number of npm requests is much larger after the merge.
+The leak rule requires explicit memory retention text. High memory use, OOM alone, growing files, and file-descriptor leaks do not meet it. The crash rule can match unrelated text such as crash-report metadata. Several reports can describe one defect. The HTML links all **27 leak-title matches** in the three complete-day periods.
 
-The HTML report links all **28 leak reports** in this comparison. [Inspect the evidence](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-safety).
+Adding up to 2,500 body characters gives a separate text check:
 
-We also repeat the calculation with up to 2,500 body characters added to each title:
+| Report type | Before merge: count / rate | Canary period: count / rate | After stable: count / rate | Stable vs canary rate |
+| --- | ---: | ---: | ---: | ---: |
+| All possible bug reports | 1,772 / 76.783 | 985 / 28.387 | 1,338 / 37.896 | +33.5% |
+| Crash reports | 571 / 24.742 | 184 / 5.303 | 121 / 3.427 | -35.4% |
+| Memory leak reports | 29 / 1.257 | 9 / 0.259 | 7 / 0.198 | -23.6% |
+| Memory keyword reports | 70 / 3.033 | 30 / 0.865 | 32 / 0.906 | +4.8% |
 
-| Extra body-text check | Before: count | Before: per million | After: count | After: per million | Rate change |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Crash or fatal signal | 571 | 24.74 | 306 | 4.34 | −82.5% |
-| Memory leak or memory not released | 29 | 1.26 | 17 | 0.24 | −80.8% |
+Body mentions can be unrelated or negated. Old and new excerpt formats differ. This check does not validate the classes. [Rules, dates, and calculations](part3/SAFETY-2026-10-30.md).
 
-The rates still decrease. This does not validate the matching rules. Body text can mention a problem that did not occur. Old and new excerpts also have different text formats.
+## Download context
 
-The crash rule has known false matches, such as text about crash-report metadata. Reports may also describe the same defect. [Read the definitions and calculations](part3/SAFETY-2026-10-30.md).
+![Report-type stacks and npm requests on a growth scale, with the canary period shaded between merge and Rust stable.](assets/readme/01-growth-and-reports.png)
 
-## Do reports grow faster than downloads?
+The optional growth view gives each series its own before-merge daily mean of 100. This reference is a date-period average. It does not describe the number of Rust users. The interactive daily chart defaults to raw counts. Select a stated version or a version family for detail.
 
-![Report growth divided by npm growth. The reference line is 1. Values below 1 mean fewer reports per npm request than before the merge.](assets/readme/03-relative-growth.png)
+| Complete-day period | Reports/day | npm requests/day |
+| --- | ---: | ---: |
+| Before merge | 9.79 | 127,502 |
+| Canary period | 10.15 | 357,721 |
+| After Rust stable | 19.39 | 511,692 |
 
-The chart calculates:
+**June to October is a different comparison.** June averaged **348,054 npm requests/day**. The mean for 1–28 October was **533,390/day**, about **1.53×**. Comparing all days before merge with all days after merge gives a different factor. Neither factor measures user growth.
+
+npm includes repeated downloads and automated jobs. Direct installers, embedded runtimes, Homebrew, and Docker can be absent. We have no historical daily installation counts by Bun version or language family. We therefore do not show “bugs per Zig/Rust installation”. [Download sources and limits](part3/POPULARITY-SOURCES.md).
+
+## Relative report rate
+
+![Rolling report/request rate relative to the before-merge reference, with separate canary-period and after-stable summaries.](assets/readme/03-relative-growth.png)
 
 ```text
-Q = report growth index / npm growth index
-  = current report/request rate / before-merge period rate
+Q = current report/request rate / before-merge period rate
+  = report growth index / npm growth index
 ```
 
-- **Q = 1:** the report/request rate equals the before-merge reference.
-- **Q < 1:** the rate is lower than that reference.
-- **Q > 1:** the rate is higher than that reference.
-- **Q is rising:** reports grow faster than npm requests over that interval. Q can rise while it remains below 1.
+At **Q = 1**, the rate equals the before-merge reference. Below 1, it is lower. A rising Q means reports grow faster than npm requests over that interval. It can rise while still below 1.
 
-The full-period after/before ratio is **0.435×**. Each moving-window value divides the sum of reports by the sum of requests. It does not average the daily ratios. The full-period value is not the average of the moving-window curve.
+For all reports, the canary-period rate is **0.370×** the reference. The after-stable rate is **0.494×**. The latter is **33.5% higher than the canary-period rate**. These date-period ratios do not measure a language effect. Rolling windows can cross event dates; period summaries exclude both event days.
 
-[Open the chart](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-growth-ratio) to select all reports, crashes or memory problems. You can use windows of 1, 7 or 28 days.
+## Components and daily version detail
 
-## Report types
+![Component-title shares in before-merge, canary, and after-stable report groups. The same matching rules apply to all three.](assets/readme/04-component-mix.png)
 
-![Before-and-after shares of component names in issue titles. HTTP and test mentions increase. Package-installation mentions decrease. Many titles have no component match.](assets/readme/04-component-mix.png)
+Titles can name several components. These groups overlap. The same rules apply in all periods, but title detail and labels can change. The [36-report review](part3/CLASSIFICATION-AUDIT.md) found wrong and missed matches. It does not measure overall classifier accuracy.
 
-| Component named in the title | Before: 1,802 reports | After: 2,389 reports |
-| --- | ---: | ---: |
-| HTTP and networks | 162 (8.99%) | 353 (14.78%) |
-| Tests | 37 (2.05%) | 176 (7.37%) |
-| Package installation | 152 (8.44%) | 135 (5.65%) |
-| Build and code conversion | 112 (6.22%) | 157 (6.57%) |
-| SQL and storage | 67 (3.72%) | 105 (4.40%) |
-| **No component match** | **1,110 (61.60%)** | **1,154 (48.30%)** |
+![Daily problem-type stacks for Zig-line Bun 1.3.14 and Rust-line Bun 1.4.0 and 1.4.4. Reports can arrive after a later release.](assets/readme/05-daily-versions.png)
 
-These counts describe words in titles. They do not confirm which component failed. A report can name several components. Titles also became more specific after the merge.
+The daily stack puts each report in one group: one matched type, several types, or no match. The map's problem-type filter uses direct title matches, so a crash can count even when its title matches other types too. The map's leak filter uses the separate explicit-leak rule.
 
-The comparison table permits several matches per report. The daily stacks use one group per report. One match keeps its type. Several matches use the **several types** group. No match uses the **no type match** group.
+## Releases and follow-up
 
-We checked [36 reports with at least one match](part3/CLASSIFICATION-AUDIT.md). We found incorrect matches and missing matches. This sample does not measure the accuracy of all classifications.
+![Weekly possible bug reports and observed closure states, with stable releases and the canary interval shown separately.](assets/readme/06-release-and-followup.png)
 
-## Reported versions by day
+Bun 1.4.0 reached stable on **20 August**, 98 calendar days after merge. Patches followed on **4 September (1.4.1)**, **5 September (1.4.2)**, **10 October (1.4.3)**, and **22 October (1.4.4)**. [Release-source checks](part2/SOURCES-2026-10-30.md).
 
-![Daily report-type stacks for Bun 1.3.14, 1.4.0 and 1.4.4. The three panels use the same dates and count scale.](assets/readme/05-daily-versions.png)
-
-These panels show **three selected versions**, not all Bun reports. [Use the HTML chart](https://bun-rust-analysis-ilyagulya.netlify.app/#p3-version-daily) to select other versions or all reports.
-
-| Version information in 4,191 reports | Count |
-| --- | ---: |
-| One usable version | 2,918 |
-| No usable version | 857 |
-| Several versions | 416 |
-
-The parser first reads the Bun version field. It then checks explicit Bun-version text if needed. It checks the base version against saved releases. This helps reject editor, extension and operating-system versions entered in the wrong field.
-
-The parser keeps `canary` and `debug` suffixes. It groups build hashes. Unknown and unreleased base versions remain unknown.
-
-A plain **`1.4.0` does not identify the release channel**. A version in a report does not prove which build caused the problem. Later edits can also change the version text. We have no historical npm denominator for each version. [Read the version evidence](part3/data/versions.jsonl).
-
-## Releases and fixes
-
-![Weekly reports split into marked-as-fixed and other outcomes. The release strip shows the first Rust stable after 98 days and four later patches.](assets/readme/06-release-and-followup.png)
-
-Bun released **1.4.0 on 20 August**. This was 98 calendar days after the rewrite merge. Four stable patches followed:
-
-| Version | Release date in 2026 |
-| --- | --- |
-| 1.4.1 | 4 September |
-| 1.4.2 | 5 September |
-| 1.4.3 | 10 October |
-| 1.4.4 | 22 October |
-
-The August report said that no Rust build had reached stable. That statement applies to its original date. [Read the release-source check](part2/SOURCES-2026-10-30.md).
-
-Recent reports have less time to get a fix. The next table includes only reports that are at least 30 days old:
-
-| Report group | Reports old enough | Marked as fixed within 30 days | Share |
+| Report-date group | Reports at least 30 days old | Marked as fixed within 30 days | Share |
 | --- | ---: | ---: | ---: |
-| Before merge | 1,802 | 478 | **26.5%** |
-| Merge to first Rust stable | 1,004 | 297 | **29.6%** |
-| After stable 1.4.0 | 796 | 192 | **24.1%** |
-| All after-merge reports | 1,800 | 489 | **27.2%** |
+| Before merge | 1,802 | 478 | 26.5% |
+| Canary period, all builds | 1,004 | 297 | 29.6% |
+| After Rust stable, all builds | 796 | 192 | 24.1% |
 
-The overall after-merge share is close to the before-merge share. The after-stable share is lower.
-
-“Marked as fixed” means GitHub records the issue as `closed` with reason `completed`. It does not prove a fix shipped. A reopened report counts as unresolved. We cannot recover every earlier close and reopen event.
-
-Before-merge states remain fixed at the August snapshot. After-merge states were updated in October. [Read the fixes analysis](part2/UPDATE-2026-10-30.md).
+“Marked as fixed” means GitHub currently records `closed` with reason `completed`. It does not prove a fix shipped. Before-merge states were observed in August; later states were observed in October. Reopen history is incomplete. These shares do not isolate a language effect. [Follow-up details](part2/UPDATE-2026-10-30.md).
 
 ## Limits
 
-The data shows that stable releases resumed. It also shows lower report-per-request rates. It does not separate a Rust effect from other changes.
+Report dates, stated version lines, and active runtime use are different measures. This study can show when reports arrived and which versions their text names. It cannot establish that Rust caused fewer or more defects.
 
-- **Downloads do not count users.** npm covers one channel. It includes automated and repeat requests.
-- **Opening dates do not identify the runtime.** After-merge reports can concern older Zig builds.
-- **Reports do not count unique defects.** Several reports can describe one defect. The label filter can admit feature requests.
-- **Text rules can be wrong.** Titles differ in detail. Memory-safety causes require case review.
-- **The snapshots have different dates.** Before-merge text, labels and states come from August. After-merge observations come from October.
-- **The periods differ.** Daily and weekly comparisons exclude different boundary dates. Do not mix their rates.
+The periods contain different releases, features, users, and follow-up times. Older releases have more time to receive reports. Text and labels can change after filing. Reports can be duplicated, misclassified, or missing. Downloads do not count users. Unknown versions remain visible rather than being assigned by date.
 
-The [original August report](archive/README-2026-08-10.md) also discusses Rust complexity and AI-assisted development. Its source quotations remain unchanged.
+The [original August source text](archive/README-2026-08-10.md) and [original HTML](archive/report-2026-08-10.html) remain historical evidence. Their claims apply to that date.
 
-## Rebuild the report
+## Rebuild and verify
 
-Use Python 3, Node.js and pnpm. After you install the dependencies, these commands use saved data:
+Use Python 3, Node.js, and pnpm:
 
 ```bash
 pnpm install --frozen-lockfile
@@ -200,7 +154,7 @@ pnpm run verify
 pnpm run site
 ```
 
-Use Python 3.12 or later to render the README figures:
+Use Python 3.12 or later for README figures:
 
 ```bash
 python3 -m venv .venv-readme
@@ -209,44 +163,32 @@ python3 -m venv .venv-readme
 ```
 
 <details>
-<summary>Source files and publishing commands</summary>
+<summary>Source files and publishing</summary>
 
-| Path | Purpose |
-| --- | --- |
-| [`index.html`](index.html) | Current HTML report |
-| [`assets/readme/`](assets/readme/) | Six figures and their data manifest |
-| [`scripts/render-readme-charts.py`](scripts/render-readme-charts.py) | Figure renderer |
-| [`archive/README-2026-08-10.md`](archive/README-2026-08-10.md) | Original source text |
-| [`archive/report-2026-08-10.html`](archive/report-2026-08-10.html) | Original HTML report |
-| [`data/`](data/) and [`scripts/`](scripts/) | Original data and checks |
-| [`part2/`](part2/README.md) | Releases and issue states |
-| [`part3/README.md`](part3/README.md) | Type rules, versions and download comparisons |
-| [`part3/SAFETY-2026-10-30.md`](part3/SAFETY-2026-10-30.md) | Crash and memory calculations |
-| [`part3/POPULARITY-SOURCES.md`](part3/POPULARITY-SOURCES.md) | npm and GitHub sources |
-| [`part3/data/`](part3/data/) | Saved inputs and per-issue evidence |
-| [`WRITING.md`](WRITING.md) | Writing rules and term definitions |
+- [Current HTML](index.html), [seven figures](assets/readme/), and their [manifest](assets/readme/manifest.json).
+- [Type and family rules](part3/README.md), [crash/leak calculations](part3/SAFETY-2026-10-30.md), and [npm/GitHub sources](part3/POPULARITY-SOURCES.md).
+- [Saved inputs and audit data](part3/data/), [original data](data/), and [writing rules](WRITING.md).
+- [Infographic design and reading guide](part3/INFOGRAPHIC.md).
 
-`pnpm run refresh` collects new issue, npm and star data. It can change old counts when reports change. Update the README and figures after a refresh. Release-asset counters have separate observation dates.
+`pnpm run refresh` collects new reports, npm counts, and star history. It can change old counts when reports change. Review the README and figures after a refresh. GitHub asset counters have separate observation dates.
 
-Run the original checks from their script directory:
+Run the original checks from `scripts/`:
 
 ```bash
 (cd scripts && python3 09-verify.py)
 ```
 
-A GitHub push does not publish a new Netlify site version. After you rebuild and verify the report, run:
+A GitHub push does not publish Netlify. After review and verification:
 
 ```bash
 pnpm run site
 pnpm --package=netlify-cli@24.0.1 dlx netlify deploy --site bun-rust-analysis-ilyagulya --prod --no-build --dir=dist
 ```
 
-Local settings, output folders and scratch work are ignored. The web package contains the current report, the original report and the license.
+The web package contains the current report, original report, and license. Local settings and scratch work are ignored.
 
 </details>
 
 ## Credits and license
 
-**Aleksandr Smyshliaev** wrote the original study. This fork adds the October data, type rules, download comparisons and charts.
-
-The code and report use the [MIT license](LICENSE). Issue authors retain copyright in their text. [CITATION.cff](CITATION.cff) gives the fork citation. The current web report is at **[bun-rust-analysis-ilyagulya.netlify.app](https://bun-rust-analysis-ilyagulya.netlify.app/)**.
+**Aleksandr Smyshliaev** wrote the original study. This fork adds the October data, text rules, version-family map, and three-period comparisons. The code and report use the [MIT license](LICENSE). Issue authors retain copyright in their text. [CITATION.cff](CITATION.cff) provides citation details.

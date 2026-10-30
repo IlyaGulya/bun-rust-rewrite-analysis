@@ -39,3 +39,9 @@ data.days.forEach((d,i)=>{
  assert(Math.abs(q-dailyRate/ratios.periods.pre.rate)<1e-9);
 });
 console.log('Relative-growth ratio equals report-index/download-index and normalized rate/baseline rate; undefined denominators remain gaps.');
+
+const phases=build({days:['2026-05-11','2026-05-12','2026-05-13','2026-05-14','2026-05-15','2026-05-16','2026-05-17','2026-05-18'],counts:Object.fromEntries(Array.from({length:8},(_,i)=>['2026-05-'+(11+i),{a:1}])),downloads:Object.fromEntries(Array.from({length:8},(_,i)=>['2026-05-'+(11+i),100])),types:['a'],firstPartial:'2026-05-11',lastPartial:'2026-05-18',merge:'2026-05-13',stable:'2026-05-16'});
+assert.deepEqual(['pre','canary','stable'].map(k=>phases.periods[k].days),[1,2,1]);
+const safety=JSON.parse(fs.readFileSync(path.join(__dirname,'data/safety.json')));
+for(const k of safety.phase_order){const x=ratios.periods[k],y=safety.stats.title.all[k];assert.equal(x.days,y.days);assert.equal(x.reports,y.n);assert.equal(x.downloads,y.downloads);assert(Math.abs(x.rate-y.rate)<1e-9);}
+console.log('Three disjoint phase summaries exclude both event days and match the independent Python export.');

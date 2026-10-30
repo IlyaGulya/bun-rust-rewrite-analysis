@@ -15,7 +15,9 @@ Use Simplified Technical English as the writing style for the current report.
 | --- | --- |
 | Report | A GitHub issue that passes the possible-bug filter. It is not a confirmed defect. |
 | npm request | A download request for the npm package `bun`. It is not a user count. |
-| Report group | Reports opened within a stated period. |
+| Report group | Reports opened within a stated period. This does not assign a language. |
+| Canary period | The dates between merge and Rust stable. Stable remained on Zig. |
+| Version family | A Zig-line, Rust-line, or unclear inference from stated version text. It is not a binary check. |
 | Title match | A word pattern found in the issue title. It is not a root-cause check. |
 | Period rate | Total reports divided by total npm requests for the same complete days. |
 | Before-merge reference | The daily mean or period rate before 14 May 2026, as labelled. |

@@ -24,13 +24,17 @@ dl={r['day']:r['downloads'] for r in p['npm']['daily']}
 valid={d for d in dl if s['first_partial']<d<s['last_partial'] and d<=s['download_through']}
 for v in ['title','expanded']:
     for key,stats in s['stats'][v].items():
-        for phase,test in [('pre',lambda d:d<s['merge']),('post',lambda d:d>s['merge']),('stable',lambda d:d>s['stable'])]:
+        for phase,test in [('pre',lambda d:d<s['merge']),('canary',lambda d:s['merge']<d<s['stable']),('stable',lambda d:d>s['stable'])]:
             days={d for d in valid if test(d)};count=sum(r['flags'][v][key] for r in rows if r['day'] in days);den=sum(dl[d] for d in days)
             x=stats[phase];assert (x['n'],x['downloads'],x['days'])==(count,den,len(days))
             assert abs(x['rate']-count*1e6/den)<1e-9
-        a,b=stats['pre']['rate'],stats['post']['rate']
-        assert stats['change_pct']==((b/a-1)*100 if a else None)
-assert len(s['leak_examples'])==s['stats']['title']['leak']['pre']['n']+s['stats']['title']['leak']['post']['n']
+assert len(s['leak_examples'])==sum(s['stats']['title']['leak'][k]['n'] for k in s['phase_order'])
+assert [s['stats']['title']['all'][k]['days'] for k in s['phase_order']]==[181,97,69]
+for variant in s['stats'].values():
+    for metrics in variant.values():
+        expected=(metrics['stable']['rate']/metrics['canary']['rate']-1)*100 if metrics['canary']['rate'] else None
+        assert metrics['stable_vs_canary_pct']==expected
+assert s['stats']['title']['all']['stable']['rate']>s['stats']['title']['all']['canary']['rate']
 page=(D.parent.parent/'index.html').read_text()
 assert 'id="p3-safety-rate-chart"' in page and 'id="p3-growth-ratio-chart"' in page and '__SAFETY_DATA__' not in page
 print('Safety analysis verified: explicit memory retention versus OOM/disk/fd signals, audit counts, complete-day denominators, rate changes and both plots.')

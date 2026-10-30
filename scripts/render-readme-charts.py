@@ -6,6 +6,7 @@ rolling/indexed series is delegated to the same JS module used in the HTML.
 """
 import datetime as dt
 import json
+import re
 import subprocess
 from pathlib import Path
 import matplotlib
@@ -36,6 +37,9 @@ SHORT={'crash':'Crash or fatal signal','panic':'Panic or failed check','hang':'H
 plt.rcParams.update({'figure.facecolor':PAPER,'axes.facecolor':PAPER,'savefig.facecolor':PAPER,'text.color':INK,'axes.labelcolor':MUTED,'xtick.color':MUTED,'ytick.color':MUTED,'font.family':'DejaVu Sans','font.size':10.5,'axes.spines.top':False,'axes.spines.right':False,'axes.spines.left':False,'axes.spines.bottom':False,'axes.axisbelow':True,'axes.grid':True,'grid.color':GRID,'grid.alpha':.75,'grid.linewidth':.65,'legend.frameon':False,'legend.labelcolor':INK,'svg.fonttype':'none'})
 parse=lambda d:dt.datetime.fromisoformat(d.replace('Z','+00:00')).replace(tzinfo=None)
 dates=[parse(d) for d in v['days']]
+PHASES=['pre','canary','stable']
+PHASE_NAMES=['Before merge','Canary period','After Rust stable']
+PHASE_COLORS=[PRE,MUTED,POST]
 def clean(ax):
     ax.grid(axis='x',visible=False);ax.tick_params(length=0,pad=8)
 def timeline(ax):
@@ -43,6 +47,7 @@ def timeline(ax):
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
 def events(ax,labels=True):
+    ax.axvspan(parse(safe['merge']),parse(safe['stable']),color=MUTED,alpha=.08,zorder=0)
     for date,label in [(safe['merge'],'Rewrite merged · 14 May'),(safe['stable'],'1.4.0 stable · 20 Aug')]:
         x=parse(date);ax.axvline(x,color=CYAN,alpha=.6,ls='--',lw=1)
         if labels:ax.text(x+dt.timedelta(days=2),.96,label,transform=ax.get_xaxis_transform(),rotation=90,va='top',ha='left',fontsize=9,color=INK,bbox={'facecolor':PAPER,'edgecolor':'none','pad':1})
@@ -56,7 +61,7 @@ def arr(xs):return np.array([np.nan if x is None else x for x in xs],dtype=float
 
 # 1. Exclusive signal stacks and npm growth use their own common pre-period bases.
 fig,ax=plt.subplots(figsize=(12,6.6));fig.subplots_adjust(left=.085,right=.96,bottom=.18,top=.73)
-header(fig,'Reports grew more slowly than npm requests','Daily data through 30 October 2026 · previous 7 days · before-merge daily mean = 100')
+header(fig,'Reports and npm requests across three release periods','Daily data through 30 October 2026 · previous 7 days · before-merge daily mean = 100')
 keys=['unknown','multiple','crash','panic','hang','memory','performance','correctness','failure'];bottom=np.zeros(len(dates));handles=[]
 for key in keys:
     y=arr(series['indexed']['reportSeries'][key]);ax.bar(dates,np.nan_to_num(y),bottom=bottom,width=.96,color=COLORS[key],linewidth=0)
@@ -64,18 +69,17 @@ for key in keys:
 line=ax.plot(dates,arr(series['indexed']['downloadSeries']),color=INK,lw=2.4,label='npm request growth')[0]
 fig.legend([line]+handles,[line.get_label()]+[x.get_label() for x in handles],loc='upper left',bbox_to_anchor=(.06,.858),ncol=5,fontsize=9,columnspacing=1.3,handlelength=1.3)
 ax.axhline(100,color=MUTED,lw=.8,ls=':');ax.set_ylabel('Growth index · before merge = 100');timeline(ax);events(ax)
-save(fig,'01-growth-and-reports','Each report enters one stack group. npm data ends 28 Oct; rates and growth indices stop there.\nReports cover all installation methods. npm includes automated builds and repeat downloads; it does not count users.')
+save(fig,'01-growth-and-reports','Each report enters one stack group. npm data ends 28 Oct; rates and growth indices stop there.\nShaded dates: Zig stable + Rust canary. npm requests cover all versions and do not count users or a Rust effect.')
 
-# 2. Separate scales keep the rare memory-retention signal visible.
-fig,axs=plt.subplots(1,2,figsize=(12,4.7));fig.subplots_adjust(left=.10,right=.96,bottom=.25,top=.70,wspace=.32)
-header(fig,'Crash and memory leak report rates fell','Complete days with both sources · reports per million npm requests · title matches do not confirm defects')
+# 2. Three disjoint date groups; neither group is a language cohort.
+fig,axs=plt.subplots(1,2,figsize=(12,5.5));fig.subplots_adjust(left=.15,right=.96,bottom=.25,top=.70,wspace=.50)
+header(fig,'Crash and memory leak reports in three date periods','Reports per million all-version npm requests · date periods do not identify language use')
 for ax,key,title in zip(axs,['crash','leak'],['Crash or fatal signal','Memory leak or retained memory']):
-    st=safe['stats']['title'][key];values=[st['pre']['rate'],st['post']['rate']]
-    ax.barh([1,0],values,height=.50,color=[PRE,POST]);ax.set_yticks([1,0],['Before','After']);ax.set_xlim(0,max(values)*1.50);ax.set_ylim(-.6,1.6)
+    st=safe['stats']['title'][key];values=[st[k]['rate'] for k in PHASES]
+    ax.barh([2,1,0],values,height=.50,color=PHASE_COLORS);ax.set_yticks([2,1,0],PHASE_NAMES);ax.set_xlim(0,max(values)*1.55);ax.set_ylim(-.6,2.6)
     ax.set_title(title,loc='left',fontsize=12,pad=15,fontweight='bold');ax.set_xlabel('Reports / million npm requests');ax.grid(axis='y',visible=False);ax.grid(axis='x',visible=True);ax.tick_params(length=0)
-    for y,val,phase in zip([1,0],values,['pre','post']):ax.text(val+max(values)*.035,y,f"{val:.2f}  ·  n={st[phase]['n']}",va='center',fontsize=10,color=INK)
-    ax.text(.99,.92,f"{st['change_pct']:.1f}%",transform=ax.transAxes,ha='right',fontsize=14,color=POST,fontweight='bold')
-save(fig,'02-crashes-and-leaks','Before: 14 Nov–13 May (23.08m requests). After: 15 May–28 Oct (70.54m). Excludes merge day and partial days.\nLeak count: 15 → 13 reports. Most of the rate decrease comes from more npm requests. This does not prove a Rust effect.')
+    for y,val,phase in zip([2,1,0],values,PHASES):ax.text(val+max(values)*.035,y,f"{val:.3f} · n={st[phase]['n']}",va='center',fontsize=10,color=INK)
+save(fig,'02-crashes-and-leaks','Periods: 14 Nov–13 May (181 days); 15 May–19 Aug (97); 21 Aug–28 Oct (69). Both event days are excluded.\nStable stayed on Zig during the canary period. Counts include all versions. Leaks: 15 / 7 / 5 reports. No causal effect is estimated.')
 
 # 3. A ratio against a fixed pooled pre-period reference (not percent-change ratios).
 fig,ax=plt.subplots(figsize=(12,5.7));fig.subplots_adjust(left=.085,right=.96,bottom=.20,top=.76)
@@ -84,20 +88,19 @@ ax.plot(dates,arr(series['ratio7']),color='#798896',alpha=.60,lw=1,label='Previo
 ax.plot(dates,arr(series['ratio28']),color=POST,lw=2.6,label='Previous 28 days')
 ax.axhline(1,color=MUTED,ls='--',lw=1,label='Before-merge reference = 1');ax.set_ylim(bottom=0);ax.set_ylabel('Relative reports / npm requests');timeline(ax);events(ax)
 ax.legend(loc='upper center',bbox_to_anchor=(.5,1.15),ncol=3,fontsize=10)
-ax.text(.98,.90,'Period rates: after / before = 0.435×',ha='right',va='top',transform=ax.transAxes,color=POST,fontsize=12,fontweight='bold',bbox={'facecolor':PAPER,'edgecolor':'none','pad':4})
-save(fig,'03-relative-growth','Below 1: fewer reports per npm request than before the merge. A rising line means the rate is increasing.\nnpm requests do not count active users. Time windows across the merge include days from both periods.')
+ax.text(.98,.90,f"Canary period: {safe['stats']['title']['all']['canary']['rate']/safe['stats']['title']['all']['pre']['rate']:.3f}× · After stable: {safe['stats']['title']['all']['stable']['rate']/safe['stats']['title']['all']['pre']['rate']:.3f}×",ha='right',va='top',transform=ax.transAxes,color=POST,fontsize=12,fontweight='bold',bbox={'facecolor':PAPER,'edgecolor':'none','pad':4})
+save(fig,'03-relative-growth','Below 1: fewer reports per npm request than before the merge. A rising line means the rate is increasing.\nnpm requests do not count active users. Shading marks the canary period. Windows can cross event dates.')
 
-# 4. Title-based components, independent of the exclusive stacks above.
-fig,ax=plt.subplots(figsize=(12,7.0));fig.subplots_adjust(left=.25,right=.92,bottom=.18,top=.77)
-header(fig,'Which components do report titles name?','Component mentions in titles · reports can match several groups · 1,802 before / 2,389 after')
-a=c['periods']['pre']['components'];b=c['periods']['post']['components'];ks=[k for k in a if k!='unclassified'];y=np.arange(len(ks))
-ax.barh(y-.18,[a[k]['share'] for k in ks],height=.32,color=PRE,label='Before merge')
-ax.barh(y+.18,[b[k]['share'] for k in ks],height=.32,color=POST,label='After merge')
-ax.set_yticks(y,[a[k]['label'] for k in ks]);ax.invert_yaxis();ax.set_xlabel('Share of possible bug reports (%)');ax.set_xlim(0,18);ax.grid(axis='y',visible=False);ax.grid(axis='x',visible=True);ax.tick_params(length=0)
-for i,k in enumerate(ks):
-    for d,off,col in [(a,-.18,PRE),(b,.18,POST)]:ax.text(d[k]['share']+.14,i+off,f"{d[k]['share']:.2f}%",va='center',fontsize=9,color=col)
-fig.legend(*ax.get_legend_handles_labels(),loc='upper left',bbox_to_anchor=(.06,.85),ncol=2)
-save(fig,'04-component-mix','No component title match: 61.6% before → 48.3% after. Groups overlap. Mentions do not establish the cause.\nTitle detail and labels differ between periods. This comparison uses different dates from the npm rate tables.')
+# 4. Three arrival-date groups retain overlapping component matches.
+fig,ax=plt.subplots(figsize=(12,7.4));fig.subplots_adjust(left=.25,right=.94,bottom=.18,top=.77)
+header(fig,'Which components do report titles name in each period?','Overlapping title matches · 1,802 before merge / 1,004 in canary period / 1,385 after stable')
+ks=[k for k in c['periods']['pre']['components'] if k!='unclassified'];y=np.arange(len(ks));maxshare=0
+for original,off,col,label in zip(['pre','pre_stable','stable'],[-.24,0,.24],PHASE_COLORS,PHASE_NAMES):
+    data=c['periods'][original]['components'];vals=[data[k]['share'] for k in ks];maxshare=max(maxshare,max(vals))
+    ax.barh(y+off,vals,height=.22,color=col,label=label)
+ax.set_yticks(y,[c['periods']['pre']['components'][k]['label'] for k in ks]);ax.invert_yaxis();ax.set_xlabel('Share of possible bug reports (%)');ax.set_xlim(0,maxshare*1.15);ax.grid(axis='y',visible=False);ax.grid(axis='x',visible=True);ax.tick_params(length=0)
+fig.legend(*ax.get_legend_handles_labels(),loc='upper left',bbox_to_anchor=(.06,.85),ncol=3)
+save(fig,'04-component-mix','These report-date groups use exact event timestamps; the npm rate tables use complete days and exclude both event days.\nA report can match several components. Title detail and labels differ. This does not identify a defect cause or language effect.')
 
 # 5. Raw daily, exclusive type stacks for three explicitly named representative versions.
 selected=['1.3.14','1.4.0','1.4.4'];buckets={version:{k:np.zeros(len(dates)) for k in keys} for version in selected};indices={d:i for i,d in enumerate(v['days'])}
@@ -106,14 +109,14 @@ for row in v['daily']:
         for k,n in row['counts'].items():buckets[row['version']][k][indices[row['day']]]+=n
 active=[i for i in range(len(dates)) if any(sum(buckets[ver][k][i] for k in keys)>0 for ver in selected)];left=dates[max(0,min(active)-7)]
 fig,axs=plt.subplots(3,1,figsize=(12,8.8),sharex=True,sharey=True);fig.subplots_adjust(left=.085,right=.96,bottom=.16,top=.75,hspace=.45)
-header(fig,'Which problem types were reported for each version?','One column per UTC report-opening day · selected versions · each report enters one stack group')
+header(fig,'Which problem types were reported for each version?','One column per UTC report-opening day · Zig line 1.3.14; Rust lines 1.4.0 and 1.4.4')
 fig.legend([Patch(color=COLORS[k],label=SHORT[k]) for k in keys],[SHORT[k] for k in keys],loc='upper left',bbox_to_anchor=(.06,.865),ncol=5,fontsize=9,handlelength=1.3)
 for i,(ax,version) in enumerate(zip(axs,selected)):
     bottom=np.zeros(len(dates))
     for k in keys:ax.bar(dates,buckets[version][k],bottom=bottom,width=.95,color=COLORS[k],linewidth=0);bottom+=buckets[version][k]
     ax.set_title(f"Bun {version}  ·  {v['counts'][version]} reports",loc='left',fontsize=12,fontweight='bold',pad=7)
     ax.set_ylabel('Reports');timeline(ax);ax.set_xlim(left,dates[-1]+dt.timedelta(days=1));events(ax,labels=i==0)
-save(fig,'05-daily-versions','These are three selected versions. The website includes other versions, unknown versions, and reports with several versions.\nA stated version does not confirm an affected runtime. Plain 1.4.0 does not identify the channel. The final day is partial.')
+save(fig,'05-daily-versions','These are three selected versions. The website includes other versions, unknown versions, and reports with several versions.\nFamily follows the version line, not the report date. Shaded dates had Zig stable + Rust canary. The final day is partial.')
 
 # 6. Whole-window issue follow-up and a stable-release strip, in the original chart idiom.
 fig,(ax,rel)=plt.subplots(2,1,figsize=(12,6.5),sharex=True,gridspec_kw={'height_ratios':[4,1]});fig.subplots_adjust(left=.085,right=.96,bottom=.19,top=.77,hspace=.32)
@@ -134,6 +137,37 @@ rel.text(parse('2026-06-30'),.58,'98 days: merge → first Rust stable',ha='cent
 rel.set_ylabel('Stable\nreleases',rotation=0,labelpad=34,va='center');timeline(rel)
 save(fig,'06-release-and-followup','Before-merge states were observed in August; after-merge states in October. The first and last weeks are partial (grey).\nUse the 30-day table to compare equal follow-up times. The release strip labels selected versions.')
 
-manifest={'snapshot':c['generated'],'npm_through':safe['download_through'],'files':sorted(p.name for p in OUT.glob('*.png')),'calculation_source':'part3/combined-series.js','stats':safe['stats']['title']}
+# 7. Weekly version map with an aligned npm context strip.
+from matplotlib.colors import ListedColormap
+m=load(D/'family-matrix.json');rows=m['rows'];top=sorted([r for r in rows if r['family']!='unclear'],key=lambda r:-r['total'])[:12];picked={r['key'] for r in top};shown=top.copy()
+for family in ['zig','rust','unclear']:
+    rest=[r for r in rows if r['family']==family and r['key'] not in picked]
+    shown += [r for r in rest if r['version'] in ['unknown','multiple']]
+    rest=[r for r in rest if r['version'] not in ['unknown','multiple']]
+    if rest:shown.append({'family':family,'version':'other','weekly':[{'all':sum(r['weekly'][i].get('all',0) for r in rest)} for i in range(len(m['weeks']))]})
+def order(r):return (['zig','rust','unclear'].index(r['family']),[int(x) if x.isdigit() else x for x in re.split(r'(\d+)',r['version'])])
+shown.sort(key=order)
+values=np.array([[w.get('all',0) for w in r['weekly']] for r in shown]);codes=np.digitize(values,[.5,1.5,4.5,9.5,24.5,49.5]);palette=['#19212a','#263e58','#345c80','#4b80aa','#69a4ce','#98cbe8','#d8effb']
+fig,(ax,context)=plt.subplots(2,1,figsize=(14,10.5),sharex=True,gridspec_kw={'height_ratios':[max(4,len(shown)*.34),1.4]});fig.subplots_adjust(left=.235,right=.97,bottom=.13,top=.81,hspace=.25)
+header(fig,'Which versions received reports before, during, and after the rollout?','Rows group inferred version families. Columns are report-opening weeks. Colour counts reports; it does not measure risk.')
+fig.legend([Patch(color=x,label=l) for x,l in zip(palette,['0','1','2–4','5–9','10–24','25–49','50+'])],['0','1','2–4','5–9','10–24','25–49','50+'],loc='upper left',bbox_to_anchor=(.23,.88),ncol=7,title='Reports per week',fontsize=10)
+ax.imshow(codes,aspect='auto',interpolation='nearest',cmap=ListedColormap(palette),vmin=0,vmax=6)
+short={'unknown':'no version','multiple':'several versions','other':'other versions'}
+ax.set_yticks(range(len(shown)),[r['family'].title()+' · '+short.get(r['version'],r['version']) for r in shown]);ax.grid(False);ax.tick_params(length=0,pad=8)
+for i in range(len(shown)):
+    for j in range(len(m['weeks'])):
+        if values[i,j]>=10:ax.text(j,i,str(values[i,j]),ha='center',va='center',fontsize=7,color=PAPER if codes[i,j]>=4 else INK)
+pm=load(D/'popularity.json');dl={r['day']:r['downloads'] for r in pm['npm']['daily']};weekly=[]
+for start in m['weeks']:
+    days=[(parse(start)+dt.timedelta(days=i)).date().isoformat() for i in range(7)];weekly.append(sum(dl[d] for d in days)/7 if all(d in dl for d in days) else np.nan)
+context.plot(range(len(weekly)),weekly,color=INK,lw=2);context.set_ylabel('All-version npm\nrequests / day');clean(context);context.ticklabel_format(axis='y',style='sci',scilimits=(3,3));context.set_ylim(bottom=0)
+for date,label in [(m['merge'],'Merge · 14 May'),(m['stable'],'Rust stable · 20 Aug')]:
+    x=(parse(date[:10])-parse(m['weeks'][0])).days/7-.5
+    ax.axvline(x,color=CYAN,lw=1.2,ls='--');context.axvline(x,color=CYAN,lw=1.2,ls='--');ax.text(x+.2,-.9,label,color=CYAN,fontsize=10,ha='left',va='bottom')
+for axis in [ax,context]:axis.set_xlim(-.5,len(m['weeks'])-.5)
+context.set_xticks(range(0,len(m['weeks']),4),[parse(d).strftime('%d %b') for d in m['weeks'][::4]])
+save(fig,'07-version-family-map','Zig stable continued between merge and 20 Aug; Rust was canary. Families are inferred from stated versions, not verified binaries.\nUnknown, multiple, conflicting-date and old development versions remain unclear. First/last report weeks are partial.\nThe npm line uses complete weeks and all versions. There is no historical per-version installation denominator or causal Rust estimate.')
+
+manifest={'snapshot':c['generated'],'npm_through':safe['download_through'],'files':sorted(p.name for p in OUT.glob('*.png')),'calculation_source':'part3/combined-series.js','matrix_source':'part3/data/family-matrix.json','stats':safe['stats']['title']}
 (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 print('Rendered',len(manifest['files']),'README figures.')

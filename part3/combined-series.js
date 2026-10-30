@@ -29,7 +29,7 @@ const CombinedSeries = (() => {
       downloadSeries.push(mode==='index'?(paired&&baselineDownloads>0?ds/windowDays/baselineDownloads*100:null):(hasDownloads?ds/windowDays:null));
     });
     const periods={};
-    for(const [key,test] of Object.entries({pre:d=>d<merge,post:d=>d>merge,stable:d=>d>stable})){
+    for(const [key,test] of Object.entries({pre:d=>d<merge,post:d=>d>merge,canary:d=>d>merge&&d<stable,stable:d=>d>stable})){
       const dates=days.filter(d=>eligible(d)&&test(d));
       const reports=dates.reduce((s,d)=>s+total(d),0),dl=dates.reduce((s,d)=>s+downloads[d],0);
       periods[key]={days:dates.length,reports,downloads:dl,reportsPerDay:dates.length?reports/dates.length:null,downloadsPerDay:dates.length?dl/dates.length:null,rate:dl>0?reports/dl*1e6:null};

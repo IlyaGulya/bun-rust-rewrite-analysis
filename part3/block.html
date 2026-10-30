@@ -1,9 +1,9 @@
 <section id="current-analysis">
   <header class="rec">
-    <h1>Bun after the Rust rewrite</h1>
-    <p class="lede prose">Compare bug reports with download activity through <strong>30 October 2026</strong>. Select a version, report type or time window.</p>
+    <h1>Bun's rewrite: reports and versions</h1>
+    <p class="lede prose">Compare report dates, stated versions and npm requests through <strong>30 October 2026</strong>. Select a version, report type or time window.</p>
     <p class="prose" id="p3-overview"></p>
-    <nav aria-label="Report sections"><a href="#p3-version-daily">Compare growth</a><a href="#p3-safety">Crashes and memory</a><a href="#p3-classify">Report types</a><a href="#after-the-stable-release">Releases and fixes</a><a href="#p3-adoption">Data sources</a></nav>
+    <nav aria-label="Report sections"><a href="#p3-family-map">Versions and families</a><a href="#p3-version-daily">Daily detail</a><a href="#p3-safety">Three-period comparison</a><a href="#p3-classify">Report types</a><a href="#after-the-stable-release">Releases and fixes</a><a href="#p3-adoption">Data sources</a></nav>
     <details class="p3-terms"><summary>Terms used in this report</summary><dl>
       <dt>Possible bug report</dt><dd>A GitHub issue that passes the label filter. It is not a confirmed defect.</dd>
       <dt>npm request</dt><dd>A download request for package <code>bun</code>. One user or automated job can make many requests.</dd>
@@ -13,13 +13,40 @@
       <dt>Relative report rate</dt><dd>Report growth index divided by npm growth index. Its reference is 1.</dd>
     </dl></details>
   </header>
+  <section id="p3-family-map">
+    <h2>Reports by version family and week</h2>
+    <p class="prose">Merge did not move stable users to Rust. Stable stayed on Zig until 20 August. The three date periods below are not language groups.</p>
+    <div class="p3-phase-strip" aria-label="Release timeline">
+      <div><strong>Before merge</strong><span>Before 14 May</span><span>Zig stable</span></div>
+      <div><strong>Canary period</strong><span>14 May–20 August</span><span>Zig stable + Rust canary</span></div>
+      <div><strong>After Rust stable</strong><span>From 20 August</span><span>Versions still overlap</span></div>
+    </div>
+    <p class="prose" id="p3-family-summary"></p>
+    <div class="p3-controls">
+      <label>Version family <select id="p3-map-family"><option value="all">All families</option><option value="zig">Zig version line</option><option value="rust">Rust version line</option><option value="unclear">Unclear family</option></select></label>
+      <label>Problem type <select id="p3-map-type"></select></label>
+      <label>Versions shown <select id="p3-map-rows"><option value="top">12 most-reported versions + remaining groups</option><option value="all">Every stated version</option></select></label>
+    </div>
+    <figure>
+      <h3>Version rows, calendar-week columns</h3>
+      <div class="p3-matrix-scroll" tabindex="0" role="region" aria-label="Scrollable report count map"><div id="p3-family-chart" role="img" aria-label="Weekly report counts by stated version and inferred Zig or Rust family"></div><div id="p3-family-context" role="img" aria-label="All-version npm requests per day, averaged within complete weeks"></div></div>
+      <figcaption>Colour shows report counts on one shared scale. Dark cells have zero reports. The line below shows all-version npm requests per day, averaged over complete weeks. It does not give downloads for each version. Scroll sideways on a small screen. Select a cell for daily version detail. The version selector below provides the same detail by keyboard. Weeks can cross release dates. The first and last weeks are partial.</figcaption>
+      <p class="prose" id="p3-map-selection" aria-live="polite">Select a week and version to inspect its report count.</p>
+    </figure>
+    <details><summary>How version families are assigned</summary><div class="p3-detail">
+      <p class="prose">Zig means a stated version line before 1.4. Rust means a stated version line from 1.4 after the rewrite merge. This is a version-line inference. It does not verify the binary or defect cause.</p>
+      <p class="prose">Unknown and multiple versions stay unclear. A Rust-line version stated before merge also stays unclear. Old canary, dev and debug version strings after merge stay unclear. A plain 1.4.0 cannot identify stable or canary.</p>
+      <p class="prose">Counts are not rates per installation. We do not have daily npm downloads by historical version or language family. New releases have less time to receive reports. Report text can change after filing.</p>
+      <div class="tablebox" tabindex="0" role="region" aria-label="Version families across date periods"><table><thead><tr><th>Stated version family</th><th>Before merge</th><th>Canary period</th><th>After Rust stable</th></tr></thead><tbody id="p3-family-periods"></tbody></table></div>
+    </div></details>
+  </section>
   <section id="p3-version-daily">
     <h2>Reports and downloads</h2>
-    <p class="prose">Colours show report types. The line shows npm requests. The default view gives each series a before-merge mean of 100.</p>
+    <p class="prose">Colours show report types. The line shows npm requests. Counts are the default. Growth uses each series's before-merge mean as 100.</p>
     <div class="p3-version-controls">
       <label for="p3-v-version">Bun version</label><select id="p3-v-version"></select>
       <label for="p3-v-axis">Group reports by</label><select id="p3-v-axis"><option value="symptoms">Problem type</option><option value="components">Component named</option></select>
-      <label for="p3-v-measure">Show</label><select id="p3-v-measure"><option value="index">Growth: before = 100</option><option value="counts">Counts and npm requests</option><option value="rate">Reports per million requests</option><option value="percent">Share of report types (%)</option></select>
+      <label for="p3-v-measure">Show</label><select id="p3-v-measure"><option value="counts">Counts and npm requests</option><option value="index">Growth: before = 100</option><option value="rate">Reports per million requests</option><option value="percent">Share of report types (%)</option></select>
       <label for="p3-v-window">Time window</label><select id="p3-v-window"><option value="7">Previous 7 days</option><option value="1">One day</option></select>
     </div>
     <div id="p3-v-charts"></div>
@@ -35,28 +62,29 @@
     </div></details>
   </section>
   <section id="p3-safety">
-    <h2>Crashes and memory leaks</h2>
-    <p class="prose">Both report rates decreased after the merge. The leak group requires evidence of memory not released after use. High memory use alone is a separate group.</p>
+    <h2>Three periods: crashes and memory leaks</h2>
+    <p class="prose">Compare three calendar periods. These groups contain reports about different versions. They do not measure a Rust effect. The leak rule checks for explicit memory retention. High memory use alone is separate.</p>
     <div class="p3-controls">
       <label>Text to check <select id="p3-safety-evidence"><option value="title">Title only</option><option value="expanded">Title and body excerpt</option></select></label>
       <label>Time window <select id="p3-safety-window"><option value="28">Previous 28 days</option><option value="7">Previous 7 days</option><option value="1">One day</option></select></label>
     </div>
-    <div class="tablebox" tabindex="0" role="region" aria-label="Before and after report rates"><table><thead><tr><th>Report type</th><th>Before: count</th><th>Before: per million</th><th>After: count</th><th>After: per million</th><th>Rate change</th></tr></thead><tbody id="p3-safety-table"></tbody></table></div>
+    <div class="tablebox" tabindex="0" role="region" aria-label="Three-period report rates"><table><thead><tr><th>Report type</th><th>Before merge: count / rate</th><th>Canary period: count / rate</th><th>After stable: count / rate</th><th>Stable vs canary rate</th></tr></thead><tbody id="p3-safety-table"></tbody></table></div>
+    <p class="prose">Rates are reports per million npm requests across all versions. The canary period includes Zig stable reports.</p>
     <p class="prose" id="p3-safety-summary"></p>
     <figure><h3>Reports per million npm requests</h3>
-      <label>Report type <select id="p3-safety-signal"><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">All memory problem reports</option></select></label>
+      <label>Report type <select id="p3-safety-signal"><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">Memory keyword reports</option></select></label>
       <div id="p3-safety-rate-chart" class="p3-chart" role="img" aria-label="Crash or memory-leak reports per million npm requests"></div>
-      <figcaption>Each point divides reports by requests for the selected window, then multiplies by one million. Dashed lines show whole-period rates. A window across the merge contains both periods. Missing data remains a gap.</figcaption>
+      <figcaption>Each point divides reports by requests for the selected window, then multiplies by one million. Dashed lines show the three separate period rates. A window across the merge contains both periods. Missing data remains a gap.</figcaption>
     </figure>
     <figure id="p3-growth-ratio"><h3>Report growth divided by download growth</h3>
-      <label>Reports to compare <select id="p3-growth-signal"><option value="all">All possible bug reports</option><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">All memory problem reports</option></select></label>
+      <label>Reports to compare <select id="p3-growth-signal"><option value="all">All possible bug reports</option><option value="crash">Crash reports</option><option value="leak">Memory leak reports</option><option value="memory">Memory keyword reports</option></select></label>
       <div id="p3-growth-ratio-chart" class="p3-chart" role="img" aria-label="Report growth index divided by npm growth index"></div>
       <p class="prose" id="p3-growth-summary"></p>
       <figcaption>Q = report growth index / npm growth index. At 1, the report/request rate equals the before-merge reference. Below 1, that rate is lower. A rising Q means reports grow faster than npm requests over that interval. It can rise while it remains below 1.</figcaption>
     </figure>
     <details><summary>Check the periods and memory-leak evidence</summary><div class="p3-detail">
-      <p class="prose">The comparison uses 181 days before the merge and 167 days after it. The periods are 14 November–13 May and 15 May–28 October. They contain 23,077,916 and 70,541,010 npm requests.</p>
-      <p class="prose">We exclude the merge day and incomplete issue-window days from the table. We also exclude unpublished download dates. One report can match both crash and leak rules. Do not add the rows.</p>
+      <p class="prose">Complete-day periods: 14 November–13 May (181 days), 15 May–19 August (97 days), and 21 August–28 October (69 days). npm totals are 23,077,916, 34,698,894 and 35,306,720 requests.</p>
+      <p class="prose">We exclude both event days, 14 May and 20 August, and incomplete issue-window days from period tables. We also exclude unpublished download dates. One report can match both crash and leak rules. Do not add the rows.</p>
       <p class="prose">The main check uses titles. The extra check adds up to 2,500 body characters on each side. It removes fenced code. Body text can mention problems that did not occur. The old and new excerpt formats also differ.</p>
       <p class="prose">The leak group includes allocated memory that remains held, including leaks found at process exit. Generic OOM, high RSS and memory corruption are separate. Disk files, file descriptors and a test-cap failure are excluded.</p>
       <p class="prose">The leak sample is small. Some reports can describe the same defect. The crash rule also has known false matches. Before-merge text and labels come from August. After-merge observations come from October.</p>
@@ -74,7 +102,7 @@
     <h2>Report types</h2>
     <p class="prose">The same word rules check titles before and after the merge. A report can match several types. No match means unknown. These words do not prove a defect or its cause.</p>
     <div class="p3-controls">
-      <label>After-merge period <select id="p3-period"><option value="post">All after-merge reports</option><option value="pre_stable">Merge to stable 1.4.0</option><option value="stable">After stable 1.4.0</option></select></label>
+      <label>After-merge period <select id="p3-period"><option value="pre_stable">Canary period: Zig stable + Rust canary</option><option value="stable">After Rust stable</option></select></label>
       <label>Show <select id="p3-measure"><option value="share">Share of reports (%)</option><option value="per_week">Reports per week</option></select></label>
       <label>Group by <select id="p3-axis"><option value="components">Component named</option><option value="symptoms">Problem type</option></select></label>
     </div>
@@ -132,6 +160,13 @@
 .p3-terms dl{padding:0 16px 16px}
 html{scrollbar-color:var(--line-strong) var(--paper);scrollbar-width:thin}
 input{caret-color:var(--s2)}
+.p3-phase-strip{display:grid;grid-template-columns:181fr 98fr 71fr;border-block:1px solid var(--line);padding-block:16px;gap:18px}
+.p3-phase-strip div{display:flex;flex-direction:column;gap:5px;font-size:13px}
+.p3-phase-strip strong{font-size:15px}.p3-phase-strip span{color:var(--muted)}
+.p3-matrix-scroll{overflow-x:auto;scrollbar-color:var(--line-strong) var(--surface)}
+#p3-family-chart{min-width:850px;width:100%;height:650px}
+#p3-family-context{min-width:850px;width:100%;height:190px}#p3-family-periods{min-width:620px}
+@media(max-width:640px){.p3-phase-strip{grid-template-columns:1fr;gap:14px}.p3-phase-strip div{display:grid;grid-template-columns:1fr 1fr}.p3-phase-strip strong{grid-column:1/-1}}
 </style>
 <script>
 const P3 = __P3_DATA__;
@@ -140,6 +175,7 @@ const AUDIT = __AUDIT_DATA__;
 const EXPOSURE = __EXPOSURE_DATA__;
 const VERSION_DAILY = __VERSION_DAILY_DATA__;
 const SAFETY = __SAFETY_DATA__;
+const FAMILY = __FAMILY_DATA__;
 __COMBINED_JS__
 window.addEventListener('DOMContentLoaded', () => {
   const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -151,12 +187,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const marks={symbol:'none',label:{color:css('--ink'),fontSize:10,formatter:'{b}',rotate:90,position:'insideEndTop'},lineStyle:{type:'dashed',color:css('--s2')},data:[{name:'Rewrite',xAxis:'2026-05-14'},{name:'Stable 1.4.0',xAxis:'2026-08-20'}]};
   const zoom=[{type:'slider',height:18,bottom:8},{type:'inside',zoomOnMouseWheel:false}];
   const n=v=>v.toLocaleString('en-US');
-  document.getElementById('p3-overview').textContent=`${n(P3.periods.pre.n)} possible bug reports opened before the merge. Another ${n(P3.periods.post.n)} opened after it. The last day, ${P3.generated.slice(0,10)}, is incomplete.`;
+  document.getElementById('p3-overview').textContent=`Reports by date: ${n(P3.periods.pre.n)} before merge; ${n(P3.periods.pre_stable.n)} in the canary period; ${n(P3.periods.stable.n)} after Rust stable. These are all-version groups. The last day, ${P3.generated.slice(0,10)}, is incomplete.`;
   draw('p3-volume-chart',{color:[colors[2],colors[1]],legend:{...base.legend,data:['Marked as fixed','Other outcome or open']},xAxis:{...base.xAxis,data:dates},dataZoom:zoom,series:[{name:'Marked as fixed',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.fixed,itemStyle:w.partial?{color:colors[3]}:{}})),markLine:marks},{name:'Other outcome or open',type:'bar',stack:'issues',data:P3.weekly.map(w=>({value:w.bugs-w.fixed,itemStyle:w.partial?{color:colors[3],opacity:.55}:{}}))}]});
 
-  const versionNames=v=>v==='unknown'?'No usable version':v==='multiple'?'Several versions reported':`Bun ${v}`;
+  const versionNames=v=>v.startsWith('family:')?FAMILY.families[v.slice(7)]:v==='unknown'?'No usable version':v==='multiple'?'Several versions reported':`Bun ${v}`;
   const versionSelect=document.getElementById('p3-v-version');
-  for(const [value,label] of [['all','All versions'],['compare','Four versions on one chart'],...Object.keys(VERSION_DAILY.counts).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true})).map(v=>[v,`${versionNames(v)} (${n(VERSION_DAILY.counts[v])} ${VERSION_DAILY.counts[v]===1?'report':'reports'})`])]){
+  for(const [value,label] of [['all','All versions'],['compare','Four versions on one chart'],['family:zig','Zig version line'],['family:rust','Rust version line'],['family:unclear','Unclear family'],...Object.keys(VERSION_DAILY.counts).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true})).map(v=>[v,`${versionNames(v)} (${n(VERSION_DAILY.counts[v])} ${VERSION_DAILY.counts[v]===1?'report':'reports'})`])]){
     const o=document.createElement('option');o.value=value;o.textContent=label;versionSelect.append(o);
   }
   let combinedChart;
@@ -169,7 +205,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const pools=Object.fromEntries(versions.map(v=>[v,{}])),aggregate={};
     for(const row of VERSION_DAILY.daily){
       if(row.axis!==axis)continue;
-      for(const v of versions){if(v!=='all'&&row.version!==v)continue;
+      for(const v of versions){if(v.startsWith('family:')?row.family!==v.slice(7):v!=='all'&&row.version!==v)continue;
         const bucket=pools[v][row.day]||{};
         for(const [k,num] of Object.entries(row.counts))bucket[k]=(bucket[k]||0)+num;
         pools[v][row.day]=bucket;
@@ -184,9 +220,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const pre=combined.periods.pre,post=combined.periods.post;
     const fmt=(x,d=1)=>x==null?'unavailable':x.toLocaleString('en-US',{maximumFractionDigits:d});
     const factor=(a,b)=>b>0?`${(a/b).toFixed(2)}×`:'no reports before the merge';
-    const change=pre.rate>0&&post.rate!=null?(post.rate/pre.rate-1)*100:null;
-    const direction=change==null?'This selection has no before-merge rate for comparison.':`The report/request rate ${change>0?'increased':'decreased'} ${fmt(Math.abs(change))}%. Reports grew ${change>0?'faster':'more slowly'} than npm requests in these periods.`;
-    document.getElementById('p3-v-summary').textContent=`The full comparison uses ${pre.days} complete days before the merge and ${post.days} after it. Reports per day: ${fmt(pre.reportsPerDay)} → ${fmt(post.reportsPerDay)} (${factor(post.reportsPerDay,pre.reportsPerDay)}). npm requests per day: ${fmt(pre.downloadsPerDay,0)} → ${fmt(post.downloadsPerDay,0)} (${factor(post.downloadsPerDay,pre.downloadsPerDay)}). Reports per million requests: ${fmt(pre.rate,2)} → ${fmt(post.rate,2)}. ${direction}`;
+    const phaseNames={pre:'Before merge',canary:'Canary period',stable:'After Rust stable'};
+    document.getElementById('p3-v-summary').textContent=['pre','canary','stable'].map(k=>{const p=combined.periods[k];return `${phaseNames[k]}: ${p.days} complete days, ${fmt(p.reportsPerDay,2)} reports/day, ${fmt(p.downloadsPerDay,0)} npm requests/day, ${fmt(p.rate,2)} reports per million requests.`;}).join(' ')+' These calendar summaries do not compare verified Zig and Rust use.';
     document.getElementById('p3-v-scope').textContent=`npm data ends on ${POP.npm.valid_through}. Issue data ends on ${P3.generated.slice(0,10)}, an incomplete day. ${version==='compare'?`Each day shows versions from left to right: ${versions.map(versionNames).join(', ')}.`:version==='all'?'All reports are included. This includes unknown and several-version groups.':'Only reports use the version filter. npm requests still cover all versions.'} ${mode==='index'&&combined.baselineReports<=0?'There were no reports in this selection before the merge. Select counts to see these reports.':''} These rates do not measure defect risk per user.`;
     const host=document.getElementById('p3-v-charts');host.replaceChildren();
     const fig=document.createElement('figure'),h=document.createElement('h3');
@@ -227,6 +262,62 @@ window.addEventListener('DOMContentLoaded', () => {
   for(const id of ['p3-v-version','p3-v-axis','p3-v-measure','p3-v-window'])document.getElementById(id).addEventListener('change',versionDaily);
   versionDaily();
 
+  const familyOrder=['zig','rust','unclear'];
+  const familyShort={zig:'Zig',rust:'Rust',unclear:'Unclear'};
+  document.getElementById('p3-family-summary').textContent=`Across all report dates, version-line inference assigns ${n(FAMILY.family_counts.zig)} reports to Zig and ${n(FAMILY.family_counts.rust)} to Rust. Another ${n(FAMILY.family_counts.unclear)} remain unclear. Calendar position does not assign a language family.`;
+  const mapTypes=document.getElementById('p3-map-type');
+  for(const [value,label] of Object.entries(FAMILY.types)){const o=document.createElement('option');o.value=value;o.textContent=label;mapTypes.append(o);}
+  const familyTable=document.getElementById('p3-family-periods');
+  for(const f of familyOrder){const tr=document.createElement('tr');for(const x of [FAMILY.families[f],...['pre','canary','stable'].map(k=>n(FAMILY.period_family_counts[k][f]||0))]){const td=document.createElement('td');td.textContent=x;tr.append(td);}familyTable.append(tr);}
+  let familyChart;
+  function familyMap(){
+    if(familyChart)familyChart.dispose();
+    const filter=document.getElementById('p3-map-family').value,type=mapTypes.value,all=document.getElementById('p3-map-rows').value==='all';
+    const source=FAMILY.rows.filter(r=>filter==='all'||r.family===filter);
+    const top=source.filter(r=>r.family!=='unclear').slice().sort((a,b)=>b.total-a.total).slice(0,12);
+    const picked=new Set(top.map(r=>r.key));let shown;
+    if(all)shown=source.slice();
+    else{
+      shown=top.slice();
+      for(const f of familyOrder){
+        const rest=source.filter(r=>r.family===f&&!picked.has(r.key));
+        for(const v of ['unknown','multiple']){const match=rest.filter(r=>r.version===v);shown.push(...match);}
+        const remaining=rest.filter(r=>!['unknown','multiple'].includes(r.version));
+        if(remaining.length)shown.push({key:f+':other',family:f,version:'other',total:remaining.reduce((s,r)=>s+r.total,0),weekly:FAMILY.weeks.map((_,i)=>Object.fromEntries(Object.keys(FAMILY.types).map(k=>[k,remaining.reduce((s,r)=>s+(r.weekly[i][k]||0),0)])))});
+      }
+    }
+    shown.sort((a,b)=>familyOrder.indexOf(a.family)-familyOrder.indexOf(b.family)||a.version.localeCompare(b.version,undefined,{numeric:true}));
+    const rowLabel=r=>`${familyShort[r.family]} · ${r.version==='unknown'?'no version':r.version==='multiple'?'several versions':r.version==='other'?'other versions':r.version}`;
+    const end=d=>new Date(Date.parse(d+'T00:00:00Z')+6*86400000).toISOString().slice(0,10);
+    const points=shown.flatMap((r,i)=>FAMILY.weeks.map((d,j)=>[j,i,r.weekly[j][type]||0]));
+    const host=document.getElementById('p3-family-chart');host.style.height=`${Math.max(400,shown.length*28+150)}px`;
+    const mergeWeek=FAMILY.weeks.find(d=>d<=FAMILY.merge.slice(0,10)&&end(d)>=FAMILY.merge.slice(0,10));
+    const stableWeek=FAMILY.weeks.find(d=>d<=FAMILY.stable.slice(0,10)&&end(d)>=FAMILY.stable.slice(0,10));
+    familyChart=draw('p3-family-chart',{
+      grid:{left:176,right:18,top:58,bottom:86},
+      xAxis:{...base.xAxis,data:FAMILY.weeks,position:'top',axisLabel:{...base.xAxis.axisLabel,fontSize:10,interval:3},splitArea:{show:false}},
+      yAxis:{type:'category',data:shown.map(rowLabel),inverse:true,axisTick:{show:false},axisLine:{show:false},axisLabel:{color:css('--ink'),fontSize:11,width:165,overflow:'truncate'}},
+      visualMap:{type:'piecewise',orient:'horizontal',left:176,bottom:12,itemWidth:13,itemHeight:11,itemGap:12,textStyle:{color:css('--ink'),fontSize:11},pieces:[{value:0,label:'0',color:css('--surface-2')},{value:1,label:'1',color:'#263e58'},{min:2,max:4,label:'2–4',color:'#345c80'},{min:5,max:9,label:'5–9',color:'#4b80aa'},{min:10,max:24,label:'10–24',color:'#69a4ce'},{min:25,max:49,label:'25–49',color:'#98cbe8'},{min:50,label:'50+',color:'#d8effb'}]},
+      tooltip:{trigger:'item',confine:true,formatter:p=>{const [w,i,count]=p.value,r=shown[i],d=FAMILY.weeks[w];return `<strong>${rowLabel(r)}</strong><br>${d} to ${end(d)} UTC${FAMILY.partial_weeks.includes(d)?' (partial)':''}<br>${FAMILY.types[type]}: ${n(count)}<br>${r.version==='other'?'Grouped remaining versions':'Select for daily version detail'}`;}},
+      series:[{type:'heatmap',data:points,itemStyle:{borderColor:css('--surface'),borderWidth:1},emphasis:{itemStyle:{borderColor:css('--ink'),borderWidth:2}},markLine:{...marks,label:{...marks.label,position:'start',rotate:0},data:[{name:'Merge · 14 May',xAxis:mergeWeek},{name:'Rust stable · 20 Aug',xAxis:stableWeek}]}}]
+    });
+    familyChart.on('click',params=>{
+      if(!Array.isArray(params.value))return;const [w,i,count]=params.value,r=shown[i];
+      if(r.version==='other'){document.getElementById('p3-map-selection').textContent='This row combines remaining versions. Select Every stated version, then choose a concrete version for daily detail.';return;}
+      document.getElementById('p3-map-selection').textContent=`${rowLabel(r)}; week starting ${FAMILY.weeks[w]}: ${n(count)} ${FAMILY.types[type].toLowerCase()}. Daily detail is selected below.`;
+      versionSelect.value=r.version==='other'?'family:'+r.family:r.version;
+      document.getElementById('p3-v-measure').value='counts';document.getElementById('p3-v-window').value='1';versionDaily();
+      combinedChart.dispatchAction({type:'dataZoom',startValue:FAMILY.weeks[w],endValue:end(FAMILY.weeks[w])});
+      document.getElementById('p3-v-scope').textContent+=` Selected map cell: ${n(count)} ${FAMILY.types[type].toLowerCase()} in the week starting ${FAMILY.weeks[w]}. Daily detail shows all problem types for this version and week.`;
+      document.getElementById('p3-version-daily').scrollIntoView({block:'start'});
+    });
+  }
+  for(const id of ['p3-map-family','p3-map-type','p3-map-rows'])document.getElementById(id).addEventListener('change',familyMap);
+  familyMap();
+  const matrixDownloads=Object.fromEntries(POP.npm.daily.map(r=>[r.day,r.downloads]));
+  const contextValues=FAMILY.weeks.map(start=>{const days=Array.from({length:7},(_,i)=>new Date(Date.parse(start+'T00:00:00Z')+i*86400000).toISOString().slice(0,10));return days.every(d=>Number.isFinite(matrixDownloads[d]))?days.reduce((s,d)=>s+matrixDownloads[d],0)/7:null;});
+  draw('p3-family-context',{grid:{left:176,right:18,top:28,bottom:32},legend:{show:false},xAxis:{...base.xAxis,data:FAMILY.weeks,axisLabel:{...base.xAxis.axisLabel,fontSize:10,interval:3}},yAxis:{...base.yAxis,name:'All-version npm requests/day',axisLabel:{color:css('--muted'),formatter:v=>(v/1000).toFixed(0)+'k'}},series:[{name:'npm requests/day, weekly mean',type:'line',data:contextValues,connectNulls:false,showSymbol:false,lineStyle:{color:css('--ink'),width:2},markLine:{...marks,data:[{name:'Merge',xAxis:FAMILY.weeks.find(d=>d<=FAMILY.merge.slice(0,10)&&new Date(Date.parse(d)+6*86400000).toISOString().slice(0,10)>=FAMILY.merge.slice(0,10))},{name:'Rust stable',xAxis:FAMILY.weeks.find(d=>d<=FAMILY.stable.slice(0,10)&&new Date(Date.parse(d)+6*86400000).toISOString().slice(0,10)>=FAMILY.stable.slice(0,10))}]}}]});
+
 
   let safetyRateChart,growthRatioChart;
   function safetyCharts(){
@@ -234,26 +325,28 @@ window.addEventListener('DOMContentLoaded', () => {
     const variant=document.getElementById('p3-safety-evidence').value,windowDays=+document.getElementById('p3-safety-window').value;
     const stat=SAFETY.stats[variant],signal=document.getElementById('p3-safety-signal').value,growthSignal=document.getElementById('p3-growth-signal').value;
     const fmt=(x,d=2)=>x==null?'unavailable':x.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:d});
+    const phaseKeys=['pre','canary','stable'];
     const table=document.getElementById('p3-safety-table');table.replaceChildren();
-    for(const key of ['crash','leak']){const row=stat[key],tr=document.createElement('tr');for(const text of [SAFETY.labels[key],n(row.pre.n),fmt(row.pre.rate),n(row.post.n),fmt(row.post.rate),`${fmt(row.change_pct,1)}%`]){const td=document.createElement('td');td.textContent=text;tr.append(td);}table.append(tr);}
-    document.getElementById('p3-safety-summary').textContent=`${variant==='title'?'Title-only check':'Extra body-text check'}: crash reports ${n(stat.crash.pre.n)} → ${n(stat.crash.post.n)}, memory-leak reports ${n(stat.leak.pre.n)} → ${n(stat.leak.post.n)}. These matches do not confirm defect causes. There are few leak reports. Download growth explains much of their rate decrease.`;
+    for(const key of ['all','crash','leak','memory']){const row=stat[key],tr=document.createElement('tr');for(const text of [SAFETY.labels[key],...phaseKeys.map(k=>`${n(row[k].n)} / ${fmt(row[k].rate,3)}`),`${row.stable_vs_canary_pct>0?'+':''}${fmt(row.stable_vs_canary_pct,1)}%`]){const td=document.createElement('td');td.textContent=text;tr.append(td);}table.append(tr);}
+    document.getElementById('p3-safety-summary').textContent=`${variant==='title'?'Title-only check':'Extra body-text check'}. Compared with the canary period, the after-stable all-report rate is ${fmt(stat.all.stable_vs_canary_pct,1)}% higher. Crash and leak rates move differently. Small leak counts and mixed versions limit this comparison. No causal language effect is estimated.`;
     const args={days:VERSION_DAILY.days,counts:SAFETY.daily[variant],downloads:Object.fromEntries(POP.npm.daily.map(r=>[r.day,r.downloads])),firstPartial:SAFETY.first_partial,lastPartial:SAFETY.last_partial,merge:SAFETY.merge,stable:SAFETY.stable,windowDays,mode:'rate'};
     const rates=CombinedSeries.build({...args,types:[signal]}),growth=CombinedSeries.build({...args,types:[growthSignal]});
     const rate=stat[signal],daily=VERSION_DAILY.days;
     const label=SAFETY.labels[signal];
-    safetyRateChart=draw('p3-safety-rate-chart',{color:[colors[2],colors[0],colors[1]],legend:{...base.legend,type:'scroll',data:[label,'Before-merge period rate','After-merge period rate']},xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'reports / 1m requests',min:0},dataZoom:zoom,
+    const phaseNames={pre:'Before merge rate',canary:'Canary-period rate',stable:'After-stable rate'};
+    const phaseTest={pre:d=>d<SAFETY.merge&&d>SAFETY.first_partial,canary:d=>d>SAFETY.merge&&d<SAFETY.stable,stable:d=>d>SAFETY.stable&&d<=SAFETY.download_through};
+    safetyRateChart=draw('p3-safety-rate-chart',{color:[colors[2],colors[0],colors[3],colors[1]],legend:{...base.legend,type:'scroll',data:[label,...phaseKeys.map(k=>phaseNames[k])]},xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'reports / 1m requests',min:0},dataZoom:zoom,
       tooltip:{...base.tooltip,valueFormatter:v=>fmt(v,3)},series:[
         {name:label,type:'line',data:rates.reportSeries[signal],connectNulls:false,showSymbol:false,lineStyle:{width:2.5},markLine:marks},
-        {name:'Before-merge period rate',type:'line',data:daily.map(d=>d<SAFETY.merge&&d>SAFETY.first_partial?rate.pre.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}},
-        {name:'After-merge period rate',type:'line',data:daily.map(d=>d>SAFETY.merge&&d<=SAFETY.download_through?rate.post.rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}}]});
-    const selected=stat[growthSignal],ratio=selected.pre.rate>0?selected.post.rate/selected.pre.rate:null;
-    document.getElementById('p3-growth-summary').textContent=`${SAFETY.labels[growthSignal]}: the full-period after/before rate ratio is ${fmt(ratio,3)}×. The before-merge reference is 1. ${ratio==null?'There is no before-merge rate for comparison.':ratio<1?'The report/request rate is lower after the merge.':'The report/request rate is higher after the merge.'} The time window changes the curve. This summary uses the full comparison period. npm requests do not count active users.`;
+        ...phaseKeys.map(k=>({name:phaseNames[k],type:'line',data:daily.map(d=>phaseTest[k](d)?rate[k].rate:null),connectNulls:false,showSymbol:false,lineStyle:{type:'dashed'}}))]});
+    const selected=stat[growthSignal];
+    document.getElementById('p3-growth-summary').textContent=SAFETY.labels[growthSignal]+': '+phaseKeys.map(k=>`${phaseNames[k]} = ${fmt(selected[k].rate/stat[growthSignal].pre.rate,3)}× the before-merge rate`).join('; ')+'. These are calendar periods, not verified version families. The time window changes the curve only. npm requests do not count active users.';
     growthRatioChart=draw('p3-growth-ratio-chart',{color:[colors[1]],xAxis:{...base.xAxis,data:daily},yAxis:{...base.yAxis,name:'relative report rate',min:0},dataZoom:zoom,
       tooltip:{...base.tooltip,valueFormatter:v=>fmt(v,3)+'×'},series:[{name:SAFETY.labels[growthSignal]+' / npm growth',type:'line',data:growth.growthRatio,connectNulls:false,showSymbol:false,lineStyle:{width:2.5},markLine:{...marks,data:[...marks.data,{name:'Before-merge rate = 1',yAxis:1}]}}]});
   }
   for(const id of ['p3-safety-evidence','p3-safety-window','p3-safety-signal','p3-growth-signal'])document.getElementById(id).addEventListener('change',safetyCharts);
   const leakTable=document.getElementById('p3-leak-evidence');
-  for(const r of SAFETY.leak_examples){const tr=document.createElement('tr'),td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [r.day,r.day<SAFETY.merge?'Before merge':'After merge']){const c=document.createElement('td');c.textContent=value;tr.append(c);}leakTable.append(tr);}
+  for(const r of SAFETY.leak_examples){const tr=document.createElement('tr'),td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [r.day,r.day<SAFETY.merge?'Before merge':r.day<SAFETY.stable?'Canary period':'After Rust stable']){const c=document.createElement('td');c.textContent=value;tr.append(c);}leakTable.append(tr);}
   safetyCharts();
 
   let category;
@@ -269,7 +362,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('p3-coverage').textContent=`No ${axis==='components'?'component':'problem-type'} match: ${a.unclassified.share}% before the merge and ${b.unclassified.share}% in the selected period. Types can overlap. The selected period has ${n(P3.periods[period].n)} possible bug reports over ${P3.periods[period].weeks.toFixed(1)} weeks. The before-merge group has ${n(P3.periods.pre.n)} reports over 26 weeks.`;
   }
   for(const id of ['p3-period','p3-measure','p3-axis'])document.getElementById(id).addEventListener('change',categories);categories();
-  function evidence(){const q=document.getElementById('p3-search').value.toLowerCase();const found=AUDIT.filter(r=>r.title.toLowerCase().includes(q));const tb=document.getElementById('p3-issues');tb.replaceChildren();document.getElementById('p3-results-count').textContent=`${n(found.length)} possible bug reports match. The table shows the first 30 by date. Tags come from title rules.`;for(const r of found.slice(0,30)){const tr=document.createElement('tr');const td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [({pre:'Before merge',pre_stable:'Before stable 1.4.0',stable:'After stable 1.4.0'})[r.period],Object.keys(r.components).map(k=>P3.rules.components[k].label).join(', ')||'Unknown',Object.keys(r.symptoms).map(k=>P3.rules.symptoms[k].label).join(', ')||'Unknown']){const c=document.createElement('td');c.textContent=value;tr.append(c);}tb.append(tr);}}
+  function evidence(){const q=document.getElementById('p3-search').value.toLowerCase();const found=AUDIT.filter(r=>r.title.toLowerCase().includes(q));const tb=document.getElementById('p3-issues');tb.replaceChildren();document.getElementById('p3-results-count').textContent=`${n(found.length)} possible bug reports match. The table shows the first 30 by date. Tags come from title rules.`;for(const r of found.slice(0,30)){const tr=document.createElement('tr');const td=document.createElement('td'),link=document.createElement('a');link.href=`https://github.com/oven-sh/bun/issues/${r.n}`;link.textContent=`#${r.n} ${r.title}`;td.append(link);tr.append(td);for(const value of [({pre:'Before merge',pre_stable:'Canary period',stable:'After Rust stable'})[r.period],Object.keys(r.components).map(k=>P3.rules.components[k].label).join(', ')||'Unknown',Object.keys(r.symptoms).map(k=>P3.rules.symptoms[k].label).join(', ')||'Unknown']){const c=document.createElement('td');c.textContent=value;tr.append(c);}tb.append(tr);}}
   document.getElementById('p3-search').addEventListener('input',evidence);evidence();
   document.getElementById('p3-pop-summary').textContent=`npm data is available through ${POP.npm.valid_through}. The saved GitHub count is ${n(POP.github.snapshot.stars)} stars. Stars show interest. They do not count Bun users.`;
 

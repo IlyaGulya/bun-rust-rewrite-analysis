@@ -10,13 +10,13 @@ version: "2026.10.30"
 date-released: 2026-10-30
 url: "https://github.com/IlyaGulya/bun-rust-rewrite-analysis"
 abstract: >-
-  Updated fork of Aleksandr Smyshliaev's study of Bun's May 2026
-  Zig-to-Rust rewrite. It covers reports through 30 October 2026 and npm
-  requests through 28 October. It compares daily report types, stated Bun
-  versions, releases, closure dates, crashes, and memory leaks. Reports per
-  npm request fell after the merge. The data does not establish that Rust
-  caused this change. Downloads do not count users, and text matches do
-  not confirm defects.
+  Updated fork of Aleksandr Smyshliaev's study of Bun's May 2026 rewrite.
+  It separates before-merge, Rust-canary, and after-stable report dates.
+  A version-family map groups stated versions into Zig, Rust, and unclear
+  lines. Three-period tables compare counts, crashes, leaks, and npm
+  request rates. Reports run through 30 October; npm data through
+  28 October. The study does not estimate a causal Rust effect or
+  defects per active user.
 keywords:
   - rust
   - zig

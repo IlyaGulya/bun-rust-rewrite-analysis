@@ -37,7 +37,7 @@ Reports available for sampling: 1315 reports with at least one title match.
 | [#25912 — Bun.Terminal PTY allocation fails after extended runtime/sleep on macOS](https://github.com/oven-sh/bun/issues/25912) | — | failure | **Supported; missed context.** Allocation failure is explicit. Bun.Terminal/PTY is process context but is not recognised. |
 | [#24679 — segmentation fault when running claude](https://github.com/oven-sh/bun/issues/24679) | — | crash | **Supported.** Fatal signal is explicit; Claude usage does not isolate a Bun component. |
 
-### After merge, before stable 1.4.0
+### Canary period: Zig stable and Rust canary
 
 Reports available for sampling: 690 reports with at least one title match.
 
@@ -56,7 +56,7 @@ Reports available for sampling: 690 reports with at least one title match.
 | [#32115 — Support bin field in bun info / bun pm view output](https://github.com/oven-sh/bun/issues/32115) | packages | — | **Feature request included.** Package-manager context is supported, but the body uses the feature-request template. The exclusion-label bug definition admits unlabelled feature requests. |
 | [#30697 — net.connect() fails with "DEFAULT_IPV6_ADDR is not defined" when using IPv6-mapped IPv4 address](https://github.com/oven-sh/bun/issues/30697) | — | failure | **Supported; missed context.** fails supports generic failure. net.connect() is an obvious network API but is not recognised by current network patterns. |
 
-### After stable 1.4.0
+### After Rust stable, all reported builds
 
 Reports available for sampling: 998 reports with at least one title match.
 

@@ -28,7 +28,7 @@ def main():
     (data/'exposure.json').write_text(json.dumps(exposure,indent=2)+'\n')
     block=(ROOT/'part3/block.html').read_text().replace('__EXPOSURE_DATA__',json.dumps(exposure,separators=(',',':')))
 
-    for marker,file in [('__P3_DATA__','classification.json'),('__POPULARITY_DATA__','popularity.json'),('__VERSION_DAILY_DATA__','version-daily.json'),('__SAFETY_DATA__','safety.json')]:
+    for marker,file in [('__P3_DATA__','classification.json'),('__POPULARITY_DATA__','popularity.json'),('__VERSION_DAILY_DATA__','version-daily.json'),('__SAFETY_DATA__','safety.json'),('__FAMILY_DATA__','family-matrix.json')]:
         block=block.replace(marker,json.dumps(json.loads((data/file).read_text()),ensure_ascii=False,separators=(',',':')).replace('<','\\u003c'))
     block=block.replace('__COMBINED_JS__',(ROOT/'part3/combined-series.js').read_text())
     audit=[{k:r[k] for k in ['n','title','period','components','symptoms']} for line in (data/'classified.jsonl').read_text().splitlines() if (r:=json.loads(line))['bug']]

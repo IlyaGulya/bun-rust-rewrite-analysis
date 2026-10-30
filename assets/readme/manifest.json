@@ -7,9 +7,11 @@
     "03-relative-growth.png",
     "04-component-mix.png",
     "05-daily-versions.png",
-    "06-release-and-followup.png"
+    "06-release-and-followup.png",
+    "07-version-family-map.png"
   ],
   "calculation_source": "part3/combined-series.js",
+  "matrix_source": "part3/data/family-matrix.json",
   "stats": {
     "all": {
       "pre": {
@@ -18,11 +20,11 @@
         "days": 181,
         "rate": 76.78336293450413
       },
-      "post": {
-        "n": 2358,
-        "downloads": 70541010,
-        "days": 167,
-        "rate": 33.42736374202751
+      "canary": {
+        "n": 985,
+        "downloads": 34698894,
+        "days": 97,
+        "rate": 28.3870719337625
       },
       "stable": {
         "n": 1338,
@@ -30,7 +32,7 @@
         "days": 69,
         "rate": 37.89646843433771
       },
-      "change_pct": -56.46535595146971
+      "stable_vs_canary_pct": 33.4990397134447
     },
     "crash": {
       "pre": {
@@ -39,11 +41,11 @@
         "days": 181,
         "rate": 17.505913445564147
       },
-      "post": {
-        "n": 190,
-        "downloads": 70541010,
-        "days": 167,
-        "rate": 2.6934686645399606
+      "canary": {
+        "n": 118,
+        "downloads": 34698894,
+        "days": 97,
+        "rate": 3.4006847595776395
       },
       "stable": {
         "n": 71,
@@ -51,7 +53,7 @@
         "days": 69,
         "rate": 2.0109486239446768
       },
-      "change_pct": -84.61394960671154
+      "stable_vs_canary_pct": -40.866361744320166
     },
     "leak": {
       "pre": {
@@ -60,11 +62,11 @@
         "days": 181,
         "rate": 0.649972033869956
       },
-      "post": {
-        "n": 13,
-        "downloads": 70541010,
-        "days": 167,
-        "rate": 0.1842899612579973
+      "canary": {
+        "n": 7,
+        "downloads": 34698894,
+        "days": 97,
+        "rate": 0.2017355365851142
       },
       "stable": {
         "n": 5,
@@ -72,7 +74,7 @@
         "days": 69,
         "rate": 0.14161610027779414
       },
-      "change_pct": -71.64647836296456
+      "stable_vs_canary_pct": -29.801113539535006
     },
     "memory": {
       "pre": {
@@ -81,11 +83,11 @@
         "days": 181,
         "rate": 1.1699496609659208
       },
-      "post": {
-        "n": 25,
-        "downloads": 70541010,
-        "days": 167,
-        "rate": 0.35440377164999476
+      "canary": {
+        "n": 10,
+        "downloads": 34698894,
+        "days": 97,
+        "rate": 0.28819362369302026
       },
       "stable": {
         "n": 14,
@@ -93,7 +95,7 @@
         "days": 69,
         "rate": 0.3965250807778236
       },
-      "change_pct": -69.70777602880828
+      "stable_vs_canary_pct": 37.5898174625114
     }
   }
 }

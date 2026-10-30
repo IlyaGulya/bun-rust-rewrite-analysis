@@ -4,6 +4,7 @@ import collections
 import datetime as dt
 import json
 import re
+import subprocess
 from pathlib import Path
 D=Path(__file__).resolve().parent/'data'
 load=lambda name:json.loads((D/name).read_text())
@@ -46,3 +47,8 @@ assert page.count('<!-- part3:start -->')==page.count('<!-- part3:end -->')==1
 assert '__P3_DATA__' not in page and '__POPULARITY_DATA__' not in page
 assert '2026-10-29' in page and '2026-10-30' in page
 print('Verified title signals, cohorts, counts, final partial week, published npm dates, weekly joins, star totals and current-first HTML.')
+
+inline=page.split('const P3 =',1)[1].split('</script>',1)[0]
+subprocess.run(['node','--check'],input='const P3 ='+inline,text=True,check=True,capture_output=True)
+assert 'id="p3-family-chart"' in page and '__FAMILY_DATA__' not in page
+print('Built report JavaScript parses; family map data is embedded.')

@@ -37,7 +37,7 @@ def main():
         rows.append(entry)
     first,last=c['start'][:10],c['generated'][:10]
     dates=sorted(d for d in dl if first<d<last and d<=pop['npm']['valid_through'])
-    groups={'pre':[d for d in dates if d<c['merge'][:10]],'post':[d for d in dates if d>c['merge'][:10]],'stable':[d for d in dates if d>c['stable'][:10]]}
+    groups={'pre':[d for d in dates if d<c['merge'][:10]],'canary':[d for d in dates if c['merge'][:10]<d<c['stable'][:10]],'stable':[d for d in dates if d>c['stable'][:10]]}
     stats={}
     for variant in daily:
         stats[variant]={}
@@ -46,17 +46,18 @@ def main():
             for period,days in groups.items():
                 count=sum(daily[variant][d][key] for d in days);downloads=sum(dl[d] for d in days)
                 values[period]={'n':count,'downloads':downloads,'days':len(days),'rate':count/downloads*1e6 if downloads else None}
-            a,b=values['pre']['rate'],values['post']['rate']
-            values['change_pct']=(b/a-1)*100 if a else None
+            values['stable_vs_canary_pct']=(values['stable']['rate']/values['canary']['rate']-1)*100 if values['canary']['rate'] else None
             stats[variant][key]=values
     payload={'generated':c['generated'],'merge':c['merge'][:10],'stable':c['stable'][:10],
+        'phase_order':['pre','canary','stable'],
+        'phases':{'pre':{'label':'Before merge','start':min(groups['pre']),'end':max(groups['pre'])},'canary':{'label':'Canary period: Zig stable + Rust canary','start':min(groups['canary']),'end':max(groups['canary'])},'stable':{'label':'After Rust stable','start':min(groups['stable']),'end':max(groups['stable'])}},
         'first_partial':first,'last_partial':last,'download_through':pop['npm']['valid_through'],
-        'labels':{'all':'All possible bug reports','crash':'Crash reports','leak':'Memory leak reports','memory':'All memory problem reports'},
+        'labels':{'all':'All possible bug reports','crash':'Crash reports','leak':'Memory leak reports','memory':'Memory keyword reports'},
         'daily':{v:{d:dict(x) for d,x in sorted(ds.items())} for v,ds in daily.items()},'stats':stats,
-        'leak_examples':[r for r in rows if r['flags']['title']['leak'] and r['day'] in dates and r['day']!=c['merge'][:10]],
-        'leak_rule':LEAK.pattern,'method':'Title signals are primary; title plus bounded body is sensitivity only. Categories overlap. All builds and channels; not confirmed defects or user risk.'}
+        'leak_examples':[r for r in rows if r['flags']['title']['leak'] and r['day'] in dates and r['day'] not in {c['merge'][:10],c['stable'][:10]}],
+        'leak_rule':LEAK.pattern,'method':'Three calendar periods are separate from reported version families. Merge and stable-release days are excluded from phase summaries. Title matches do not confirm defects. All versions and installation channels are included. No causal Rust effect is measured.'}
     (D/'safety.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n')
     (D/'safety-audit.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n' for r in rows))
     for variant,metrics in stats.items():
-        print(variant,{k:(v['pre']['n'],round(v['pre']['rate'],3),v['post']['n'],round(v['post']['rate'],3),round(v['change_pct'],1) if v['change_pct'] is not None else None) for k,v in metrics.items()})
+        print(variant,{key:{phase:(value[phase]['n'],round(value[phase]['rate'],3)) for phase in ['pre','canary','stable']} for key,value in metrics.items()})
 if __name__=='__main__':main()
