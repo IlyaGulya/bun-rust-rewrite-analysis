@@ -94,8 +94,10 @@ To update the linked Netlify project after rebuilding and verifying:
 
 ```bash
 pnpm run site
-netlify deploy --site bun-rust-analysis-ilyagulya --prod --no-build --dir=dist
+pnpm --package=netlify-cli@24.0.1 dlx netlify deploy --site bun-rust-analysis-ilyagulya --prod --no-build --dir=dist
 ```
+
+The pinned, isolated CLI avoids conflicts with globally installed packages and uses your existing Netlify login.
 
 `.netlify/`, `dist/`, scratch work and the full raw issue cache are ignored. Only the rendered report and license are packaged for web publication.
 
